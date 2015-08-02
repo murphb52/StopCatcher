@@ -55,6 +55,8 @@ class SCConfirmStopViewController: SCViewController, MKMapViewDelegate {
     
     func didTapConfirmButton()
     {
+        SCUserDefaultsManager().isCatchingStop = true
+
         let localNotification = UILocalNotification()
         
         let regionToDetect = CLCircularRegion(center: selectedLocation, radius: radius, identifier: "Location Tracking")
@@ -73,7 +75,7 @@ class SCConfirmStopViewController: SCViewController, MKMapViewDelegate {
         
         UIApplication.sharedApplication().scheduleLocalNotification(timedNotification)
         
-        
         self.navigationController?.popToRootViewControllerAnimated(true)
+        
     }
 }

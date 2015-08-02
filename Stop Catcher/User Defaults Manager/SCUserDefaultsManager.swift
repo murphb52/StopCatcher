@@ -11,4 +11,17 @@ import UIKit
 class SCUserDefaultsManager: NSObject
 {
     
+    var isCatchingStop : Bool {
+        set
+        {
+            NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: "isCatchingStop")
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
+        
+        get
+        {
+            return NSUserDefaults.standardUserDefaults().boolForKey("isCatchingStop")
+        }
+    }
+    
 }

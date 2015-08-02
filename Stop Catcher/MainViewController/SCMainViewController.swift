@@ -18,17 +18,38 @@ class SCMainViewController: SCViewController {
         super.viewDidLoad()
         
         self.catchAStopButton.addTarget(self, action: Selector("didTapCatchAStopButton"), forControlEvents: UIControlEvents.TouchUpInside)
+    }
+    
+    override func viewWillAppear(animated: Bool)
+    {
+        super.viewWillAppear(animated)
         
-        let locationManager = CLLocationManager()
-        locationManager.requestAlwaysAuthorization()
+        
+        if(SCUserDefaultsManager().isCatchingStop)
+        {
+            self.catchAStopButton.setTitle("Stop Catching a stop", forState: UIControlState.allZeros)
+        }
+        else
+        {
+            self.catchAStopButton.setTitle("Catch a stop", forState: UIControlState.allZeros)
+        }
     }
     
     func didTapCatchAStopButton()
     {
-        UIApplication.sharedApplication().cancelAllLocalNotifications()
-        
-        let pickAStopViewController = SCPickAStopViewController(nibName: "SCPickAStopViewController", bundle: nil)
-        self.navigationController?.pushViewController(pickAStopViewController, animated: true)
-    }
+        if(SCUserDefaultsManager().isCatchingStop)
+        {
+            UIApplication.sharedApplication().cancelAllLocalNotifications()
+            SCUserDefaultsManager().isCatchingStop = false
+            self.catchAStopButton.setTitle("Catch a stop", forState: UIControlState.allZeros)
+            self.catchAStopButton.addTarget(self, action: Selector("didTapCatchAStopButton"), forControlEvents: UIControlEvents.TouchUpInside)
 
+        }
+        else
+        {
+            let pickAStopViewController = SCPickAStopViewController(nibName: "SCPickAStopViewController", bundle: nil)
+            self.navigationController?.pushViewController(pickAStopViewController, animated: true)
+
+        }
+    }
 }
