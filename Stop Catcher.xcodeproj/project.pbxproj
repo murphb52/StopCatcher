@@ -20,6 +20,7 @@
 		C923C22C1B6E45CE007C8D3E /* SCConfirmStopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C923C22A1B6E45CE007C8D3E /* SCConfirmStopViewController.swift */; };
 		C923C22D1B6E45CE007C8D3E /* SCConfirmStopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C923C22B1B6E45CE007C8D3E /* SCConfirmStopViewController.xib */; };
 		C923C2301B6E45E3007C8D3E /* SCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C923C22F1B6E45E3007C8D3E /* SCViewController.swift */; };
+		C923C2321B6E6DAA007C8D3E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C923C2311B6E6DAA007C8D3E /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		C923C22A1B6E45CE007C8D3E /* SCConfirmStopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCConfirmStopViewController.swift; path = "Confirm Stop/SCConfirmStopViewController.swift"; sourceTree = "<group>"; };
 		C923C22B1B6E45CE007C8D3E /* SCConfirmStopViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SCConfirmStopViewController.xib; path = "Confirm Stop/SCConfirmStopViewController.xib"; sourceTree = "<group>"; };
 		C923C22F1B6E45E3007C8D3E /* SCViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCViewController.swift; path = SCViewController/SCViewController.swift; sourceTree = "<group>"; };
+		C923C2311B6E6DAA007C8D3E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C923C2321B6E6DAA007C8D3E /* CoreLocation.framework in Frameworks */,
 				C923C2271B6E4571007C8D3E /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -150,6 +153,7 @@
 		C923C2281B6E4583007C8D3E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C923C2311B6E6DAA007C8D3E /* CoreLocation.framework */,
 				C923C2261B6E4571007C8D3E /* MapKit.framework */,
 			);
 			name = Frameworks;
@@ -221,6 +225,11 @@
 				TargetAttributes = {
 					C923C1E91B6E4277007C8D3E = {
 						CreatedOnToolsVersion = 6.4;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					C923C1FE1B6E4277007C8D3E = {
 						CreatedOnToolsVersion = 6.4;

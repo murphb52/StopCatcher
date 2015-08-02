@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class SCMainViewController: SCViewController {
 
@@ -17,6 +18,9 @@ class SCMainViewController: SCViewController {
         super.viewDidLoad()
         
         self.catchAStopButton.addTarget(self, action: Selector("didTapCatchAStopButton"), forControlEvents: UIControlEvents.TouchUpInside)
+        
+        let locationManager = CLLocationManager()
+        locationManager.requestAlwaysAuthorization()
     }
     
     func didTapCatchAStopButton()

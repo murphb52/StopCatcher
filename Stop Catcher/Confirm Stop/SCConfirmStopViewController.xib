@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SCConfirmStopViewController" customModule="Stop_Catcher" customModuleProvider="target">
             <connections>
                 <outlet property="confirmButton" destination="ZhV-fS-MQn" id="Mpu-DZ-tmL"/>
+                <outlet property="mapView" destination="qfQ-Uf-vDD" id="g4B-TH-ox3"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -15,11 +16,14 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="qfQ-Uf-vDD">
+                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qfQ-Uf-vDD">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="150"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="150" id="bqG-Hb-Mzu"/>
                     </constraints>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="pPU-9L-nw9"/>
+                    </connections>
                 </mapView>
                 <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z6Q-DM-GnO">
                     <rect key="frame" x="0.0" y="150" width="600" height="162"/>

@@ -13,18 +13,122 @@ class SCPickAStopViewController: SCViewController, MKMapViewDelegate
 {
     @IBOutlet weak var mapView: MKMapView!
     
+    var selectedLocation : CLLocationCoordinate2D!
+    var currentAnnotation : MKPointAnnotation!
+    var continueButton : UIBarButtonItem!
+    
+    let kDistanceRadius = 2000.0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let tapGestureRecogniser = UITapGestureRecognizer(target: self, action: Selector("handleTapGesture:"))
-        tapGestureRecogniser.numberOfTapsRequired = 1
-        self.mapView .addGestureRecognizer(tapGestureRecogniser)
+        
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: Selector("handleTapGesture:"))
+        self.mapView .addGestureRecognizer(longPressGesture)
+        
+        self.continueButton = UIBarButtonItem(title: "Continue", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("handleTappedContinueButton"))
+        self.continueButton.enabled = false;
+        self.navigationItem.rightBarButtonItem = self.continueButton
         
     }
 
-    func handleTapGesture(recognizer : UITapGestureRecognizer)
+    func handleTapGesture(recognizer : UILongPressGestureRecognizer)
+    {
+        if(recognizer.state == UIGestureRecognizerState.Ended)
+        {
+            self.removeAllAnnotations()
+            self.mapView.removeOverlays(self.mapView.overlays)
+            
+            let tappedPoint = recognizer.locationInView(self.mapView)
+            
+            let tappedLocation = self.mapView.convertPoint(tappedPoint, toCoordinateFromView: self.view)
+            
+            currentAnnotation = MKPointAnnotation()
+            
+            currentAnnotation.coordinate = tappedLocation
+            
+            selectedLocation = tappedLocation
+            
+            self.mapView.addAnnotation(currentAnnotation)
+            
+            let circleView = MKCircle(centerCoordinate: selectedLocation, radius: kDistanceRadius as CLLocationDistance)
+            self.mapView.addOverlay(circleView)
+            
+            self.continueButton.enabled = true;
+        }
+
+    }
+    
+    func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
+        if overlay is MKCircle
+        {
+            var circle = MKCircleRenderer(overlay: overlay)
+            circle.strokeColor = UIColor.redColor().colorWithAlphaComponent(0.4)
+            circle.fillColor = UIColor.redColor().colorWithAlphaComponent(0.1)
+            circle.lineWidth = 1
+            return circle
+        }
+        else
+        {
+            return nil
+        }
+    }
+    
+    //***** Remove all annotations and only leave the user location annotation if it is present
+    func removeAllAnnotations()
+    {
+        let userLocationAnnotation = mapView.userLocation
+        
+        self.mapView.removeAnnotations(mapView.annotations)
+        
+        if(userLocationAnnotation != nil)
+        {
+            self.mapView.addAnnotation(userLocationAnnotation)
+        }
+    }
+    
+    //***** Animate the addition of the annotation
+    func mapView(mapView: MKMapView!, didAddAnnotationViews views: [AnyObject]!)
+    {
+        
+        for view in views {
+            let mkView = view as! MKAnnotationView
+            if view.annotation is MKUserLocation {
+                continue;
+            }
+            
+            // Check if current annotation is inside visible map rect, else go to next one
+            let point:MKMapPoint  =  MKMapPointForCoordinate(mkView.annotation.coordinate);
+            if (!MKMapRectContainsPoint(self.mapView.visibleMapRect, point)) {
+                continue;
+            }
+            
+            let endFrame:CGRect = mkView.frame;
+            
+            // Move annotation out of view
+            mkView.frame = CGRectMake(mkView.frame.origin.x, mkView.frame.origin.y - self.view.frame.size.height, mkView.frame.size.width, mkView.frame.size.height);
+            
+            UIView.animateWithDuration(0.5, delay: 0.0, options: UIViewAnimationOptions.CurveEaseIn, animations:{() in
+                mkView.frame = endFrame
+                // Animate squash
+                }, completion:{(Bool) in
+                    UIView.animateWithDuration(0.05, delay: 0.0, options: UIViewAnimationOptions.CurveEaseInOut, animations:{() in
+                        mkView.transform = CGAffineTransformMakeScale(1.0, 0.8)
+                        
+                        }, completion: {(Bool) in
+                            UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.CurveEaseInOut, animations:{() in
+                                mkView.transform = CGAffineTransformIdentity
+                                }, completion: nil)
+                    })
+                    
+            })
+        }
+    }
+
+    
+    func handleTappedContinueButton()
     {
         let confirmStopViewController = SCConfirmStopViewController(nibName: "SCConfirmStopViewController", bundle: nil)
+        confirmStopViewController.selectedLocation = selectedLocation
         self.navigationController?.pushViewController(confirmStopViewController, animated: true)
     }
 }

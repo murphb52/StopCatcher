@@ -26,6 +26,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = rootNavigationController
         self.window?.makeKeyAndVisible()
         
+        //***** Adk for Push notes
+        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Sound | .Alert | .Badge, categories: nil))
+        
+
         return true
     }
 
