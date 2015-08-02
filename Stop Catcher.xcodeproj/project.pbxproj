@@ -7,12 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C923C1F01B6E4277007C8D3E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C923C1EF1B6E4277007C8D3E /* AppDelegate.swift */; };
-		C923C1F21B6E4277007C8D3E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C923C1F11B6E4277007C8D3E /* ViewController.swift */; };
-		C923C1F51B6E4277007C8D3E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C923C1F31B6E4277007C8D3E /* Main.storyboard */; };
-		C923C1F71B6E4277007C8D3E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C923C1F61B6E4277007C8D3E /* Images.xcassets */; };
-		C923C1FA1B6E4277007C8D3E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C923C1F81B6E4277007C8D3E /* LaunchScreen.xib */; };
 		C923C2061B6E4277007C8D3E /* Stop_CatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C923C2051B6E4277007C8D3E /* Stop_CatcherTests.swift */; };
+		C923C2171B6E4316007C8D3E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C923C2101B6E4316007C8D3E /* AppDelegate.swift */; };
+		C923C2181B6E4316007C8D3E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C923C2111B6E4316007C8D3E /* LaunchScreen.xib */; };
+		C923C21A1B6E4316007C8D3E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C923C2151B6E4316007C8D3E /* Images.xcassets */; };
+		C923C21B1B6E4316007C8D3E /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C923C2161B6E4316007C8D3E /* Info.plist */; };
+		C923C21F1B6E433B007C8D3E /* SCMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C923C21D1B6E433B007C8D3E /* SCMainViewController.swift */; };
+		C923C2201B6E433B007C8D3E /* SCMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C923C21E1B6E433B007C8D3E /* SCMainViewController.xib */; };
+		C923C2241B6E44C7007C8D3E /* SCPickAStopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C923C2221B6E44C7007C8D3E /* SCPickAStopViewController.swift */; };
+		C923C2251B6E44C7007C8D3E /* SCPickAStopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C923C2231B6E44C7007C8D3E /* SCPickAStopViewController.xib */; };
+		C923C2271B6E4571007C8D3E /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C923C2261B6E4571007C8D3E /* MapKit.framework */; };
+		C923C22C1B6E45CE007C8D3E /* SCConfirmStopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C923C22A1B6E45CE007C8D3E /* SCConfirmStopViewController.swift */; };
+		C923C22D1B6E45CE007C8D3E /* SCConfirmStopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C923C22B1B6E45CE007C8D3E /* SCConfirmStopViewController.xib */; };
+		C923C2301B6E45E3007C8D3E /* SCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C923C22F1B6E45E3007C8D3E /* SCViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,15 +34,21 @@
 
 /* Begin PBXFileReference section */
 		C923C1EA1B6E4277007C8D3E /* Stop Catcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Stop Catcher.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C923C1EE1B6E4277007C8D3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C923C1EF1B6E4277007C8D3E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C923C1F11B6E4277007C8D3E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		C923C1F41B6E4277007C8D3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		C923C1F61B6E4277007C8D3E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		C923C1F91B6E4277007C8D3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		C923C1FF1B6E4277007C8D3E /* Stop CatcherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Stop CatcherTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C923C2041B6E4277007C8D3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C923C2051B6E4277007C8D3E /* Stop_CatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stop_CatcherTests.swift; sourceTree = "<group>"; };
+		C923C2101B6E4316007C8D3E /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C923C2121B6E4316007C8D3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		C923C2151B6E4316007C8D3E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		C923C2161B6E4316007C8D3E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C923C21D1B6E433B007C8D3E /* SCMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCMainViewController.swift; path = MainViewController/SCMainViewController.swift; sourceTree = "<group>"; };
+		C923C21E1B6E433B007C8D3E /* SCMainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SCMainViewController.xib; path = MainViewController/SCMainViewController.xib; sourceTree = "<group>"; };
+		C923C2221B6E44C7007C8D3E /* SCPickAStopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCPickAStopViewController.swift; path = "Pick a stop/SCPickAStopViewController.swift"; sourceTree = "<group>"; };
+		C923C2231B6E44C7007C8D3E /* SCPickAStopViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SCPickAStopViewController.xib; path = "Pick a stop/SCPickAStopViewController.xib"; sourceTree = "<group>"; };
+		C923C2261B6E4571007C8D3E /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		C923C22A1B6E45CE007C8D3E /* SCConfirmStopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCConfirmStopViewController.swift; path = "Confirm Stop/SCConfirmStopViewController.swift"; sourceTree = "<group>"; };
+		C923C22B1B6E45CE007C8D3E /* SCConfirmStopViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SCConfirmStopViewController.xib; path = "Confirm Stop/SCConfirmStopViewController.xib"; sourceTree = "<group>"; };
+		C923C22F1B6E45E3007C8D3E /* SCViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCViewController.swift; path = SCViewController/SCViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C923C2271B6E4571007C8D3E /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,9 +73,10 @@
 		C923C1E11B6E4277007C8D3E = {
 			isa = PBXGroup;
 			children = (
+				C923C2281B6E4583007C8D3E /* Frameworks */,
+				C923C1EB1B6E4277007C8D3E /* Products */,
 				C923C1EC1B6E4277007C8D3E /* Stop Catcher */,
 				C923C2021B6E4277007C8D3E /* Stop CatcherTests */,
-				C923C1EB1B6E4277007C8D3E /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,22 +92,13 @@
 		C923C1EC1B6E4277007C8D3E /* Stop Catcher */ = {
 			isa = PBXGroup;
 			children = (
-				C923C1EF1B6E4277007C8D3E /* AppDelegate.swift */,
-				C923C1F11B6E4277007C8D3E /* ViewController.swift */,
-				C923C1F31B6E4277007C8D3E /* Main.storyboard */,
-				C923C1F61B6E4277007C8D3E /* Images.xcassets */,
-				C923C1F81B6E4277007C8D3E /* LaunchScreen.xib */,
-				C923C1ED1B6E4277007C8D3E /* Supporting Files */,
+				C923C22E1B6E45D5007C8D3E /* SCViewController */,
+				C923C2291B6E45B8007C8D3E /* Confirm Stop */,
+				C923C2211B6E44B8007C8D3E /* Pick a stop */,
+				C923C21C1B6E4321007C8D3E /* MainViewController */,
+				C923C20F1B6E4316007C8D3E /* Supporting Files */,
 			);
 			path = "Stop Catcher";
-			sourceTree = "<group>";
-		};
-		C923C1ED1B6E4277007C8D3E /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				C923C1EE1B6E4277007C8D3E /* Info.plist */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		C923C2021B6E4277007C8D3E /* Stop CatcherTests */ = {
@@ -110,6 +116,60 @@
 				C923C2041B6E4277007C8D3E /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C923C20F1B6E4316007C8D3E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C923C2101B6E4316007C8D3E /* AppDelegate.swift */,
+				C923C2111B6E4316007C8D3E /* LaunchScreen.xib */,
+				C923C2151B6E4316007C8D3E /* Images.xcassets */,
+				C923C2161B6E4316007C8D3E /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C923C21C1B6E4321007C8D3E /* MainViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C923C21D1B6E433B007C8D3E /* SCMainViewController.swift */,
+				C923C21E1B6E433B007C8D3E /* SCMainViewController.xib */,
+			);
+			name = MainViewController;
+			sourceTree = "<group>";
+		};
+		C923C2211B6E44B8007C8D3E /* Pick a stop */ = {
+			isa = PBXGroup;
+			children = (
+				C923C2221B6E44C7007C8D3E /* SCPickAStopViewController.swift */,
+				C923C2231B6E44C7007C8D3E /* SCPickAStopViewController.xib */,
+			);
+			name = "Pick a stop";
+			sourceTree = "<group>";
+		};
+		C923C2281B6E4583007C8D3E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C923C2261B6E4571007C8D3E /* MapKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C923C2291B6E45B8007C8D3E /* Confirm Stop */ = {
+			isa = PBXGroup;
+			children = (
+				C923C22A1B6E45CE007C8D3E /* SCConfirmStopViewController.swift */,
+				C923C22B1B6E45CE007C8D3E /* SCConfirmStopViewController.xib */,
+			);
+			name = "Confirm Stop";
+			sourceTree = "<group>";
+		};
+		C923C22E1B6E45D5007C8D3E /* SCViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C923C22F1B6E45E3007C8D3E /* SCViewController.swift */,
+			);
+			name = SCViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,9 +252,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C923C1F51B6E4277007C8D3E /* Main.storyboard in Resources */,
-				C923C1FA1B6E4277007C8D3E /* LaunchScreen.xib in Resources */,
-				C923C1F71B6E4277007C8D3E /* Images.xcassets in Resources */,
+				C923C21B1B6E4316007C8D3E /* Info.plist in Resources */,
+				C923C21A1B6E4316007C8D3E /* Images.xcassets in Resources */,
+				C923C2181B6E4316007C8D3E /* LaunchScreen.xib in Resources */,
+				C923C22D1B6E45CE007C8D3E /* SCConfirmStopViewController.xib in Resources */,
+				C923C2251B6E44C7007C8D3E /* SCPickAStopViewController.xib in Resources */,
+				C923C2201B6E433B007C8D3E /* SCMainViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,8 +275,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C923C1F21B6E4277007C8D3E /* ViewController.swift in Sources */,
-				C923C1F01B6E4277007C8D3E /* AppDelegate.swift in Sources */,
+				C923C2171B6E4316007C8D3E /* AppDelegate.swift in Sources */,
+				C923C2301B6E45E3007C8D3E /* SCViewController.swift in Sources */,
+				C923C2241B6E44C7007C8D3E /* SCPickAStopViewController.swift in Sources */,
+				C923C21F1B6E433B007C8D3E /* SCMainViewController.swift in Sources */,
+				C923C22C1B6E45CE007C8D3E /* SCConfirmStopViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,18 +302,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		C923C1F31B6E4277007C8D3E /* Main.storyboard */ = {
+		C923C2111B6E4316007C8D3E /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				C923C1F41B6E4277007C8D3E /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		C923C1F81B6E4277007C8D3E /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C923C1F91B6E4277007C8D3E /* Base */,
+				C923C2121B6E4316007C8D3E /* Base */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
@@ -340,7 +398,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = "Stop Catcher/Info.plist";
+				INFOPLIST_FILE = "Stop Catcher/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -350,7 +408,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = "Stop Catcher/Info.plist";
+				INFOPLIST_FILE = "Stop Catcher/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
