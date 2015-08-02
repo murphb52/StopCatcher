@@ -14,6 +14,7 @@ class SCConfirmStopViewController: SCViewController, MKMapViewDelegate {
 
     @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var datePicker: UIDatePicker!
     
     let kDistanceRadius = 2000.0
 
@@ -63,6 +64,14 @@ class SCConfirmStopViewController: SCViewController, MKMapViewDelegate {
         localNotification.alertTitle = "Wake up!"
         
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+        
+        let timedNotification = UILocalNotification()
+        timedNotification.fireDate = NSDate(timeIntervalSinceNow: self.datePicker.countDownDuration)
+        timedNotification.alertBody = "Timed wake up!"
+        timedNotification.alertTitle = "Wake up!"
+        
+        UIApplication.sharedApplication().scheduleLocalNotification(timedNotification)
+        
         
         self.navigationController?.popToRootViewControllerAnimated(true)
     }

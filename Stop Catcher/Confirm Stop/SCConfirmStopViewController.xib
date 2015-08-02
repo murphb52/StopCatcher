@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SCConfirmStopViewController" customModule="Stop_Catcher" customModuleProvider="target">
             <connections>
                 <outlet property="confirmButton" destination="ZhV-fS-MQn" id="Mpu-DZ-tmL"/>
+                <outlet property="datePicker" destination="z6Q-DM-GnO" id="7DB-eW-GkI"/>
                 <outlet property="mapView" destination="qfQ-Uf-vDD" id="g4B-TH-ox3"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
