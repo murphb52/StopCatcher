@@ -25,6 +25,8 @@ class SCMainViewController: SCViewController {
     
     func didTapCatchAStopButton()
     {
+        UIApplication.sharedApplication().cancelAllLocalNotifications()
+        
         let pickAStopViewController = SCPickAStopViewController(nibName: "SCPickAStopViewController", bundle: nil)
         self.navigationController?.pushViewController(pickAStopViewController, animated: true)
     }

@@ -19,6 +19,7 @@ class SCConfirmStopViewController: SCViewController, MKMapViewDelegate {
     let kDistanceRadius = 2000.0
 
     var selectedLocation : CLLocationCoordinate2D!
+    var radius : Double!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +34,7 @@ class SCConfirmStopViewController: SCViewController, MKMapViewDelegate {
         currentAnnotation.coordinate = selectedLocation
         self.mapView.addAnnotation(currentAnnotation)
         
-        let circleView = MKCircle(centerCoordinate: selectedLocation, radius: kDistanceRadius as CLLocationDistance)
+        let circleView = MKCircle(centerCoordinate: selectedLocation, radius: radius as CLLocationDistance)
         self.mapView.addOverlay(circleView)
     }
 
@@ -56,7 +57,7 @@ class SCConfirmStopViewController: SCViewController, MKMapViewDelegate {
     {
         let localNotification = UILocalNotification()
         
-        let regionToDetect = CLCircularRegion(center: selectedLocation, radius: kDistanceRadius, identifier: "Location Tracking")
+        let regionToDetect = CLCircularRegion(center: selectedLocation, radius: radius, identifier: "Location Tracking")
         
         localNotification.regionTriggersOnce = true
         localNotification.region = regionToDetect

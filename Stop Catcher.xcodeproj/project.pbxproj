@@ -21,6 +21,7 @@
 		C923C22D1B6E45CE007C8D3E /* SCConfirmStopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C923C22B1B6E45CE007C8D3E /* SCConfirmStopViewController.xib */; };
 		C923C2301B6E45E3007C8D3E /* SCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C923C22F1B6E45E3007C8D3E /* SCViewController.swift */; };
 		C923C2321B6E6DAA007C8D3E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C923C2311B6E6DAA007C8D3E /* CoreLocation.framework */; };
+		C923C2351B6E797F007C8D3E /* SCUserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C923C2341B6E797F007C8D3E /* SCUserDefaultsManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		C923C22B1B6E45CE007C8D3E /* SCConfirmStopViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SCConfirmStopViewController.xib; path = "Confirm Stop/SCConfirmStopViewController.xib"; sourceTree = "<group>"; };
 		C923C22F1B6E45E3007C8D3E /* SCViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCViewController.swift; path = SCViewController/SCViewController.swift; sourceTree = "<group>"; };
 		C923C2311B6E6DAA007C8D3E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		C923C2341B6E797F007C8D3E /* SCUserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCUserDefaultsManager.swift; path = "User Defaults Manager/SCUserDefaultsManager.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 		C923C1EC1B6E4277007C8D3E /* Stop Catcher */ = {
 			isa = PBXGroup;
 			children = (
+				C923C2331B6E795F007C8D3E /* User Defaults Manager */,
 				C923C22E1B6E45D5007C8D3E /* SCViewController */,
 				C923C2291B6E45B8007C8D3E /* Confirm Stop */,
 				C923C2211B6E44B8007C8D3E /* Pick a stop */,
@@ -174,6 +177,14 @@
 				C923C22F1B6E45E3007C8D3E /* SCViewController.swift */,
 			);
 			name = SCViewController;
+			sourceTree = "<group>";
+		};
+		C923C2331B6E795F007C8D3E /* User Defaults Manager */ = {
+			isa = PBXGroup;
+			children = (
+				C923C2341B6E797F007C8D3E /* SCUserDefaultsManager.swift */,
+			);
+			name = "User Defaults Manager";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -288,6 +299,7 @@
 				C923C2301B6E45E3007C8D3E /* SCViewController.swift in Sources */,
 				C923C2241B6E44C7007C8D3E /* SCPickAStopViewController.swift in Sources */,
 				C923C21F1B6E433B007C8D3E /* SCMainViewController.swift in Sources */,
+				C923C2351B6E797F007C8D3E /* SCUserDefaultsManager.swift in Sources */,
 				C923C22C1B6E45CE007C8D3E /* SCConfirmStopViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

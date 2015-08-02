@@ -14,10 +14,14 @@ class SCPickAStopViewController: SCViewController, MKMapViewDelegate
     @IBOutlet weak var mapView: MKMapView!
     
     var selectedLocation : CLLocationCoordinate2D!
+    var currentRadius : Double = 0.0
     var currentAnnotation : MKPointAnnotation!
     var continueButton : UIBarButtonItem!
     
-    let kDistanceRadius = 2000.0
+    @IBOutlet weak var radiusSlider: UISlider!
+    
+    let maxRadius : Double = 2000.0
+    let minRadius : Double = 250.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,10 +54,12 @@ class SCPickAStopViewController: SCViewController, MKMapViewDelegate
             
             self.mapView.addAnnotation(currentAnnotation)
             
-            let circleView = MKCircle(centerCoordinate: selectedLocation, radius: kDistanceRadius as CLLocationDistance)
+            let circleView = MKCircle(centerCoordinate: selectedLocation, radius: maxRadius/2 as CLLocationDistance)
             self.mapView.addOverlay(circleView)
             
             self.continueButton.enabled = true;
+            
+            self.radiusSlider.hidden = false;
         }
 
     }
@@ -129,6 +135,20 @@ class SCPickAStopViewController: SCViewController, MKMapViewDelegate
     {
         let confirmStopViewController = SCConfirmStopViewController(nibName: "SCConfirmStopViewController", bundle: nil)
         confirmStopViewController.selectedLocation = selectedLocation
+        confirmStopViewController.radius = self.currentRadius
         self.navigationController?.pushViewController(confirmStopViewController, animated: true)
+    }
+    
+    @IBAction func radiusSliderValueDidChange(sender: AnyObject) {
+
+        // 0 == min
+        // 1 == max
+        
+        self.mapView.removeOverlays(self.mapView.overlays)
+        let radius = Double(self.radiusSlider.value) * maxRadius
+        let circleView = MKCircle(centerCoordinate: selectedLocation, radius: radius)
+        self.mapView.addOverlay(circleView)
+        
+        self.currentRadius = radius
     }
 }

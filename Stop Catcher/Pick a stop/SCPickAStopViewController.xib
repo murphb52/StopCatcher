@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SCPickAStopViewController" customModule="Stop_Catcher" customModuleProvider="target">
             <connections>
                 <outlet property="mapView" destination="ihT-WK-Y9q" id="xAC-Rb-ico"/>
+                <outlet property="radiusSlider" destination="lo4-7K-VdR" id="l0J-Fs-cBn"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -22,13 +23,25 @@
                         <outlet property="delegate" destination="-1" id="8BR-tf-RrK"/>
                     </connections>
                 </mapView>
+                <slider hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="lo4-7K-VdR">
+                    <rect key="frame" x="6" y="562" width="588" height="31"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="itO-zm-Gqo"/>
+                    </constraints>
+                    <connections>
+                        <action selector="radiusSliderValueDidChange:" destination="-1" eventType="valueChanged" id="xLi-3a-lL6"/>
+                    </connections>
+                </slider>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="ihT-WK-Y9q" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="80u-jM-UVx"/>
                 <constraint firstItem="ihT-WK-Y9q" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="KUV-PO-QRO"/>
+                <constraint firstItem="lo4-7K-VdR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="VCl-6f-mhf"/>
                 <constraint firstAttribute="bottom" secondItem="ihT-WK-Y9q" secondAttribute="bottom" id="lbe-F4-xpA"/>
+                <constraint firstAttribute="bottom" secondItem="lo4-7K-VdR" secondAttribute="bottom" constant="8" id="mFH-bE-e5u"/>
                 <constraint firstAttribute="trailing" secondItem="ihT-WK-Y9q" secondAttribute="trailing" id="rij-7D-efg"/>
+                <constraint firstAttribute="trailing" secondItem="lo4-7K-VdR" secondAttribute="trailing" constant="8" id="xWP-Mb-zdt"/>
             </constraints>
         </view>
     </objects>
