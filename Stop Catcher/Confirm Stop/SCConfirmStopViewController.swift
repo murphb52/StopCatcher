@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class SCConfirmStopViewController: SCViewController, MKMapViewDelegate {
+class SCConfirmStopViewController: SCViewController, MKMapViewDelegate, UIAlertViewDelegate {
 
     @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var mapView: MKMapView!
@@ -55,8 +55,38 @@ class SCConfirmStopViewController: SCViewController, MKMapViewDelegate {
     
     func didTapConfirmButton()
     {
-        SCUserDefaultsManager().isCatchingStop = true
+        //***** Check if we have asked for push notications
+        if(SCUserDefaultsManager().hasAskedForPushNotes)
+        {
 
+            let notificationSettings = UIApplication.sharedApplication().currentUserNotificationSettings()
+            if (notificationSettings.types == UIUserNotificationType.None)
+            {
+                //***** Tell them to turn on Push notes
+                let pushNotesAlertView = UIAlertView(title: "Notifications!", message: "Notifications are turned off!\nStop Catcher will only ever send you notifications to wake you up", delegate: self, cancelButtonTitle: "Cancel")
+                pushNotesAlertView.addButtonWithTitle("Settings")
+                pushNotesAlertView.show()
+            }
+            else
+            {
+                //***** Finish setting up the current catch
+                self.setupStopToCatch()
+            }
+
+        }
+        //***** Ask for push notes
+        else
+        {
+            UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Sound | .Alert | .Badge, categories: nil))
+            SCUserDefaultsManager().hasAskedForPushNotes = true
+        }
+        
+    }
+    
+    func setupStopToCatch()
+    {
+        SCUserDefaultsManager().isCatchingStop = true
+        
         let localNotification = UILocalNotification()
         
         let regionToDetect = CLCircularRegion(center: selectedLocation, radius: radius, identifier: "Location Tracking")
@@ -76,6 +106,5 @@ class SCConfirmStopViewController: SCViewController, MKMapViewDelegate {
         UIApplication.sharedApplication().scheduleLocalNotification(timedNotification)
         
         self.navigationController?.popToRootViewControllerAnimated(true)
-        
     }
 }

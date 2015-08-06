@@ -24,4 +24,17 @@ class SCUserDefaultsManager: NSObject
         }
     }
     
+    var hasAskedForPushNotes : Bool {
+        set
+        {
+            NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: "hasAskedForPushNotes")
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
+        
+        get
+        {
+            return NSUserDefaults.standardUserDefaults().boolForKey("hasAskedForPushNotes")
+        }
+    }
+    
 }
