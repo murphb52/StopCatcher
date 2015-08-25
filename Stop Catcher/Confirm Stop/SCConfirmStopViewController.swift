@@ -107,4 +107,9 @@ class SCConfirmStopViewController: SCViewController, MKMapViewDelegate, UIAlertV
         
         self.navigationController?.popToRootViewControllerAnimated(true)
     }
+    
+    func alertView(alertView: UIAlertView, didDismissWithButtonIndex buttonIndex: Int)
+    {
+        UIApplication.sharedApplication().openURL(NSURL(string: UIApplicationOpenSettingsURLString)!)
+    }
 }

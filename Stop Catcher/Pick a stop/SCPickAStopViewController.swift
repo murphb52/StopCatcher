@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class SCPickAStopViewController: SCViewController, MKMapViewDelegate
+class SCPickAStopViewController: SCViewController, MKMapViewDelegate, CLLocationManagerDelegate
 {
     @IBOutlet weak var mapView: MKMapView!
     
@@ -26,12 +26,23 @@ class SCPickAStopViewController: SCViewController, MKMapViewDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "Pick A Location!"
+        
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: Selector("handleTapGesture:"))
         self.mapView .addGestureRecognizer(longPressGesture)
         
         self.continueButton = UIBarButtonItem(title: "Continue", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("handleTappedContinueButton"))
         self.continueButton.enabled = false;
         self.navigationItem.rightBarButtonItem = self.continueButton
+        
+        self.buttonHolderView.layer.cornerRadius = 10
+        self.buttonHolderView.layer.masksToBounds = true
+     
+        let authStatus = CLLocationManager.authorizationStatus()
+        self.switchOnAuthStatus(authStatus)
         
     }
 
@@ -150,5 +161,57 @@ class SCPickAStopViewController: SCViewController, MKMapViewDelegate
         self.mapView.addOverlay(circleView)
         
         self.currentRadius = radius
+    }
+    
+    @IBAction func askForUserLocation(sender: AnyObject)
+    {
+        locationManager.requestAlwaysAuthorization()
+        
+        
+    }
+    
+    func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus)
+    {
+        self.switchOnAuthStatus(status)
+    }
+    
+    func switchOnAuthStatus(authStatus : CLAuthorizationStatus)
+    {
+        self.blurredView.alpha = 0;
+        self.blurredView.hidden = false
+UIView.animateWithDuration(0.3, animations: { () -> Void in
+    
+    switch authStatus
+    {
+    case .Restricted:
+        self.blurredView.alpha = 1
+    case .NotDetermined:
+        self.blurredView.alpha = 1
+    case .Denied:
+        self.blurredView.alpha = 1
+    case .AuthorizedWhenInUse:
+        self.blurredView.alpha = 0
+    case .AuthorizedAlways:
+        self.blurredView.alpha = 0
+    }
+    
+}) { (completed) -> Void in
+    
+    switch authStatus
+    {
+    case .Restricted:
+        self.blurredView.hidden = false
+    case .NotDetermined:
+        self.blurredView.hidden = false
+    case .Denied:
+        self.blurredView.hidden = false
+    case .AuthorizedWhenInUse:
+        self.blurredView.hidden = true
+    case .AuthorizedAlways:
+        self.blurredView.hidden = true
+    }
+    
+        }
+
     }
 }

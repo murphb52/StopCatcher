@@ -16,6 +16,7 @@ class SCMainViewController: SCViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        self.title = "Home"
         
         self.catchAStopButton.addTarget(self, action: Selector("didTapCatchAStopButton"), forControlEvents: UIControlEvents.TouchUpInside)
     }
