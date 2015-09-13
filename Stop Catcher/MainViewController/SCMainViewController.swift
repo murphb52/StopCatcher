@@ -19,6 +19,7 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate
     @IBOutlet weak var blurredView: UIView!
     @IBOutlet weak var enableLocationPermissionButton: UIButton!
     
+    @IBOutlet weak var myLocationButton: UIButton!
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -29,6 +30,12 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate
         
         //***** Setup locationPermission button
         self.enableLocationPermissionButton.addTarget(self, action: Selector("handleEnablePermissionButtonTap"), forControlEvents: UIControlEvents.TouchUpInside)
+        
+        self.myLocationButton.layer.borderColor = UIColor(red: 155.0/255.0, green: 89.0/255.0, blue: 182.0/255.0, alpha: 1.0).CGColor
+        self.myLocationButton.layer.borderWidth = 1;
+        self.myLocationButton.layer.cornerRadius = 10;
+        self.myLocationButton.layer.masksToBounds = true
+        self.myLocationButton.addTarget(self, action: Selector("handleMyLocationButtonTapped"), forControlEvents: UIControlEvents.TouchUpInside)
         
         //***** Setup our view for the state of our authStatus
         setupViewForAuthStatus(CLLocationManager.authorizationStatus(), animated: false)
@@ -77,6 +84,8 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate
     
     func setupForAuthorizedLocationPermission(animated: Bool)
     {
+        self.mapView.showsUserLocation = true
+
         let duration = animated ? 0.3 : 0.0
         UIView.animateWithDuration(duration, animations: { () -> Void in
             
@@ -93,6 +102,14 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate
             self.blurView.alpha = 1;
             
         })
+    }
+    
+    func handleMyLocationButtonTapped()
+    {
+        let userLocation = self.mapView.userLocation
+        let coords = userLocation.coordinate
+        let region = MKCoordinateRegionMakeWithDistance(coords, 2000, 2000)
+        mapView.setRegion(region, animated: true)
     }
 
 }
