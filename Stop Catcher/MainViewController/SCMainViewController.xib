@@ -33,7 +33,7 @@
                     </state>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MapFlag" translatesAutoresizingMaskIntoConstraints="NO" id="lbs-Bs-AHy">
-                    <rect key="frame" x="297.5" y="277.5" width="25" height="25"/>
+                    <rect key="frame" x="287.5" y="287.5" width="25" height="25"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="K4E-1V-m1A"/>
                         <constraint firstAttribute="width" constant="25" id="fQS-B4-DM9"/>
@@ -80,11 +80,11 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="centerX" secondItem="lbs-Bs-AHy" secondAttribute="centerX" constant="-10" id="0mN-n4-SBy"/>
+                <constraint firstAttribute="centerX" secondItem="lbs-Bs-AHy" secondAttribute="centerX" id="0mN-n4-SBy"/>
                 <constraint firstItem="oxr-Qe-pib" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="5bN-Yu-Ywj"/>
                 <constraint firstItem="BXW-8m-3yK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="5rs-pb-brS"/>
                 <constraint firstItem="oxr-Qe-pib" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="8zN-Oh-GXA"/>
-                <constraint firstAttribute="centerY" secondItem="lbs-Bs-AHy" secondAttribute="centerY" constant="10" id="Ppx-2p-wa3"/>
+                <constraint firstAttribute="centerY" secondItem="lbs-Bs-AHy" secondAttribute="centerY" id="Ppx-2p-wa3"/>
                 <constraint firstAttribute="trailing" secondItem="oxr-Qe-pib" secondAttribute="trailing" id="QUd-Jc-2Iq"/>
                 <constraint firstItem="BXW-8m-3yK" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="hsb-X2-ivH"/>
                 <constraint firstItem="3Od-Lm-Wtr" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="8" id="ksw-ql-zRF"/>

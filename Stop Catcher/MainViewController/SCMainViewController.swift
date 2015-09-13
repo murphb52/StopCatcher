@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class SCMainViewController: SCViewController, CLLocationManagerDelegate
+class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapViewDelegate
 {
     var locationManager : CLLocationManager!
 
@@ -20,11 +20,17 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate
     @IBOutlet weak var enableLocationPermissionButton: UIButton!
     
     @IBOutlet weak var myLocationButton: UIButton!
+    
+    let maxRadius : Double = 2000.0
+    let minRadius : Double = 250.0
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
         self.title = "Stop Catcher"
 
+        self.mapView.delegate = self
+        
         locationManager = CLLocationManager()
         locationManager.delegate = self
         
@@ -36,6 +42,9 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate
         self.myLocationButton.layer.cornerRadius = 10;
         self.myLocationButton.layer.masksToBounds = true
         self.myLocationButton.addTarget(self, action: Selector("handleMyLocationButtonTapped"), forControlEvents: UIControlEvents.TouchUpInside)
+        
+        let circleView = MKCircle(centerCoordinate: self.mapView.region.center, radius: maxRadius/2 as CLLocationDistance)
+        self.mapView.addOverlay(circleView)
         
         //***** Setup our view for the state of our authStatus
         setupViewForAuthStatus(CLLocationManager.authorizationStatus(), animated: false)
@@ -112,4 +121,25 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate
         mapView.setRegion(region, animated: true)
     }
 
+    func mapView(mapView: MKMapView!, regionDidChangeAnimated animated: Bool)
+    {
+        self.mapView.removeOverlays(self.mapView.overlays)
+        let circleView = MKCircle(centerCoordinate: mapView.centerCoordinate, radius: maxRadius)
+        self.mapView.addOverlay(circleView)
+    }
+    
+    func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
+        if overlay is MKCircle
+        {
+            var circle = MKCircleRenderer(overlay: overlay)
+            circle.strokeColor = UIColor(red: 155.0/255.0, green: 89.0/255.0, blue: 182.0/255.0, alpha: 1.0)
+            circle.fillColor = UIColor(red: 155.0/255.0, green: 89.0/255.0, blue: 182.0/255.0, alpha: 1.0).colorWithAlphaComponent(0.3)
+            circle.lineWidth = 1
+            return circle
+        }
+        else
+        {
+            return nil
+        }
+    }
 }
