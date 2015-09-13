@@ -9,48 +9,90 @@
 import UIKit
 import MapKit
 
-class SCMainViewController: SCViewController {
+class SCMainViewController: SCViewController, CLLocationManagerDelegate
+{
+    var locationManager : CLLocationManager!
 
-    @IBOutlet weak var catchAStopButton: UIButton!
+    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var blurView: UIVisualEffectView!
+    
+    @IBOutlet weak var blurredView: UIView!
+    @IBOutlet weak var enableLocationPermissionButton: UIButton!
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        self.title = "Home"
+        self.title = "Stop Catcher"
+
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
         
-        self.catchAStopButton.addTarget(self, action: Selector("didTapCatchAStopButton"), forControlEvents: UIControlEvents.TouchUpInside)
+        //***** Setup locationPermission button
+        self.enableLocationPermissionButton.addTarget(self, action: Selector("handleEnablePermissionButtonTap"), forControlEvents: UIControlEvents.TouchUpInside)
+        
+        //***** Setup our view for the state of our authStatus
+        setupViewForAuthStatus(CLLocationManager.authorizationStatus(), animated: false)
     }
     
-    override func viewWillAppear(animated: Bool)
+    func handleEnablePermissionButtonTap()
     {
-        super.viewWillAppear(animated)
-        
-        
-        if(SCUserDefaultsManager().isCatchingStop)
+        //***** If we have not asked for permission we request permission
+        if(CLLocationManager.authorizationStatus() == CLAuthorizationStatus.NotDetermined)
         {
-            self.catchAStopButton.setTitle("Stop Catching a stop", forState: UIControlState.allZeros)
+            locationManager.requestAlwaysAuthorization()
         }
+        //***** If we have asked before we simply point the user to the settings
         else
         {
-            self.catchAStopButton.setTitle("Catch a stop", forState: UIControlState.allZeros)
+            let settingsUrl = NSURL(string: UIApplicationOpenSettingsURLString)
+            UIApplication.sharedApplication().openURL(settingsUrl!)
         }
     }
     
-    func didTapCatchAStopButton()
+    func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus)
     {
-        if(SCUserDefaultsManager().isCatchingStop)
-        {
-            UIApplication.sharedApplication().cancelAllLocalNotifications()
-            SCUserDefaultsManager().isCatchingStop = false
-            self.catchAStopButton.setTitle("Catch a stop", forState: UIControlState.allZeros)
-            self.catchAStopButton.addTarget(self, action: Selector("didTapCatchAStopButton"), forControlEvents: UIControlEvents.TouchUpInside)
+        setupViewForAuthStatus(status, animated: true)
+    }
 
-        }
-        else
+    func setupViewForAuthStatus(authStatus: CLAuthorizationStatus, animated: Bool)
+    {
+        switch(authStatus)
         {
-            let pickAStopViewController = SCPickAStopViewController(nibName: "SCPickAStopViewController", bundle: nil)
-            self.navigationController?.pushViewController(pickAStopViewController, animated: true)
-
+        case .AuthorizedAlways:
+            setupForAuthorizedLocationPermission(animated)
+            break
+        case .AuthorizedWhenInUse:
+            setupForUnAuthorizedLocationPermission(animated)
+            break
+        case .Denied:
+            setupForUnAuthorizedLocationPermission(animated)
+            break
+        case .Restricted:
+            setupForUnAuthorizedLocationPermission(animated)
+        case .NotDetermined:
+            setupForUnAuthorizedLocationPermission(animated)
+            break
         }
     }
+    
+    func setupForAuthorizedLocationPermission(animated: Bool)
+    {
+        let duration = animated ? 0.3 : 0.0
+        UIView.animateWithDuration(duration, animations: { () -> Void in
+            
+            self.blurView.alpha = 0;
+            
+        })
+    }
+    
+    func setupForUnAuthorizedLocationPermission(animated: Bool)
+    {
+        let duration = animated ? 0.3 : 0.0
+        UIView.animateWithDuration(duration, animations: { () -> Void in
+            
+            self.blurView.alpha = 1;
+            
+        })
+    }
+
 }

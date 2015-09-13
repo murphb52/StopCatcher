@@ -17,6 +17,14 @@ class SCPickAStopViewController: SCViewController, MKMapViewDelegate, CLLocation
     var currentRadius : Double = 0.0
     var currentAnnotation : MKPointAnnotation!
     var continueButton : UIBarButtonItem!
+    var locationManager : CLLocationManager!
+    
+    @IBOutlet weak var mapViewHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var mapViewBottomConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var blurredView: UIVisualEffectView!
+    @IBOutlet weak var buttonHolderView: UIView!
     
     @IBOutlet weak var radiusSlider: UISlider!
     

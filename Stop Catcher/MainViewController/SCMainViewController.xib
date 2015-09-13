@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SCMainViewController" customModule="Stop_Catcher" customModuleProvider="target">
             <connections>
-                <outlet property="catchAStopButton" destination="boH-qs-GLG" id="jmU-Tz-uvS"/>
+                <outlet property="blurView" destination="BXW-8m-3yK" id="19f-FA-smk"/>
+                <outlet property="blurredView" destination="qIb-PA-vEI" id="RnC-P3-F4Z"/>
+                <outlet property="enableLocationPermissionButton" destination="EjE-9x-Z3I" id="65e-c5-S6Y"/>
+                <outlet property="mapView" destination="oxr-Qe-pib" id="vwv-3q-djR"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -15,23 +18,60 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="boH-qs-GLG">
-                    <rect key="frame" x="8" y="8" width="584" height="30"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="30" id="KR6-6P-cNx"/>
-                    </constraints>
-                    <state key="normal" title="Catch a stop">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
+                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="oxr-Qe-pib">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                </mapView>
+                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BXW-8m-3yK">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="qIb-PA-vEI">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We need access to your location to tell you when you are near your stop." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kvl-at-b4E">
+                                <rect key="frame" x="200" y="267.5" width="200" height="65"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="65" id="1IY-1d-vU9"/>
+                                    <constraint firstAttribute="width" constant="200" id="BjF-aq-4I6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EjE-9x-Z3I">
+                                <rect key="frame" x="8" y="548" width="584" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="9w8-sS-aq9"/>
+                                </constraints>
+                                <state key="normal" title="Enable location services">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="EjE-9x-Z3I" firstAttribute="leading" secondItem="qIb-PA-vEI" secondAttribute="leading" constant="8" id="40X-wr-dmB"/>
+                            <constraint firstAttribute="bottom" secondItem="EjE-9x-Z3I" secondAttribute="bottom" constant="8" id="7SP-63-1xu"/>
+                            <constraint firstAttribute="centerY" secondItem="Kvl-at-b4E" secondAttribute="centerY" id="7c7-fn-DtU"/>
+                            <constraint firstAttribute="centerY" secondItem="Kvl-at-b4E" secondAttribute="centerY" id="Vh5-9w-xMy"/>
+                            <constraint firstAttribute="centerX" secondItem="Kvl-at-b4E" secondAttribute="centerX" id="ffC-ug-BSV"/>
+                            <constraint firstAttribute="centerX" secondItem="Kvl-at-b4E" secondAttribute="centerX" id="i1U-7v-vKh"/>
+                            <constraint firstAttribute="trailing" secondItem="EjE-9x-Z3I" secondAttribute="trailing" constant="8" id="mdx-md-hN8"/>
+                        </constraints>
+                    </view>
+                    <blurEffect style="light"/>
+                </visualEffectView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="boH-qs-GLG" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="luD-3k-1hz"/>
-                <constraint firstItem="boH-qs-GLG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="8" id="qtU-sn-dml"/>
-                <constraint firstAttribute="trailing" secondItem="boH-qs-GLG" secondAttribute="trailing" constant="8" id="u8m-4C-uee"/>
-                <constraint firstAttribute="centerX" secondItem="boH-qs-GLG" secondAttribute="centerX" id="wAB-TE-GoR"/>
+                <constraint firstItem="oxr-Qe-pib" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="5bN-Yu-Ywj"/>
+                <constraint firstItem="BXW-8m-3yK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="5rs-pb-brS"/>
+                <constraint firstItem="oxr-Qe-pib" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="8zN-Oh-GXA"/>
+                <constraint firstAttribute="trailing" secondItem="oxr-Qe-pib" secondAttribute="trailing" id="QUd-Jc-2Iq"/>
+                <constraint firstItem="BXW-8m-3yK" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="hsb-X2-ivH"/>
+                <constraint firstAttribute="bottom" secondItem="BXW-8m-3yK" secondAttribute="bottom" id="nYQ-s0-pRv"/>
+                <constraint firstAttribute="bottom" secondItem="oxr-Qe-pib" secondAttribute="bottom" id="u58-M7-00I"/>
+                <constraint firstAttribute="trailing" secondItem="BXW-8m-3yK" secondAttribute="trailing" id="zpb-lA-JF0"/>
             </constraints>
+            <point key="canvasLocation" x="274" y="400"/>
         </view>
     </objects>
 </document>
