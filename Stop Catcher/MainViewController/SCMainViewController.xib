@@ -6,11 +6,16 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SCMainViewController" customModule="Stop_Catcher" customModuleProvider="target">
             <connections>
+                <outlet property="beginTrackingButton" destination="PWX-Z4-P9e" id="dtN-kr-ZVJ"/>
                 <outlet property="blurView" destination="BXW-8m-3yK" id="19f-FA-smk"/>
                 <outlet property="blurredView" destination="qIb-PA-vEI" id="RnC-P3-F4Z"/>
                 <outlet property="enableLocationPermissionButton" destination="EjE-9x-Z3I" id="65e-c5-S6Y"/>
                 <outlet property="mapView" destination="oxr-Qe-pib" id="vwv-3q-djR"/>
                 <outlet property="myLocationButton" destination="3Od-Lm-Wtr" id="F3r-7V-Ngs"/>
+                <outlet property="stopWatchButton" destination="Gch-z0-aSQ" id="Zl2-8G-g3T"/>
+                <outlet property="stopWatchHeightConstraint" destination="VNb-50-K3c" id="DLD-9t-Q8j"/>
+                <outlet property="stopWatchHolderView" destination="n07-rl-2T4" id="9uf-q2-3zx"/>
+                <outlet property="stopWatchWidthConstrant" destination="ABF-yI-83b" id="8E5-h2-LxA"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -22,8 +27,9 @@
                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="oxr-Qe-pib">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                 </mapView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Od-Lm-Wtr" userLabel="My Location">
-                    <rect key="frame" x="548" y="8" width="44" height="44"/>
+                <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Od-Lm-Wtr" userLabel="My Location">
+                    <rect key="frame" x="548" y="32" width="44" height="44"/>
+                    <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="47j-4c-GfM"/>
                         <constraint firstAttribute="width" constant="44" id="8gB-7a-je4"/>
@@ -32,14 +38,57 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
+                <view clipsSubviews="YES" alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n07-rl-2T4" userLabel="Stopwatch View">
+                    <rect key="frame" x="548" y="84" width="44" height="44"/>
+                    <subviews>
+                        <datePicker clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="countDownTimer" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pIm-S6-nKm">
+                            <rect key="frame" x="-156" y="0.0" width="200" height="162"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="162" id="0GX-iZ-PXT"/>
+                                <constraint firstAttribute="width" constant="200" id="i20-ga-Qi9"/>
+                            </constraints>
+                            <date key="date" timeIntervalSinceReferenceDate="463791600.89822501">
+                                <!--2015-09-12 23:00:00 +0000-->
+                            </date>
+                        </datePicker>
+                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gch-z0-aSQ" userLabel="Stopwatch">
+                            <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="44" id="QoS-EB-72U"/>
+                                <constraint firstAttribute="height" constant="44" id="mBq-pb-Wkd"/>
+                            </constraints>
+                            <state key="normal" image="Stopwatch">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="Gch-z0-aSQ" secondAttribute="trailing" id="4B0-an-t9M"/>
+                        <constraint firstAttribute="trailing" secondItem="pIm-S6-nKm" secondAttribute="trailing" id="4BO-Gq-uTi"/>
+                        <constraint firstAttribute="width" constant="44" id="ABF-yI-83b"/>
+                        <constraint firstAttribute="height" constant="44" id="VNb-50-K3c"/>
+                        <constraint firstItem="pIm-S6-nKm" firstAttribute="top" secondItem="n07-rl-2T4" secondAttribute="top" id="gXG-1l-wRu"/>
+                        <constraint firstItem="Gch-z0-aSQ" firstAttribute="top" secondItem="n07-rl-2T4" secondAttribute="top" id="h0S-Fd-Ijz"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PWX-Z4-P9e">
+                    <rect key="frame" x="8" y="548" width="584" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="fT3-OT-eNC"/>
+                    </constraints>
+                    <state key="normal" title="Begin Tracking">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MapFlag" translatesAutoresizingMaskIntoConstraints="NO" id="lbs-Bs-AHy">
-                    <rect key="frame" x="287.5" y="287.5" width="25" height="25"/>
+                    <rect key="frame" x="287" y="287" width="25" height="25"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="K4E-1V-m1A"/>
                         <constraint firstAttribute="width" constant="25" id="fQS-B4-DM9"/>
                     </constraints>
                 </imageView>
-                <visualEffectView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BXW-8m-3yK">
+                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BXW-8m-3yK">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="qIb-PA-vEI">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
@@ -83,11 +132,16 @@
                 <constraint firstAttribute="centerX" secondItem="lbs-Bs-AHy" secondAttribute="centerX" id="0mN-n4-SBy"/>
                 <constraint firstItem="oxr-Qe-pib" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="5bN-Yu-Ywj"/>
                 <constraint firstItem="BXW-8m-3yK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="5rs-pb-brS"/>
+                <constraint firstAttribute="trailing" secondItem="n07-rl-2T4" secondAttribute="trailing" constant="8" id="5zU-An-CU8"/>
                 <constraint firstItem="oxr-Qe-pib" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="8zN-Oh-GXA"/>
+                <constraint firstItem="n07-rl-2T4" firstAttribute="top" secondItem="3Od-Lm-Wtr" secondAttribute="bottom" constant="8" id="OjP-qs-cRN"/>
                 <constraint firstAttribute="centerY" secondItem="lbs-Bs-AHy" secondAttribute="centerY" id="Ppx-2p-wa3"/>
                 <constraint firstAttribute="trailing" secondItem="oxr-Qe-pib" secondAttribute="trailing" id="QUd-Jc-2Iq"/>
+                <constraint firstAttribute="bottom" secondItem="PWX-Z4-P9e" secondAttribute="bottom" constant="8" id="Z7A-mM-5DH"/>
+                <constraint firstAttribute="trailing" secondItem="PWX-Z4-P9e" secondAttribute="trailing" constant="8" id="gCW-SH-mdb"/>
                 <constraint firstItem="BXW-8m-3yK" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="hsb-X2-ivH"/>
-                <constraint firstItem="3Od-Lm-Wtr" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="8" id="ksw-ql-zRF"/>
+                <constraint firstItem="3Od-Lm-Wtr" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="32" id="ksw-ql-zRF"/>
+                <constraint firstItem="PWX-Z4-P9e" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="lgR-Bk-pkJ"/>
                 <constraint firstAttribute="bottom" secondItem="BXW-8m-3yK" secondAttribute="bottom" id="nYQ-s0-pRv"/>
                 <constraint firstAttribute="trailing" secondItem="3Od-Lm-Wtr" secondAttribute="trailing" constant="8" id="r2b-EJ-d2v"/>
                 <constraint firstAttribute="bottom" secondItem="oxr-Qe-pib" secondAttribute="bottom" id="u58-M7-00I"/>
@@ -99,5 +153,6 @@
     <resources>
         <image name="MapFlag" width="24" height="24"/>
         <image name="MyLocation" width="25" height="25"/>
+        <image name="Stopwatch" width="25" height="25"/>
     </resources>
 </document>
