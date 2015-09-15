@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class SCUserDefaultsManager: NSObject
 {
@@ -35,6 +36,41 @@ class SCUserDefaultsManager: NSObject
         {
             return NSUserDefaults.standardUserDefaults().boolForKey("hasAskedForPushNotes")
         }
+    }
+    
+    var trackingLocation : CLLocationCoordinate2D? {
+        
+        set
+        {
+            if (newValue) != nil
+            {
+                let latitudeNumberValue = NSNumber(double: newValue!.latitude)
+                let longitudeNumberValue = NSNumber(double: newValue!.longitude)
+                let locationDictionary = ["latitudeNumberValue" : latitudeNumberValue, "longitudeNumberValue" : longitudeNumberValue]
+                NSUserDefaults.standardUserDefaults().setObject(locationDictionary, forKey: "locationDictionary")
+            }
+            else
+            {
+                NSUserDefaults.standardUserDefaults().removeObjectForKey("locationDictionary")
+            }
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
+        
+        get
+        {
+            if let locationDictionary: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("locationDictionary")
+            {
+                let latitudeNumberValue : NSNumber = locationDictionary!["latitudeNumberValue"] as! NSNumber
+                let longitudeNumberValue : NSNumber = locationDictionary!["longitudeNumberValue"] as! NSNumber
+                return CLLocationCoordinate2D(latitude: latitudeNumberValue.doubleValue, longitude: longitudeNumberValue.doubleValue)
+            }
+            else
+            {
+                return nil
+            }
+            
+        }
+    
     }
     
 }

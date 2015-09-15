@@ -9,6 +9,7 @@
                 <outlet property="beginTrackingButton" destination="PWX-Z4-P9e" id="dtN-kr-ZVJ"/>
                 <outlet property="blurView" destination="BXW-8m-3yK" id="19f-FA-smk"/>
                 <outlet property="blurredView" destination="qIb-PA-vEI" id="RnC-P3-F4Z"/>
+                <outlet property="centeredMapFlag" destination="lbs-Bs-AHy" id="kiQ-6K-Bog"/>
                 <outlet property="enableLocationPermissionButton" destination="EjE-9x-Z3I" id="65e-c5-S6Y"/>
                 <outlet property="mapView" destination="oxr-Qe-pib" id="vwv-3q-djR"/>
                 <outlet property="myLocationButton" destination="3Od-Lm-Wtr" id="F3r-7V-Ngs"/>
@@ -16,6 +17,7 @@
                 <outlet property="stopWatchHeightConstraint" destination="VNb-50-K3c" id="DLD-9t-Q8j"/>
                 <outlet property="stopWatchHolderView" destination="n07-rl-2T4" id="9uf-q2-3zx"/>
                 <outlet property="stopWatchWidthConstrant" destination="ABF-yI-83b" id="8E5-h2-LxA"/>
+                <outlet property="timePicker" destination="pIm-S6-nKm" id="Ifu-YX-5IV"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -50,6 +52,9 @@
                             <date key="date" timeIntervalSinceReferenceDate="463791600.89822501">
                                 <!--2015-09-12 23:00:00 +0000-->
                             </date>
+                            <connections>
+                                <action selector="handleTimePickerValueChanged:" destination="-1" eventType="valueChanged" id="Lzk-rC-Itn"/>
+                            </connections>
                         </datePicker>
                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gch-z0-aSQ" userLabel="Stopwatch">
                             <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>

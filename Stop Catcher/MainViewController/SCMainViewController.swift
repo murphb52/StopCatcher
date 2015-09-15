@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapViewDelegate
+class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapViewDelegate, UIAlertViewDelegate
 {
     var locationManager : CLLocationManager!
 
@@ -31,8 +31,12 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
     let maxRadius : Double = 2000.0
     let minRadius : Double = 250.0
     
+    @IBOutlet weak var centeredMapFlag: UIImageView!
+    
     @IBOutlet weak var stopWatchHeightConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var timePicker: UIDatePicker!
+    var hasPickedTime = false
     
     override func viewDidLoad()
     {
@@ -61,17 +65,27 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
 
         let grayColor = UIColor(red: 246.0/255.0, green: 246.0/255.0, blue: 246.0/255.0, alpha: 1.0)
         let purpleColor = UIColor(red: 155.0/255.0, green: 89.0/255.0, blue: 182.0/255.0, alpha: 1.0)
+        self.beginTrackingButton.addTarget(self, action: Selector("handleBeginTrackingButtonTapped"), forControlEvents: UIControlEvents.TouchUpInside)
         self.beginTrackingButton.layer.cornerRadius = 5;
         self.beginTrackingButton.layer.masksToBounds = true
         self.beginTrackingButton.tintColor = grayColor
         self.beginTrackingButton.backgroundColor = purpleColor
-
-        
+                
         let circleView = MKCircle(centerCoordinate: self.mapView.region.center, radius: maxRadius/2 as CLLocationDistance)
         self.mapView.addOverlay(circleView)
         
+        let pickedTime = NSDate(timeIntervalSince1970: 0)
+        self.timePicker.setDate(pickedTime, animated: true)
+        
+        self.updateUI()
+        
         //***** Setup our view for the state of our authStatus
         setupViewForAuthStatus(CLLocationManager.authorizationStatus(), animated: false)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.updateUI()
     }
     
     func handleEnablePermissionButtonTap()
@@ -147,9 +161,10 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
 
     func mapView(mapView: MKMapView!, regionDidChangeAnimated animated: Bool)
     {
-        self.mapView.removeOverlays(self.mapView.overlays)
-        let circleView = MKCircle(centerCoordinate: mapView.centerCoordinate, radius: maxRadius)
-        self.mapView.addOverlay(circleView)
+        if(SCUserDefaultsManager().isCatchingStop == false)
+        {
+            self.updateRadiusCircle()
+        }
     }
     
     func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
@@ -214,5 +229,109 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
             
         }
         
+    }
+
+    @IBAction func handleTimePickerValueChanged(sender: AnyObject)
+    {
+        self.hasPickedTime = true
+    }
+    
+    func handleBeginTrackingButtonTapped()
+    {
+        var title : String?
+        var message : String?
+        
+        if (SCUserDefaultsManager().isCatchingStop)
+        {
+            title = "Stop Tracking"
+            message = "Are you sure you want to stop tracking this location?"
+        }
+        else
+        {
+            title = "Begin Tracking"
+            message = "Are you sure you want to start tracking this location?"
+        }
+        
+        var alertController = UIAlertController(title: title, message: "Are you sure you want to track this location?", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+            
+            if (SCUserDefaultsManager().isCatchingStop == true)
+            {
+                SCUserDefaultsManager().isCatchingStop = false
+                SCUserDefaultsManager().trackingLocation = nil
+            }
+            else
+            {
+                SCUserDefaultsManager().isCatchingStop = true
+                SCUserDefaultsManager().trackingLocation = self.mapView.centerCoordinate
+            }
+            
+            self.updateUI()
+        }))
+        alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: { (action) -> Void in
+            
+            
+        }))
+        self.presentViewController(alertController, animated: true, completion: nil)
+        
+    }
+    
+    func updateUI()
+    {
+        if(SCUserDefaultsManager().isCatchingStop == true)
+        {
+            self.beginTrackingButton.setTitle("Stop Tracking", forState: UIControlState.allZeros)
+            
+            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                self.centeredMapFlag.alpha = 0;
+            })
+            
+            self.removeAllAnnotations()
+            let pointAnnotation = MKPointAnnotation()
+            pointAnnotation.coordinate = SCUserDefaultsManager().trackingLocation!
+            self.mapView.addAnnotation(pointAnnotation)
+        }
+        else
+        {
+            self.beginTrackingButton.setTitle("Begin Tracking", forState: UIControlState.allZeros)
+            
+            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                self.centeredMapFlag.alpha = 1;
+            })
+            
+            self.removeAllAnnotations()
+        }
+        
+        self.updateRadiusCircle()
+    }
+
+    //***** Remove all annotations and only leave the user location annotation if it is present
+    func removeAllAnnotations()
+    {
+        let userLocationAnnotation = mapView.userLocation
+        
+        self.mapView.removeAnnotations(mapView.annotations)
+        
+        if(userLocationAnnotation != nil)
+        {
+            self.mapView.addAnnotation(userLocationAnnotation)
+        }
+    }
+    
+    func updateRadiusCircle()
+    {
+        if(SCUserDefaultsManager().isCatchingStop == true)
+        {
+            self.mapView.removeOverlays(self.mapView.overlays)
+            let circleView = MKCircle(centerCoordinate: SCUserDefaultsManager().trackingLocation!, radius: maxRadius)
+            self.mapView.addOverlay(circleView)
+        }
+        else
+        {
+            self.mapView.removeOverlays(self.mapView.overlays)
+            let circleView = MKCircle(centerCoordinate: mapView.centerCoordinate, radius: maxRadius)
+            self.mapView.addOverlay(circleView)
+        }
     }
 }
