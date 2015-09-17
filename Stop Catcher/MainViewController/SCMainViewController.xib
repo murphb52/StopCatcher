@@ -9,8 +9,9 @@
                 <outlet property="beginTrackingButton" destination="PWX-Z4-P9e" id="dtN-kr-ZVJ"/>
                 <outlet property="blurView" destination="BXW-8m-3yK" id="19f-FA-smk"/>
                 <outlet property="blurredView" destination="qIb-PA-vEI" id="RnC-P3-F4Z"/>
+                <outlet property="blurredViewAlertView" destination="7me-9u-LMD" id="LLh-jW-Ovp"/>
+                <outlet property="blurredViewButton" destination="3C5-L1-Uhk" id="7Ul-oR-qG4"/>
                 <outlet property="centeredMapFlag" destination="lbs-Bs-AHy" id="kiQ-6K-Bog"/>
-                <outlet property="enableLocationPermissionButton" destination="EjE-9x-Z3I" id="65e-c5-S6Y"/>
                 <outlet property="mapView" destination="oxr-Qe-pib" id="vwv-3q-djR"/>
                 <outlet property="myLocationButton" destination="3Od-Lm-Wtr" id="F3r-7V-Ngs"/>
                 <outlet property="stopWatchButton" destination="Gch-z0-aSQ" id="Zl2-8G-g3T"/>
@@ -99,37 +100,57 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We need access to your location to tell you when you are near your stop." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kvl-at-b4E">
-                                <rect key="frame" x="200" y="267" width="200" height="65"/>
+                            <view alpha="0.80000000000000004" contentMode="scaleToFill" placeholderIntrinsicWidth="500" placeholderIntrinsicHeight="117" translatesAutoresizingMaskIntoConstraints="NO" id="7me-9u-LMD">
+                                <rect key="frame" x="50" y="233.5" width="500" height="133"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3C5-L1-Uhk">
+                                        <rect key="frame" x="8" y="81" width="484" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="Hw3-US-tky"/>
+                                        </constraints>
+                                        <state key="normal" title="Enable Location Services">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable Location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="waD-8c-ix8">
+                                        <rect key="frame" x="8" y="8" width="484" height="23"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="23" id="tMa-XU-X81"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="484" placeholderIntrinsicHeight="18" text="Stop Catcher needs permission to access your location" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KUB-Jc-BN5">
+                                        <rect key="frame" x="8" y="47" width="484" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="65" id="1IY-1d-vU9"/>
-                                    <constraint firstAttribute="width" constant="200" id="BjF-aq-4I6"/>
+                                    <constraint firstAttribute="trailing" secondItem="3C5-L1-Uhk" secondAttribute="trailing" constant="8" id="18e-cC-fFc"/>
+                                    <constraint firstAttribute="trailing" secondItem="KUB-Jc-BN5" secondAttribute="trailing" constant="8" id="8N2-TA-Nt5"/>
+                                    <constraint firstItem="KUB-Jc-BN5" firstAttribute="top" secondItem="waD-8c-ix8" secondAttribute="bottom" constant="16" id="NOd-As-mPf"/>
+                                    <constraint firstItem="KUB-Jc-BN5" firstAttribute="top" secondItem="waD-8c-ix8" secondAttribute="bottom" constant="16" id="Uiq-yG-jE6"/>
+                                    <constraint firstItem="KUB-Jc-BN5" firstAttribute="leading" secondItem="7me-9u-LMD" secondAttribute="leading" constant="8" id="YLH-MK-WaT"/>
+                                    <constraint firstItem="3C5-L1-Uhk" firstAttribute="leading" secondItem="7me-9u-LMD" secondAttribute="leading" constant="8" id="ZTU-7f-FuC"/>
+                                    <constraint firstItem="waD-8c-ix8" firstAttribute="top" secondItem="7me-9u-LMD" secondAttribute="top" constant="8" id="fFc-Bc-IvC"/>
+                                    <constraint firstAttribute="trailing" secondItem="waD-8c-ix8" secondAttribute="trailing" constant="8" id="l3z-J2-9RE"/>
+                                    <constraint firstItem="3C5-L1-Uhk" firstAttribute="top" secondItem="KUB-Jc-BN5" secondAttribute="bottom" constant="16" id="w76-v9-9Oq"/>
+                                    <constraint firstItem="waD-8c-ix8" firstAttribute="leading" secondItem="7me-9u-LMD" secondAttribute="leading" constant="8" id="yJS-Me-e7k"/>
+                                    <constraint firstAttribute="bottom" secondItem="3C5-L1-Uhk" secondAttribute="bottom" constant="8" id="yXM-rZ-fbL"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EjE-9x-Z3I">
-                                <rect key="frame" x="8" y="548" width="584" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="9w8-sS-aq9"/>
-                                </constraints>
-                                <state key="normal" title="Enable location services">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
+                            </view>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="EjE-9x-Z3I" firstAttribute="leading" secondItem="qIb-PA-vEI" secondAttribute="leading" constant="8" id="40X-wr-dmB"/>
-                            <constraint firstAttribute="bottom" secondItem="EjE-9x-Z3I" secondAttribute="bottom" constant="8" id="7SP-63-1xu"/>
-                            <constraint firstAttribute="centerY" secondItem="Kvl-at-b4E" secondAttribute="centerY" id="7c7-fn-DtU"/>
-                            <constraint firstAttribute="centerY" secondItem="Kvl-at-b4E" secondAttribute="centerY" id="Vh5-9w-xMy"/>
-                            <constraint firstAttribute="centerX" secondItem="Kvl-at-b4E" secondAttribute="centerX" id="ffC-ug-BSV"/>
-                            <constraint firstAttribute="centerX" secondItem="Kvl-at-b4E" secondAttribute="centerX" id="i1U-7v-vKh"/>
-                            <constraint firstAttribute="trailing" secondItem="EjE-9x-Z3I" secondAttribute="trailing" constant="8" id="mdx-md-hN8"/>
+                            <constraint firstItem="7me-9u-LMD" firstAttribute="leading" secondItem="qIb-PA-vEI" secondAttribute="leading" constant="50" id="TtA-yJ-qy2"/>
+                            <constraint firstAttribute="centerY" secondItem="7me-9u-LMD" secondAttribute="centerY" id="xFx-XZ-It5"/>
+                            <constraint firstAttribute="trailing" secondItem="7me-9u-LMD" secondAttribute="trailing" constant="50" id="xbY-IT-eIt"/>
                         </constraints>
                     </view>
-                    <blurEffect style="light"/>
+                    <blurEffect style="dark"/>
                 </visualEffectView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

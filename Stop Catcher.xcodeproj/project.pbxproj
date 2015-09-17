@@ -488,6 +488,7 @@
 				C923C20B1B6E4277007C8D3E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C923C20C1B6E4277007C8D3E /* Build configuration list for PBXNativeTarget "Stop CatcherTests" */ = {
 			isa = XCConfigurationList;
@@ -496,6 +497,7 @@
 				C923C20E1B6E4277007C8D3E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

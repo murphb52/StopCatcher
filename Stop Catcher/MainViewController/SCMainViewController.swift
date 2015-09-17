@@ -13,11 +13,15 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
 {
     var locationManager : CLLocationManager!
 
+    
+    @IBOutlet weak var blurredViewButton: UIButton!
+    @IBOutlet weak var blurredViewLabel: UILabel!
+    @IBOutlet weak var blurredView: UIView!
+
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var blurView: UIVisualEffectView!
     
-    @IBOutlet weak var blurredView: UIView!
-    @IBOutlet weak var enableLocationPermissionButton: UIButton!
+    @IBOutlet weak var blurredViewAlertView: UIView!
     
     @IBOutlet weak var myLocationButton: UIButton!
     @IBOutlet weak var stopWatchButton: UIButton!
@@ -48,8 +52,6 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
         locationManager = CLLocationManager()
         locationManager.delegate = self
         
-        //***** Setup locationPermission button
-        self.enableLocationPermissionButton.addTarget(self, action: Selector("handleEnablePermissionButtonTap"), forControlEvents: UIControlEvents.TouchUpInside)
         
         self.myLocationButton.layer.borderColor = UIColor(red: 155.0/255.0, green: 89.0/255.0, blue: 182.0/255.0, alpha: 1.0).CGColor
         self.myLocationButton.layer.borderWidth = 1;
@@ -70,6 +72,16 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
         self.beginTrackingButton.layer.masksToBounds = true
         self.beginTrackingButton.tintColor = grayColor
         self.beginTrackingButton.backgroundColor = purpleColor
+        
+        //***** Setup locationPermission button
+        self.blurredViewButton.addTarget(self, action: Selector("handleEnablePermissionButtonTap"), forControlEvents: UIControlEvents.TouchUpInside)
+        self.blurredViewButton.layer.cornerRadius = 5;
+        self.blurredViewButton.layer.masksToBounds = true
+        self.blurredViewButton.tintColor = grayColor
+        self.blurredViewButton.backgroundColor = purpleColor
+        
+        self.blurredViewAlertView.layer.cornerRadius = 5
+        self.blurredViewAlertView.layer.masksToBounds = true
                 
         let circleView = MKCircle(centerCoordinate: self.mapView.region.center, radius: maxRadius/2 as CLLocationDistance)
         self.mapView.addOverlay(circleView)
