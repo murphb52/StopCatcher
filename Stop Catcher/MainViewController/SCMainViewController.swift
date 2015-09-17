@@ -98,6 +98,7 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.updateUI()
+        setupViewForAuthStatus(CLLocationManager.authorizationStatus(), animated: false)
     }
     
     func handleEnablePermissionButtonTap()
@@ -151,6 +152,8 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
             self.blurView.alpha = 0;
             
         })
+        
+        self.setNeedsStatusBarAppearanceUpdate()
     }
     
     func setupForUnAuthorizedLocationPermission(animated: Bool)
@@ -161,6 +164,8 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
             self.blurView.alpha = 1;
             
         })
+        
+        self.setNeedsStatusBarAppearanceUpdate()
     }
     
     func handleMyLocationButtonTapped()
@@ -344,6 +349,24 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
             self.mapView.removeOverlays(self.mapView.overlays)
             let circleView = MKCircle(centerCoordinate: mapView.centerCoordinate, radius: maxRadius)
             self.mapView.addOverlay(circleView)
+        }
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle
+    {
+        
+        switch(CLLocationManager.authorizationStatus())
+        {
+        case .AuthorizedAlways:
+            return UIStatusBarStyle.LightContent
+        case .AuthorizedWhenInUse:
+            return UIStatusBarStyle.LightContent
+        case .Denied:
+            return UIStatusBarStyle.Default
+        case .Restricted:
+            return UIStatusBarStyle.Default
+        case .NotDetermined:
+            return UIStatusBarStyle.Default
         }
     }
 }
