@@ -58,7 +58,9 @@ class SCUserDefaultsManager: NSObject
         
         get
         {
-            if let locationDictionary: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("locationDictionary")
+            let locationDictionary : AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("locationDictionary")
+            
+            if (locationDictionary != nil)
             {
                 let latitudeNumberValue : NSNumber = locationDictionary!["latitudeNumberValue"] as! NSNumber
                 let longitudeNumberValue : NSNumber = locationDictionary!["longitudeNumberValue"] as! NSNumber

@@ -253,47 +253,6 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
         self.hasPickedTime = true
     }
     
-    func handleBeginTrackingButtonTapped()
-    {
-        var title : String?
-        var message : String?
-        
-        if (SCUserDefaultsManager().isCatchingStop)
-        {
-            title = "Stop Tracking"
-            message = "Are you sure you want to stop tracking this location?"
-        }
-        else
-        {
-            title = "Begin Tracking"
-            message = "Are you sure you want to start tracking this location?"
-        }
-        
-        var alertController = UIAlertController(title: title, message: "Are you sure you want to track this location?", preferredStyle: UIAlertControllerStyle.Alert)
-        
-        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
-            
-            if (SCUserDefaultsManager().isCatchingStop == true)
-            {
-                SCUserDefaultsManager().isCatchingStop = false
-                SCUserDefaultsManager().trackingLocation = nil
-            }
-            else
-            {
-                SCUserDefaultsManager().isCatchingStop = true
-                SCUserDefaultsManager().trackingLocation = self.mapView.centerCoordinate
-            }
-            
-            self.updateUI()
-        }))
-        alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: { (action) -> Void in
-            
-            
-        }))
-        self.presentViewController(alertController, animated: true, completion: nil)
-        
-    }
-    
     func updateUI()
     {
         if(SCUserDefaultsManager().isCatchingStop == true)
@@ -368,5 +327,99 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
         case .NotDetermined:
             return UIStatusBarStyle.Default
         }
+    }
+    
+    func didTapConfirmButton()
+    {
+        //***** Check if we have asked for push notications
+        if(SCUserDefaultsManager().hasAskedForPushNotes)
+        {
+            
+            let notificationSettings = UIApplication.sharedApplication().currentUserNotificationSettings()
+            if (notificationSettings.types == UIUserNotificationType.None)
+            {
+                //***** Tell them to turn on Push notes
+                let pushNotesAlertView = UIAlertView(title: "Notifications!", message: "Notifications are turned off!\nStop Catcher will only ever send you notifications to wake you up", delegate: self, cancelButtonTitle: "Cancel")
+                pushNotesAlertView.addButtonWithTitle("Settings")
+                pushNotesAlertView.show()
+            }
+            else
+            {
+                //***** Finish setting up the current catch
+                self.setupStopToCatch()
+            }
+            
+        }
+            //***** Ask for push notes
+        else
+        {
+            UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Sound | .Alert | .Badge, categories: nil))
+            SCUserDefaultsManager().hasAskedForPushNotes = true
+        }
+        
+    }
+    
+    func setupStopToCatch()
+    {
+        SCUserDefaultsManager().isCatchingStop = true
+        
+        let localNotification = UILocalNotification()
+        
+        let regionToDetect = CLCircularRegion(center: self.mapView.centerCoordinate, radius: maxRadius, identifier: "Location Tracking")
+        
+        localNotification.regionTriggersOnce = true
+        localNotification.region = regionToDetect
+        localNotification.alertBody = "Time to wake up!"
+        localNotification.alertTitle = "Wake up!"
+        
+        UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+        
+        let timedNotification = UILocalNotification()
+        timedNotification.fireDate = NSDate(timeIntervalSinceNow: self.timePicker.countDownDuration)
+        timedNotification.alertBody = "Timed wake up!"
+        timedNotification.alertTitle = "Wake up!"
+        
+        UIApplication.sharedApplication().scheduleLocalNotification(timedNotification)
+    }
+    
+    func handleBeginTrackingButtonTapped()
+    {
+        var title : String?
+        var message : String?
+        
+        if (SCUserDefaultsManager().isCatchingStop)
+        {
+            title = "Stop Tracking"
+            message = "Are you sure you want to stop tracking this location?"
+        }
+        else
+        {
+            title = "Begin Tracking"
+            message = "Are you sure you want to start tracking this location?"
+        }
+        
+        var alertController = UIAlertController(title: title, message: "Are you sure you want to track this location?", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+            
+            if (SCUserDefaultsManager().isCatchingStop == true)
+            {
+                SCUserDefaultsManager().isCatchingStop = false
+                SCUserDefaultsManager().trackingLocation = nil
+            }
+            else
+            {
+                SCUserDefaultsManager().isCatchingStop = true
+                SCUserDefaultsManager().trackingLocation = self.mapView.centerCoordinate
+            }
+            
+            self.updateUI()
+        }))
+        alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: { (action) -> Void in
+            
+            
+        }))
+        self.presentViewController(alertController, animated: true, completion: nil)
+        
     }
 }
