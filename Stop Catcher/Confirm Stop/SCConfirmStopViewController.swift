@@ -38,10 +38,10 @@ class SCConfirmStopViewController: SCViewController, MKMapViewDelegate, UIAlertV
         self.mapView.addOverlay(circleView)
     }
 
-    func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
+    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer! {
         if overlay is MKCircle
         {
-            var circle = MKCircleRenderer(overlay: overlay)
+            let circle = MKCircleRenderer(overlay: overlay)
             circle.strokeColor = UIColor.redColor().colorWithAlphaComponent(0.4)
             circle.fillColor = UIColor.redColor().colorWithAlphaComponent(0.1)
             circle.lineWidth = 1
@@ -77,7 +77,7 @@ class SCConfirmStopViewController: SCViewController, MKMapViewDelegate, UIAlertV
         //***** Ask for push notes
         else
         {
-            UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Sound | .Alert | .Badge, categories: nil))
+            UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Sound, .Alert, .Badge], categories: nil))
             SCUserDefaultsManager().hasAskedForPushNotes = true
         }
         

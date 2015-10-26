@@ -83,10 +83,10 @@ class SCPickAStopViewController: SCViewController, MKMapViewDelegate, CLLocation
 
     }
     
-    func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
+    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer! {
         if overlay is MKCircle
         {
-            var circle = MKCircleRenderer(overlay: overlay)
+            let circle = MKCircleRenderer(overlay: overlay)
             circle.strokeColor = UIColor.redColor().colorWithAlphaComponent(0.4)
             circle.fillColor = UIColor.redColor().colorWithAlphaComponent(0.1)
             circle.lineWidth = 1
@@ -112,11 +112,11 @@ class SCPickAStopViewController: SCViewController, MKMapViewDelegate, CLLocation
     }
     
     //***** Animate the addition of the annotation
-    func mapView(mapView: MKMapView!, didAddAnnotationViews views: [AnyObject]!)
+    func mapView(mapView: MKMapView, didAddAnnotationViews views: [MKAnnotationView])
     {
         
         for view in views {
-            let mkView = view as! MKAnnotationView
+            let mkView = view 
             if view.annotation is MKUserLocation {
                 continue;
             }
@@ -178,7 +178,7 @@ class SCPickAStopViewController: SCViewController, MKMapViewDelegate, CLLocation
         
     }
     
-    func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus)
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus)
     {
         self.switchOnAuthStatus(status)
     }

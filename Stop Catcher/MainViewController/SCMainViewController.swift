@@ -116,7 +116,7 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
         }
     }
     
-    func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus)
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus)
     {
         setupViewForAuthStatus(status, animated: true)
     }
@@ -176,7 +176,7 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
         mapView.setRegion(region, animated: true)
     }
 
-    func mapView(mapView: MKMapView!, regionDidChangeAnimated animated: Bool)
+    func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool)
     {
         if(SCUserDefaultsManager().isCatchingStop == false)
         {
@@ -184,10 +184,10 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
         }
     }
     
-    func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
+    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer! {
         if overlay is MKCircle
         {
-            var circle = MKCircleRenderer(overlay: overlay)
+            let circle = MKCircleRenderer(overlay: overlay)
             circle.strokeColor = UIColor(red: 155.0/255.0, green: 89.0/255.0, blue: 182.0/255.0, alpha: 1.0)
             circle.fillColor = UIColor(red: 155.0/255.0, green: 89.0/255.0, blue: 182.0/255.0, alpha: 1.0).colorWithAlphaComponent(0.3)
             circle.lineWidth = 1
@@ -239,7 +239,7 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
             
         }) { (finished) -> Void in
             
-            self.stopWatchButton.setImage(image, forState: UIControlState.allZeros)
+            self.stopWatchButton.setImage(image, forState: UIControlState())
             UIView.animateWithDuration(0.15, animations: { () -> Void in
                 self.stopWatchButton.alpha = 1
             })
@@ -257,7 +257,7 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
     {
         if(SCUserDefaultsManager().isCatchingStop == true)
         {
-            self.beginTrackingButton.setTitle("Stop Tracking", forState: UIControlState.allZeros)
+            self.beginTrackingButton.setTitle("Stop Tracking", forState: UIControlState())
             
             UIView.animateWithDuration(0.3, animations: { () -> Void in
                 self.centeredMapFlag.alpha = 0;
@@ -270,7 +270,7 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
         }
         else
         {
-            self.beginTrackingButton.setTitle("Begin Tracking", forState: UIControlState.allZeros)
+            self.beginTrackingButton.setTitle("Begin Tracking", forState: UIControlState())
             
             UIView.animateWithDuration(0.3, animations: { () -> Void in
                 self.centeredMapFlag.alpha = 1;
@@ -353,7 +353,7 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
             //***** Ask for push notes
         else
         {
-            UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Sound | .Alert | .Badge, categories: nil))
+            UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Sound, .Alert, .Badge], categories: nil))
             SCUserDefaultsManager().hasAskedForPushNotes = true
         }
         
@@ -398,7 +398,7 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
             message = "Are you sure you want to start tracking this location?"
         }
         
-        var alertController = UIAlertController(title: title, message: "Are you sure you want to track this location?", preferredStyle: UIAlertControllerStyle.Alert)
+        let alertController = UIAlertController(title: title, message: "Are you sure you want to track this location?", preferredStyle: UIAlertControllerStyle.Alert)
         
         alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
             
