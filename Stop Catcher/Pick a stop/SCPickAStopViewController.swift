@@ -83,19 +83,13 @@ class SCPickAStopViewController: SCViewController, MKMapViewDelegate, CLLocation
 
     }
     
-    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer! {
-        if overlay is MKCircle
-        {
-            let circle = MKCircleRenderer(overlay: overlay)
-            circle.strokeColor = UIColor.redColor().colorWithAlphaComponent(0.4)
-            circle.fillColor = UIColor.redColor().colorWithAlphaComponent(0.1)
-            circle.lineWidth = 1
-            return circle
-        }
-        else
-        {
-            return nil
-        }
+    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer
+    {
+        let circle = MKCircleRenderer(overlay: overlay)
+        circle.strokeColor = UIColor.redColor().colorWithAlphaComponent(0.4)
+        circle.fillColor = UIColor.redColor().colorWithAlphaComponent(0.1)
+        circle.lineWidth = 1
+        return circle
     }
     
     //***** Remove all annotations and only leave the user location annotation if it is present
@@ -105,10 +99,8 @@ class SCPickAStopViewController: SCViewController, MKMapViewDelegate, CLLocation
         
         self.mapView.removeAnnotations(mapView.annotations)
         
-        if(userLocationAnnotation != nil)
-        {
-            self.mapView.addAnnotation(userLocationAnnotation)
-        }
+        self.mapView.addAnnotation(userLocationAnnotation)
+
     }
     
     //***** Animate the addition of the annotation
@@ -122,7 +114,7 @@ class SCPickAStopViewController: SCViewController, MKMapViewDelegate, CLLocation
             }
             
             // Check if current annotation is inside visible map rect, else go to next one
-            let point:MKMapPoint  =  MKMapPointForCoordinate(mkView.annotation.coordinate);
+            let point:MKMapPoint  =  MKMapPointForCoordinate(mkView.annotation!.coordinate);
             if (!MKMapRectContainsPoint(self.mapView.visibleMapRect, point)) {
                 continue;
             }

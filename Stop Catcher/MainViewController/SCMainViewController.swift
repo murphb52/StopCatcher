@@ -184,40 +184,31 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
         }
     }
     
-    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer! {
-        if overlay is MKCircle
-        {
-            let circle = MKCircleRenderer(overlay: overlay)
-            circle.strokeColor = UIColor(red: 155.0/255.0, green: 89.0/255.0, blue: 182.0/255.0, alpha: 1.0)
-            circle.fillColor = UIColor(red: 155.0/255.0, green: 89.0/255.0, blue: 182.0/255.0, alpha: 1.0).colorWithAlphaComponent(0.3)
-            circle.lineWidth = 1
-            return circle
-        }
-        else
-        {
-            return nil
-        }
+    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer
+    {
+        let circle = MKCircleRenderer(overlay: overlay)
+        circle.strokeColor = UIColor(red: 155.0/255.0, green: 89.0/255.0, blue: 182.0/255.0, alpha: 1.0)
+        circle.fillColor = UIColor(red: 155.0/255.0, green: 89.0/255.0, blue: 182.0/255.0, alpha: 1.0).colorWithAlphaComponent(0.3)
+        circle.lineWidth = 1
+        return circle
     }
     
     func handleStopwatchButtonTapped()
     {
         var newButtonWidth : CGFloat
         var newButtonHeight : CGFloat
-        var labelAlpha : CGFloat
         var image : UIImage
         
         if(self.stopWatchButtonIsLarge)
         {
             newButtonWidth = 44.0
             newButtonHeight = 44.0
-            labelAlpha = 0
             image = UIImage(named: "Stopwatch")!
         }
         else
         {
             newButtonWidth = 216
             newButtonHeight = 162
-            labelAlpha = 1
             image = UIImage(named: "TickImage")!
         }
 
@@ -289,10 +280,7 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
         
         self.mapView.removeAnnotations(mapView.annotations)
         
-        if(userLocationAnnotation != nil)
-        {
-            self.mapView.addAnnotation(userLocationAnnotation)
-        }
+        self.mapView.addAnnotation(userLocationAnnotation)
     }
     
     func updateRadiusCircle()
@@ -336,7 +324,7 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
         {
             
             let notificationSettings = UIApplication.sharedApplication().currentUserNotificationSettings()
-            if (notificationSettings.types == UIUserNotificationType.None)
+            if (notificationSettings!.types == UIUserNotificationType.None)
             {
                 //***** Tell them to turn on Push notes
                 let pushNotesAlertView = UIAlertView(title: "Notifications!", message: "Notifications are turned off!\nStop Catcher will only ever send you notifications to wake you up", delegate: self, cancelButtonTitle: "Cancel")
@@ -398,7 +386,7 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
             message = "Are you sure you want to start tracking this location?"
         }
         
-        let alertController = UIAlertController(title: title, message: "Are you sure you want to track this location?", preferredStyle: UIAlertControllerStyle.Alert)
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
         
         alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
             

@@ -38,19 +38,13 @@ class SCConfirmStopViewController: SCViewController, MKMapViewDelegate, UIAlertV
         self.mapView.addOverlay(circleView)
     }
 
-    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer! {
-        if overlay is MKCircle
-        {
-            let circle = MKCircleRenderer(overlay: overlay)
-            circle.strokeColor = UIColor.redColor().colorWithAlphaComponent(0.4)
-            circle.fillColor = UIColor.redColor().colorWithAlphaComponent(0.1)
-            circle.lineWidth = 1
-            return circle
-        }
-        else
-        {
-            return nil
-        }
+    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer
+    {
+        let circle = MKCircleRenderer(overlay: overlay)
+        circle.strokeColor = UIColor.redColor().colorWithAlphaComponent(0.4)
+        circle.fillColor = UIColor.redColor().colorWithAlphaComponent(0.1)
+        circle.lineWidth = 1
+        return circle
     }
     
     func didTapConfirmButton()
@@ -60,7 +54,7 @@ class SCConfirmStopViewController: SCViewController, MKMapViewDelegate, UIAlertV
         {
 
             let notificationSettings = UIApplication.sharedApplication().currentUserNotificationSettings()
-            if (notificationSettings.types == UIUserNotificationType.None)
+            if (notificationSettings!.types == UIUserNotificationType.None)
             {
                 //***** Tell them to turn on Push notes
                 let pushNotesAlertView = UIAlertView(title: "Notifications!", message: "Notifications are turned off!\nStop Catcher will only ever send you notifications to wake you up", delegate: self, cancelButtonTitle: "Cancel")
