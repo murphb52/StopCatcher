@@ -23,7 +23,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Because we want to!</string>
+	<string>We only ever will track your location when you tell us to. The information is all kept on the handset and we will never store this information</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>

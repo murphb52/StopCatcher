@@ -166,8 +166,6 @@ class SCPickAStopViewController: SCViewController, MKMapViewDelegate, CLLocation
     @IBAction func askForUserLocation(sender: AnyObject)
     {
         locationManager.requestAlwaysAuthorization()
-        
-        
     }
     
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus)

@@ -399,6 +399,8 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
             {
                 SCUserDefaultsManager().isCatchingStop = true
                 SCUserDefaultsManager().trackingLocation = self.mapView.centerCoordinate
+                
+                self.didTapConfirmButton()
             }
             
             self.updateUI()
