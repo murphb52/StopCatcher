@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         
         let arrayOfNotifications = UIApplication.sharedApplication().scheduledLocalNotifications
-        if (arrayOfNotifications!.count == 0)
+        if (arrayOfNotifications!.count == 0 || arrayOfNotifications!.count % 2 != 0)
         {
             SCUserDefaultsManager().isCatchingStop = false
         }
@@ -63,6 +63,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
         
+        SCUserDefaultsManager().isCatchingStop = false
+
     }
 
 }

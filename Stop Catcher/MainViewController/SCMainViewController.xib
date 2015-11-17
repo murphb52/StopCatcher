@@ -7,7 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SCMainViewController" customModule="Stop_Catcher" customModuleProvider="target">
             <connections>
-                <outlet property="beginTrackingButton" destination="PWX-Z4-P9e" id="dtN-kr-ZVJ"/>
+                <outlet property="beginTrackingButton" destination="PWX-Z4-P9e" id="5RP-Y8-3l4"/>
                 <outlet property="blurView" destination="BXW-8m-3yK" id="19f-FA-smk"/>
                 <outlet property="blurredView" destination="qIb-PA-vEI" id="RnC-P3-F4Z"/>
                 <outlet property="blurredViewAlertView" destination="7me-9u-LMD" id="LLh-jW-Ovp"/>

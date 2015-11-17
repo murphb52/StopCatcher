@@ -13,11 +13,7 @@
 		C923C21A1B6E4316007C8D3E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C923C2151B6E4316007C8D3E /* Images.xcassets */; };
 		C923C21F1B6E433B007C8D3E /* SCMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C923C21D1B6E433B007C8D3E /* SCMainViewController.swift */; };
 		C923C2201B6E433B007C8D3E /* SCMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C923C21E1B6E433B007C8D3E /* SCMainViewController.xib */; };
-		C923C2241B6E44C7007C8D3E /* SCPickAStopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C923C2221B6E44C7007C8D3E /* SCPickAStopViewController.swift */; };
-		C923C2251B6E44C7007C8D3E /* SCPickAStopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C923C2231B6E44C7007C8D3E /* SCPickAStopViewController.xib */; };
 		C923C2271B6E4571007C8D3E /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C923C2261B6E4571007C8D3E /* MapKit.framework */; };
-		C923C22C1B6E45CE007C8D3E /* SCConfirmStopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C923C22A1B6E45CE007C8D3E /* SCConfirmStopViewController.swift */; };
-		C923C22D1B6E45CE007C8D3E /* SCConfirmStopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C923C22B1B6E45CE007C8D3E /* SCConfirmStopViewController.xib */; };
 		C923C2301B6E45E3007C8D3E /* SCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C923C22F1B6E45E3007C8D3E /* SCViewController.swift */; };
 		C923C2321B6E6DAA007C8D3E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C923C2311B6E6DAA007C8D3E /* CoreLocation.framework */; };
 		C923C2351B6E797F007C8D3E /* SCUserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C923C2341B6E797F007C8D3E /* SCUserDefaultsManager.swift */; };
@@ -44,11 +40,7 @@
 		C923C2161B6E4316007C8D3E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C923C21D1B6E433B007C8D3E /* SCMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCMainViewController.swift; path = MainViewController/SCMainViewController.swift; sourceTree = "<group>"; };
 		C923C21E1B6E433B007C8D3E /* SCMainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SCMainViewController.xib; path = MainViewController/SCMainViewController.xib; sourceTree = "<group>"; };
-		C923C2221B6E44C7007C8D3E /* SCPickAStopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCPickAStopViewController.swift; path = "Pick a stop/SCPickAStopViewController.swift"; sourceTree = "<group>"; };
-		C923C2231B6E44C7007C8D3E /* SCPickAStopViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SCPickAStopViewController.xib; path = "Pick a stop/SCPickAStopViewController.xib"; sourceTree = "<group>"; };
 		C923C2261B6E4571007C8D3E /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		C923C22A1B6E45CE007C8D3E /* SCConfirmStopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCConfirmStopViewController.swift; path = "Confirm Stop/SCConfirmStopViewController.swift"; sourceTree = "<group>"; };
-		C923C22B1B6E45CE007C8D3E /* SCConfirmStopViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SCConfirmStopViewController.xib; path = "Confirm Stop/SCConfirmStopViewController.xib"; sourceTree = "<group>"; };
 		C923C22F1B6E45E3007C8D3E /* SCViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCViewController.swift; path = SCViewController/SCViewController.swift; sourceTree = "<group>"; };
 		C923C2311B6E6DAA007C8D3E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		C923C2341B6E797F007C8D3E /* SCUserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCUserDefaultsManager.swift; path = "User Defaults Manager/SCUserDefaultsManager.swift"; sourceTree = "<group>"; };
@@ -98,8 +90,6 @@
 			children = (
 				C923C2331B6E795F007C8D3E /* User Defaults Manager */,
 				C923C22E1B6E45D5007C8D3E /* SCViewController */,
-				C923C2291B6E45B8007C8D3E /* Confirm Stop */,
-				C923C2211B6E44B8007C8D3E /* Pick a stop */,
 				C923C21C1B6E4321007C8D3E /* MainViewController */,
 				C923C20F1B6E4316007C8D3E /* Supporting Files */,
 			);
@@ -143,15 +133,6 @@
 			name = MainViewController;
 			sourceTree = "<group>";
 		};
-		C923C2211B6E44B8007C8D3E /* Pick a stop */ = {
-			isa = PBXGroup;
-			children = (
-				C923C2221B6E44C7007C8D3E /* SCPickAStopViewController.swift */,
-				C923C2231B6E44C7007C8D3E /* SCPickAStopViewController.xib */,
-			);
-			name = "Pick a stop";
-			sourceTree = "<group>";
-		};
 		C923C2281B6E4583007C8D3E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -159,15 +140,6 @@
 				C923C2261B6E4571007C8D3E /* MapKit.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		C923C2291B6E45B8007C8D3E /* Confirm Stop */ = {
-			isa = PBXGroup;
-			children = (
-				C923C22A1B6E45CE007C8D3E /* SCConfirmStopViewController.swift */,
-				C923C22B1B6E45CE007C8D3E /* SCConfirmStopViewController.xib */,
-			);
-			name = "Confirm Stop";
 			sourceTree = "<group>";
 		};
 		C923C22E1B6E45D5007C8D3E /* SCViewController */ = {
@@ -275,8 +247,6 @@
 			files = (
 				C923C21A1B6E4316007C8D3E /* Images.xcassets in Resources */,
 				C923C2181B6E4316007C8D3E /* LaunchScreen.xib in Resources */,
-				C923C22D1B6E45CE007C8D3E /* SCConfirmStopViewController.xib in Resources */,
-				C923C2251B6E44C7007C8D3E /* SCPickAStopViewController.xib in Resources */,
 				C923C2201B6E433B007C8D3E /* SCMainViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -297,10 +267,8 @@
 			files = (
 				C923C2171B6E4316007C8D3E /* AppDelegate.swift in Sources */,
 				C923C2301B6E45E3007C8D3E /* SCViewController.swift in Sources */,
-				C923C2241B6E44C7007C8D3E /* SCPickAStopViewController.swift in Sources */,
 				C923C21F1B6E433B007C8D3E /* SCMainViewController.swift in Sources */,
 				C923C2351B6E797F007C8D3E /* SCUserDefaultsManager.swift in Sources */,
-				C923C22C1B6E45CE007C8D3E /* SCConfirmStopViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
