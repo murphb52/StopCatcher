@@ -412,4 +412,81 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
         self.presentViewController(alertController, animated: true, completion: nil)
         
     }
+    
+    //MARK: Refactoring 
+    
+    func showBlurredOverlay()
+    {
+        
+    }
+    
+    func hideBlurredOverlay()
+    {
+        
+    }
+    
+    func updateViewForCatchingStop()
+    {
+        
+    }
+    
+    func updateViewForNotCatchingAStop()
+    {
+        
+    }
+    
+    //MARK: Selectors for confirm button
+    
+    func didTapCatchAStopButton()
+    {
+        
+    }
+    
+    func didTapConfirmCatchAStopButton()
+    {
+        
+    }
+    
+    func didTapStopCatchingAStopButton()
+    {
+        
+    }
+    
+    func didTapConfirmStopCatchingStopButton()
+    {
+        
+    }
+    
+    func didTapOverlayButton()
+    {
+        
+    }
+    
+    //MARK: Map Button
+    
+    func didTapClockButton()
+    {
+        
+    }
+    
+    func didTapMyLocationButton()
+    {
+        
+    }
+    
+    //MARK: Local Notifications
+    
+    func addLocationNotificationAtCurrentPoint()
+    {
+        
+    }
+    
+    func removeAllLocalNotifications()
+    {
+        
+    }
+
+    //MARK: MapView Methods
+
+    
 }
