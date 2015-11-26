@@ -33,8 +33,7 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
     @IBOutlet weak var stopWatchWidthConstrant: NSLayoutConstraint!
     var stopWatchButtonIsLarge : Bool = false
     
-    let maxRadius : Double = 2000.0
-    let minRadius : Double = 250.0
+    let maxRadius : Double = 200.0
     
     @IBOutlet weak var centeredMapFlag: UIImageView!
     
