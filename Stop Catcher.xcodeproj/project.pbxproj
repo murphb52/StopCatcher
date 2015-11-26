@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C923C2061B6E4277007C8D3E /* Stop_CatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C923C2051B6E4277007C8D3E /* Stop_CatcherTests.swift */; };
 		C923C2171B6E4316007C8D3E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C923C2101B6E4316007C8D3E /* AppDelegate.swift */; };
 		C923C2181B6E4316007C8D3E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C923C2111B6E4316007C8D3E /* LaunchScreen.xib */; };
 		C923C21A1B6E4316007C8D3E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C923C2151B6E4316007C8D3E /* Images.xcassets */; };
@@ -19,21 +18,8 @@
 		C923C2351B6E797F007C8D3E /* SCUserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C923C2341B6E797F007C8D3E /* SCUserDefaultsManager.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		C923C2001B6E4277007C8D3E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C923C1E21B6E4277007C8D3E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C923C1E91B6E4277007C8D3E;
-			remoteInfo = "Stop Catcher";
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		C923C1EA1B6E4277007C8D3E /* Stop Catcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Stop Catcher.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C923C1FF1B6E4277007C8D3E /* Stop CatcherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Stop CatcherTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C923C2041B6E4277007C8D3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C923C2051B6E4277007C8D3E /* Stop_CatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stop_CatcherTests.swift; sourceTree = "<group>"; };
 		C923C2101B6E4316007C8D3E /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C923C2121B6E4316007C8D3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		C923C2151B6E4316007C8D3E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -56,13 +42,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C923C1FC1B6E4277007C8D3E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -72,7 +51,6 @@
 				C923C2281B6E4583007C8D3E /* Frameworks */,
 				C923C1EB1B6E4277007C8D3E /* Products */,
 				C923C1EC1B6E4277007C8D3E /* Stop Catcher */,
-				C923C2021B6E4277007C8D3E /* Stop CatcherTests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -80,7 +58,6 @@
 			isa = PBXGroup;
 			children = (
 				C923C1EA1B6E4277007C8D3E /* Stop Catcher.app */,
-				C923C1FF1B6E4277007C8D3E /* Stop CatcherTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -94,23 +71,6 @@
 				C923C20F1B6E4316007C8D3E /* Supporting Files */,
 			);
 			path = "Stop Catcher";
-			sourceTree = "<group>";
-		};
-		C923C2021B6E4277007C8D3E /* Stop CatcherTests */ = {
-			isa = PBXGroup;
-			children = (
-				C923C2051B6E4277007C8D3E /* Stop_CatcherTests.swift */,
-				C923C2031B6E4277007C8D3E /* Supporting Files */,
-			);
-			path = "Stop CatcherTests";
-			sourceTree = "<group>";
-		};
-		C923C2031B6E4277007C8D3E /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				C923C2041B6E4277007C8D3E /* Info.plist */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		C923C20F1B6E4316007C8D3E /* Supporting Files */ = {
@@ -178,24 +138,6 @@
 			productReference = C923C1EA1B6E4277007C8D3E /* Stop Catcher.app */;
 			productType = "com.apple.product-type.application";
 		};
-		C923C1FE1B6E4277007C8D3E /* Stop CatcherTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C923C20C1B6E4277007C8D3E /* Build configuration list for PBXNativeTarget "Stop CatcherTests" */;
-			buildPhases = (
-				C923C1FB1B6E4277007C8D3E /* Sources */,
-				C923C1FC1B6E4277007C8D3E /* Frameworks */,
-				C923C1FD1B6E4277007C8D3E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				C923C2011B6E4277007C8D3E /* PBXTargetDependency */,
-			);
-			name = "Stop CatcherTests";
-			productName = "Stop CatcherTests";
-			productReference = C923C1FF1B6E4277007C8D3E /* Stop CatcherTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -216,10 +158,6 @@
 							};
 						};
 					};
-					C923C1FE1B6E4277007C8D3E = {
-						CreatedOnToolsVersion = 6.4;
-						TestTargetID = C923C1E91B6E4277007C8D3E;
-					};
 				};
 			};
 			buildConfigurationList = C923C1E51B6E4277007C8D3E /* Build configuration list for PBXProject "Stop Catcher" */;
@@ -236,7 +174,6 @@
 			projectRoot = "";
 			targets = (
 				C923C1E91B6E4277007C8D3E /* Stop Catcher */,
-				C923C1FE1B6E4277007C8D3E /* Stop CatcherTests */,
 			);
 		};
 /* End PBXProject section */
@@ -249,13 +186,6 @@
 				C923C21A1B6E4316007C8D3E /* Images.xcassets in Resources */,
 				C923C2181B6E4316007C8D3E /* LaunchScreen.xib in Resources */,
 				C923C2201B6E433B007C8D3E /* SCMainViewController.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C923C1FD1B6E4277007C8D3E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,23 +203,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C923C1FB1B6E4277007C8D3E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C923C2061B6E4277007C8D3E /* Stop_CatcherTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		C923C2011B6E4277007C8D3E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C923C1E91B6E4277007C8D3E /* Stop Catcher */;
-			targetProxy = C923C2001B6E4277007C8D3E /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		C923C2111B6E4316007C8D3E /* LaunchScreen.xib */ = {
@@ -396,7 +310,7 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = "Stop Catcher/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.stopcatcher.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.stopcatcher.StopCatcher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -412,46 +326,10 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = "Stop Catcher/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.stopcatcher.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.stopcatcher.StopCatcher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		C923C20D1B6E4277007C8D3E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "Stop CatcherTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.stopcatcher.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Stop Catcher.app/Stop Catcher";
-			};
-			name = Debug;
-		};
-		C923C20E1B6E4277007C8D3E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "Stop CatcherTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.stopcatcher.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Stop Catcher.app/Stop Catcher";
 			};
 			name = Release;
 		};
@@ -472,15 +350,6 @@
 			buildConfigurations = (
 				C923C20A1B6E4277007C8D3E /* Debug */,
 				C923C20B1B6E4277007C8D3E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C923C20C1B6E4277007C8D3E /* Build configuration list for PBXNativeTarget "Stop CatcherTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C923C20D1B6E4277007C8D3E /* Debug */,
-				C923C20E1B6E4277007C8D3E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -73,6 +73,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().cancelAllLocalNotifications()
         rootViewController?.updateUI()
     }
+    
+    func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
+        rootViewController?.didTapConfirmCatchAStopButton()
+    }
 
 }
 
