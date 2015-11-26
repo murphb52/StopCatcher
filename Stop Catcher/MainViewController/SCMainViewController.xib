@@ -103,10 +103,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view alpha="0.80000000000000004" contentMode="scaleToFill" placeholderIntrinsicWidth="500" placeholderIntrinsicHeight="117" translatesAutoresizingMaskIntoConstraints="NO" id="7me-9u-LMD">
-                                <rect key="frame" x="50" y="233.5" width="500" height="133"/>
+                                <rect key="frame" x="16" y="233.5" width="568" height="133"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3C5-L1-Uhk">
-                                        <rect key="frame" x="8" y="81" width="484" height="44"/>
+                                        <rect key="frame" x="8" y="81" width="552" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="Hw3-US-tky"/>
                                         </constraints>
@@ -115,7 +115,7 @@
                                         </state>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable Location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="waD-8c-ix8">
-                                        <rect key="frame" x="8" y="8" width="484" height="23"/>
+                                        <rect key="frame" x="8" y="8" width="552" height="23"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="23" id="tMa-XU-X81"/>
                                         </constraints>
@@ -124,7 +124,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="484" placeholderIntrinsicHeight="18" text="Stop Catcher needs permission to access your location" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KUB-Jc-BN5">
-                                        <rect key="frame" x="8" y="47" width="484" height="18"/>
+                                        <rect key="frame" x="8" y="47" width="552" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -147,9 +147,9 @@
                             </view>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="7me-9u-LMD" firstAttribute="leading" secondItem="qIb-PA-vEI" secondAttribute="leading" constant="50" id="TtA-yJ-qy2"/>
+                            <constraint firstItem="7me-9u-LMD" firstAttribute="leading" secondItem="qIb-PA-vEI" secondAttribute="leading" constant="16" id="TtA-yJ-qy2"/>
                             <constraint firstAttribute="centerY" secondItem="7me-9u-LMD" secondAttribute="centerY" id="xFx-XZ-It5"/>
-                            <constraint firstAttribute="trailing" secondItem="7me-9u-LMD" secondAttribute="trailing" constant="50" id="xbY-IT-eIt"/>
+                            <constraint firstAttribute="trailing" secondItem="7me-9u-LMD" secondAttribute="trailing" constant="16" id="xbY-IT-eIt"/>
                         </constraints>
                     </view>
                     <blurEffect style="dark"/>

@@ -200,6 +200,7 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
             let image = UIImage(named: "MapFlag")
             
             annotationView.image = image
+            annotationView.frame = CGRectMake(0, 0, 44, 56)
             
             return annotationView;
         }
