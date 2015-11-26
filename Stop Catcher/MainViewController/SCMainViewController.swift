@@ -341,10 +341,6 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
         {
             self.updateRadiusCircle()
         }
-        
-        print("CenteredImageView Center: \(self.centeredMapFlag.center)")
-        print("CenterPoint of MapView: \(self.mapView.center)")
-
     }
     
     func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer
