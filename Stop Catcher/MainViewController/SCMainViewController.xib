@@ -13,6 +13,7 @@
                 <outlet property="blurredViewAlertView" destination="7me-9u-LMD" id="LLh-jW-Ovp"/>
                 <outlet property="blurredViewButton" destination="3C5-L1-Uhk" id="7Ul-oR-qG4"/>
                 <outlet property="centeredMapFlag" destination="lbs-Bs-AHy" id="kiQ-6K-Bog"/>
+                <outlet property="centeredMapImageView" destination="lbs-Bs-AHy" id="KlC-GA-Qdd"/>
                 <outlet property="mapView" destination="oxr-Qe-pib" id="vwv-3q-djR"/>
                 <outlet property="myLocationButton" destination="3Od-Lm-Wtr" id="F3r-7V-Ngs"/>
                 <outlet property="stopWatchButton" destination="Gch-z0-aSQ" id="Zl2-8G-g3T"/>
@@ -89,10 +90,10 @@
                     </state>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MapFlag" translatesAutoresizingMaskIntoConstraints="NO" id="lbs-Bs-AHy">
-                    <rect key="frame" x="287" y="287" width="25" height="25"/>
+                    <rect key="frame" x="277.5" y="271.5" width="44" height="56"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="25" id="K4E-1V-m1A"/>
-                        <constraint firstAttribute="width" constant="25" id="fQS-B4-DM9"/>
+                        <constraint firstAttribute="height" constant="56" id="K4E-1V-m1A"/>
+                        <constraint firstAttribute="width" constant="44" id="fQS-B4-DM9"/>
                     </constraints>
                 </imageView>
                 <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BXW-8m-3yK">
@@ -178,7 +179,7 @@
         </view>
     </objects>
     <resources>
-        <image name="MapFlag" width="24" height="24"/>
+        <image name="MapFlag" width="33" height="42"/>
         <image name="MyLocation" width="25" height="25"/>
         <image name="Stopwatch" width="25" height="25"/>
     </resources>

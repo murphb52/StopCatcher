@@ -28,6 +28,7 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
     
     @IBOutlet weak var beginTrackingButton: UIButton!
     
+    @IBOutlet weak var centeredMapImageView: UIImageView!
     @IBOutlet weak var stopWatchHolderView: UIView!
     @IBOutlet weak var stopWatchWidthConstrant: NSLayoutConstraint!
     var stopWatchButtonIsLarge : Bool = false
@@ -179,6 +180,33 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
         self.updateRadiusCircle()
     }
     
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        if (annotation.isKindOfClass(MKUserLocation.classForCoder()))
+        {
+            return nil
+        }
+        
+        let pinView = mapView .dequeueReusableAnnotationViewWithIdentifier("PinView")
+        
+        if ((pinView == nil))
+        {
+            let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "PinView")
+            
+            let image = UIImage(named: "MapFlag")
+            
+            annotationView.image = image
+            
+            return annotationView;
+        }
+        else
+        {
+            pinView?.annotation = annotation
+        }
+        
+        return pinView
+    }
+    
     func updateViewForNotCatchingAStop()
     {
         self.beginTrackingButton .removeTarget(nil, action: nil, forControlEvents: .AllEvents)
@@ -212,7 +240,9 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
             else
             {
                 SCUserDefaultsManager().isCatchingStop = true
-                SCUserDefaultsManager().trackingLocation = self.mapView.centerCoordinate
+                
+                SCUserDefaultsManager().trackingLocation = self.mapView.convertPoint(self.mapView.center, toCoordinateFromView: self.view)
+                
                 self.addLocationNotificationAtCurrentPoint()
                 self.updateUI()
             }
@@ -305,6 +335,10 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
         {
             self.updateRadiusCircle()
         }
+        
+        print("CenteredImageView Center: \(self.centeredMapFlag.center)")
+        print("CenterPoint of MapView: \(self.mapView.center)")
+
     }
     
     func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer
@@ -319,11 +353,7 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
     //***** Remove all annotations and only leave the user location annotation if it is present
     func removeAllAnnotations()
     {
-        let userLocationAnnotation = mapView.userLocation
-        
         self.mapView.removeAnnotations(mapView.annotations)
-        
-        self.mapView.addAnnotation(userLocationAnnotation)
     }
     
     func updateRadiusCircle()
@@ -337,7 +367,7 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
         else
         {
             self.mapView.removeOverlays(self.mapView.overlays)
-            let circleView = MKCircle(centerCoordinate: mapView.centerCoordinate, radius: maxRadius)
+            let circleView = MKCircle(centerCoordinate: self.mapView.convertPoint(self.mapView.center, toCoordinateFromView: self.view), radius: maxRadius)
             self.mapView.addOverlay(circleView)
         }
     }
