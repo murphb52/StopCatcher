@@ -101,6 +101,11 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
         setupViewForAuthStatus(CLLocationManager.authorizationStatus(), animated: false)
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.updateUI()
+    }
+    
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus)
     {
         setupViewForAuthStatus(status, animated: true)
@@ -261,6 +266,7 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
         self.removeAllLocalNotifications()
         SCUserDefaultsManager().isCatchingStop = false
         SCUserDefaultsManager().trackingLocation = nil
+        UIApplication.sharedApplication().cancelAllLocalNotifications()
         self.updateUI()
     }
     
@@ -301,15 +307,15 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
         
         localNotification.regionTriggersOnce = true
         localNotification.region = regionToDetect
-        localNotification.alertBody = "Time to wake up!"
-        localNotification.alertTitle = "Wake up!"
+        localNotification.alertBody = "Looks like you are near your stop!"
+        localNotification.alertTitle = "Get ready!"
         
         UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
         
         let timedNotification = UILocalNotification()
         timedNotification.fireDate = NSDate(timeIntervalSinceNow: self.timePicker.countDownDuration)
-        timedNotification.alertBody = "Timed wake up!"
-        timedNotification.alertTitle = "Wake up!"
+        timedNotification.alertBody = "Check you haven't missed your stop!"
+        timedNotification.alertTitle = "Time to check!"
         
         UIApplication.sharedApplication().scheduleLocalNotification(timedNotification)
     }

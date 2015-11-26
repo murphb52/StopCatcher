@@ -12,6 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var rootViewController : SCMainViewController?
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
@@ -19,8 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         
-        let rootViewController = SCMainViewController(nibName: "SCMainViewController", bundle: nil)
-        let rootNavigationController = UINavigationController(rootViewController: rootViewController)
+        rootViewController = SCMainViewController(nibName: "SCMainViewController", bundle: nil)
+        let rootNavigationController = UINavigationController(rootViewController: rootViewController!)
         rootNavigationController.navigationBar.translucent = false;
         
         self.window?.rootViewController = rootViewController
@@ -47,9 +48,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         
         let arrayOfNotifications = UIApplication.sharedApplication().scheduledLocalNotifications
+        
         if (arrayOfNotifications!.count == 0 || arrayOfNotifications!.count % 2 != 0)
         {
             SCUserDefaultsManager().isCatchingStop = false
+            SCUserDefaultsManager().trackingLocation = nil
+            UIApplication.sharedApplication().cancelAllLocalNotifications()
+            rootViewController?.updateUI()
         }
         else
         {
@@ -64,7 +69,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
         
         SCUserDefaultsManager().isCatchingStop = false
-
+        SCUserDefaultsManager().trackingLocation = nil
+        UIApplication.sharedApplication().cancelAllLocalNotifications()
+        rootViewController?.updateUI()
     }
 
 }

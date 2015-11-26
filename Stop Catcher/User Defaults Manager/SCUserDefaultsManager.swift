@@ -17,11 +17,6 @@ class SCUserDefaultsManager: NSObject
         {
             NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: "isCatchingStop")
             NSUserDefaults.standardUserDefaults().synchronize()
-            
-            if (newValue == false)
-            {
-                UIApplication.sharedApplication().cancelAllLocalNotifications()
-            }
         }
         
         get
