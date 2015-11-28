@@ -238,9 +238,20 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
             if (notificationSettings!.types == UIUserNotificationType.None)
             {
                 //***** Tell them to turn on Push notes
-                let pushNotesAlertView = UIAlertView(title: "Notifications!", message: "Notifications are turned off!\nStop Catcher will only ever send you notifications to wake you up", delegate: self, cancelButtonTitle: "Cancel")
-                pushNotesAlertView.addButtonWithTitle("Settings")
-                pushNotesAlertView.show()
+                let pushNotesAlertController = UIAlertController(title: "Notifications!", message: "Notifications are turned off!\nStop Catcher will only ever send you notifications to wake you up", preferredStyle: .Alert)
+                
+                //***** Cancel Action
+                let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+                pushNotesAlertController.addAction(cancelAction)
+                
+                //***** Settings Action
+                let settingsAction = UIAlertAction(title: "Settings", style: .Default, handler: { (action) -> Void in
+                    let settingsUrl = NSURL(string: UIApplicationOpenSettingsURLString)
+                    UIApplication.sharedApplication().openURL(settingsUrl!)
+                })
+                pushNotesAlertController.addAction(settingsAction)
+                
+                self.presentViewController(pushNotesAlertController, animated: true, completion: nil)
             }
             else
             {
