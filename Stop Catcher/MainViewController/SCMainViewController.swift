@@ -237,21 +237,84 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
             let notificationSettings = UIApplication.sharedApplication().currentUserNotificationSettings()
             if (notificationSettings!.types == UIUserNotificationType.None)
             {
-                //***** Tell them to turn on Push notes
-                let pushNotesAlertController = UIAlertController(title: "Notifications!", message: "Notifications are turned off!\nStop Catcher will only ever send you notifications to wake you up", preferredStyle: .Alert)
+                let hud = MBProgressHUD .showHUDAddedTo(self.view, animated: true)
+                hud.dimBackground = true
+            
+                let request = MKDirectionsRequest()
+                request.transportType = .Transit
                 
-                //***** Cancel Action
-                let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-                pushNotesAlertController.addAction(cancelAction)
+                let startPlacemark = MKPlacemark(coordinate: CLLocationCoordinate2DMake((self.mapView.userLocation.location?.coordinate.latitude)!, (self.mapView.userLocation.location?.coordinate.longitude)!), addressDictionary: nil)
+                request.source = MKMapItem(placemark: startPlacemark)
                 
-                //***** Settings Action
-                let settingsAction = UIAlertAction(title: "Settings", style: .Default, handler: { (action) -> Void in
-                    let settingsUrl = NSURL(string: UIApplicationOpenSettingsURLString)
-                    UIApplication.sharedApplication().openURL(settingsUrl!)
-                })
-                pushNotesAlertController.addAction(settingsAction)
+                let location = self.mapView.convertPoint(self.mapView.center, toCoordinateFromView: self.view)
+                let endPlacemark = MKPlacemark(coordinate: location, addressDictionary: nil)
+                request.destination = MKMapItem(placemark: endPlacemark)
                 
-                self.presentViewController(pushNotesAlertController, animated: true, completion: nil)
+                let directions = MKDirections(request: request)
+                directions.calculateETAWithCompletionHandler { (response, error) -> Void in
+                    
+                    MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
+                    if (response != nil)
+                    {
+                        let totalTravelTimeSeconds : Double = (response?.expectedTravelTime)!
+                        let totalTravelTimeMinutes : Double = totalTravelTimeSeconds / 60 as Double;
+                        let totalTravelTimeHours : Double = totalTravelTimeMinutes / 60 as Double;
+                        
+                        let remainderMinutes = Int(floor(totalTravelTimeMinutes % 60))
+                        let remainderHours = Int(floor(totalTravelTimeHours))
+                        
+                        var travelTime : String?
+                        if(remainderHours == 1)
+                        {
+                            travelTime = "\(remainderHours) Hour"
+                        }
+                        else if (remainderHours > 1)
+                        {
+                            travelTime = "\(remainderHours) Hours"
+                        }
+                        
+                        if(remainderMinutes == 1)
+                        {
+                            if(travelTime != nil)
+                            {
+                                travelTime?.appendContentsOf("' \(remainderMinutes) Minutes")
+                            }
+                            else
+                            {
+                                travelTime = ("\(remainderMinutes) Minute")
+                            }
+                            
+                        }
+                        else if (remainderMinutes > 1)
+                        {
+                            if(travelTime != nil)
+                            {
+                                travelTime?.appendContentsOf("' \(remainderMinutes) Minutes")
+                            }
+                            else
+                            {
+                                travelTime = ("\(remainderMinutes) Minutes")
+                            }
+                        }
+                        
+                        if (travelTime == nil)
+                        {
+                            travelTime = "a few seconds"
+                        }
+                        
+                        let alertController = UIAlertController(title: "Arrival Time", message: "Looks like you can reach this destination in \(travelTime!)\nDont forget to set your alarm!", preferredStyle: .Alert)
+                        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                        self.presentViewController(alertController, animated: true, completion: nil)
+
+                    }
+                    else
+                    {
+                        let alertController = UIAlertController(title: "Uh-oh", message: "Looks like we cannot get an estimated arrival time right now.\nThere may not be travel information available for this region", preferredStyle: .Alert)
+                        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                        self.presentViewController(alertController, animated: true, completion: nil)
+                    }
+                }
+
             }
             else
             {

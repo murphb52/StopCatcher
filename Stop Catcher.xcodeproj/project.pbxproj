@@ -16,6 +16,7 @@
 		C923C2301B6E45E3007C8D3E /* SCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C923C22F1B6E45E3007C8D3E /* SCViewController.swift */; };
 		C923C2321B6E6DAA007C8D3E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C923C2311B6E6DAA007C8D3E /* CoreLocation.framework */; };
 		C923C2351B6E797F007C8D3E /* SCUserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C923C2341B6E797F007C8D3E /* SCUserDefaultsManager.swift */; };
+		C95D83C41C1A13D2004246EB /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = C95D83C31C1A13D2004246EB /* MBProgressHUD.m */; };
 		C97A3E081C1109F700A5F786 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C97A3E061C1109F700A5F786 /* Fabric.framework */; };
 		C97A3E091C1109F700A5F786 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C97A3E071C1109F700A5F786 /* Crashlytics.framework */; };
 /* End PBXBuildFile section */
@@ -32,6 +33,9 @@
 		C923C22F1B6E45E3007C8D3E /* SCViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCViewController.swift; path = SCViewController/SCViewController.swift; sourceTree = "<group>"; };
 		C923C2311B6E6DAA007C8D3E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		C923C2341B6E797F007C8D3E /* SCUserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCUserDefaultsManager.swift; path = "User Defaults Manager/SCUserDefaultsManager.swift"; sourceTree = "<group>"; };
+		C95D83C21C1A13D2004246EB /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		C95D83C31C1A13D2004246EB /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		C95D83C81C1A1465004246EB /* StopCatcherBridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopCatcherBridgingHeader.h; sourceTree = "<group>"; };
 		C97A3E061C1109F700A5F786 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		C97A3E071C1109F700A5F786 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -54,6 +58,7 @@
 		C923C1E11B6E4277007C8D3E = {
 			isa = PBXGroup;
 			children = (
+				C95D83C01C1A139A004246EB /* Third Party Libraries */,
 				C923C2281B6E4583007C8D3E /* Frameworks */,
 				C923C1EB1B6E4277007C8D3E /* Products */,
 				C923C1EC1B6E4277007C8D3E /* Stop Catcher */,
@@ -86,6 +91,7 @@
 				C923C2111B6E4316007C8D3E /* LaunchScreen.xib */,
 				C923C2151B6E4316007C8D3E /* Images.xcassets */,
 				C923C2161B6E4316007C8D3E /* Info.plist */,
+				C95D83C81C1A1465004246EB /* StopCatcherBridgingHeader.h */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -124,6 +130,24 @@
 				C923C2341B6E797F007C8D3E /* SCUserDefaultsManager.swift */,
 			);
 			name = "User Defaults Manager";
+			sourceTree = "<group>";
+		};
+		C95D83C01C1A139A004246EB /* Third Party Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				C95D83C11C1A13D2004246EB /* MBProgressHUD */,
+			);
+			name = "Third Party Libraries";
+			sourceTree = "<group>";
+		};
+		C95D83C11C1A13D2004246EB /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				C95D83C21C1A13D2004246EB /* MBProgressHUD.h */,
+				C95D83C31C1A13D2004246EB /* MBProgressHUD.m */,
+			);
+			name = MBProgressHUD;
+			path = "Third Party Libraries/MBProgressHUD";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -223,6 +247,7 @@
 			files = (
 				C923C2171B6E4316007C8D3E /* AppDelegate.swift in Sources */,
 				C923C2301B6E45E3007C8D3E /* SCViewController.swift in Sources */,
+				C95D83C41C1A13D2004246EB /* MBProgressHUD.m in Sources */,
 				C923C21F1B6E433B007C8D3E /* SCMainViewController.swift in Sources */,
 				C923C2351B6E797F007C8D3E /* SCUserDefaultsManager.swift in Sources */,
 			);
@@ -338,10 +363,12 @@
 				);
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = "Stop Catcher/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.stopcatcher.StopCatcher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "df97ef32-516d-49c8-8a8d-f0b925531c92";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/brianmurphy/Documents/Development/iOS/Stop Catcher/Stop Catcher/Supporting Files/StopCatcherBridgingHeader.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -358,10 +385,12 @@
 				);
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = "Stop Catcher/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.stopcatcher.StopCatcher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "df97ef32-516d-49c8-8a8d-f0b925531c92";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/brianmurphy/Documents/Development/iOS/Stop Catcher/Stop Catcher/Supporting Files/StopCatcherBridgingHeader.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
