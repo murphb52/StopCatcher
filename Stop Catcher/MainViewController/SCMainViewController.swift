@@ -237,6 +237,15 @@ class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapVi
             let notificationSettings = UIApplication.sharedApplication().currentUserNotificationSettings()
             if (notificationSettings!.types == UIUserNotificationType.None)
             {
+                if(self.mapView.userLocation.location == nil)
+                {
+                    let alertController = UIAlertController(title: "Uh-oh", message: "Looks like we cannot get your location right now. Please try again later", preferredStyle: .Alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alertController, animated: true, completion: nil)
+
+                    return;
+                }
+                
                 let hud = MBProgressHUD .showHUDAddedTo(self.view, animated: true)
                 hud.dimBackground = true
             
