@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class SCMainViewController: SCViewController, CLLocationManagerDelegate, MKMapViewDelegate, UIAlertViewDelegate
+class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UIAlertViewDelegate
 {
     var locationManager : CLLocationManager!
 
