@@ -14,7 +14,6 @@
 		C923C2201B6E433B007C8D3E /* SCMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C923C21E1B6E433B007C8D3E /* SCMainViewController.xib */; };
 		C923C2271B6E4571007C8D3E /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C923C2261B6E4571007C8D3E /* MapKit.framework */; };
 		C923C2321B6E6DAA007C8D3E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C923C2311B6E6DAA007C8D3E /* CoreLocation.framework */; };
-		C923C2351B6E797F007C8D3E /* SCUserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C923C2341B6E797F007C8D3E /* SCUserDefaultsManager.swift */; };
 		C95D83C41C1A13D2004246EB /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = C95D83C31C1A13D2004246EB /* MBProgressHUD.m */; };
 		C97A3E081C1109F700A5F786 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C97A3E061C1109F700A5F786 /* Fabric.framework */; };
 		C97A3E091C1109F700A5F786 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C97A3E071C1109F700A5F786 /* Crashlytics.framework */; };
@@ -22,7 +21,8 @@
 		C9A74D8A1C629DE5001AE360 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A74D891C629DE5001AE360 /* TodayViewController.swift */; };
 		C9A74D8D1C629DE6001AE360 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9A74D8B1C629DE6001AE360 /* MainInterface.storyboard */; };
 		C9A74D911C629DE6001AE360 /* Distance to Stop.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C9A74D851C629DE5001AE360 /* Distance to Stop.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		C9A74D961C629E6D001AE360 /* SCUserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C923C2341B6E797F007C8D3E /* SCUserDefaultsManager.swift */; };
+		C9A74D9C1C63F922001AE360 /* SCUserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A74D9B1C63F922001AE360 /* SCUserDefaultsManager.swift */; };
+		C9A74D9D1C63F933001AE360 /* SCUserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A74D9B1C63F922001AE360 /* SCUserDefaultsManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,7 +59,6 @@
 		C923C21E1B6E433B007C8D3E /* SCMainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SCMainViewController.xib; path = MainViewController/SCMainViewController.xib; sourceTree = "<group>"; };
 		C923C2261B6E4571007C8D3E /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		C923C2311B6E6DAA007C8D3E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		C923C2341B6E797F007C8D3E /* SCUserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SCUserDefaultsManager.swift; path = "User Defaults Manager/SCUserDefaultsManager.swift"; sourceTree = "<group>"; };
 		C95D83C21C1A13D2004246EB /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		C95D83C31C1A13D2004246EB /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		C95D83C81C1A1465004246EB /* StopCatcherBridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopCatcherBridgingHeader.h; sourceTree = "<group>"; };
@@ -72,6 +71,7 @@
 		C9A74D8E1C629DE6001AE360 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C9A74D971C62A17E001AE360 /* Distance to Stop.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "Distance to Stop.entitlements"; path = "Distance to Stop/Distance to Stop.entitlements"; sourceTree = "<group>"; };
 		C9A74D981C62A189001AE360 /* Stop Catcher.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Stop Catcher.entitlements"; sourceTree = "<group>"; };
+		C9A74D9B1C63F922001AE360 /* SCUserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCUserDefaultsManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,10 +100,11 @@
 		C923C1E11B6E4277007C8D3E = {
 			isa = PBXGroup;
 			children = (
-				C9A74D971C62A17E001AE360 /* Distance to Stop.entitlements */,
 				C9A74D881C629DE5001AE360 /* Distance to Stop Extenstion */,
+				C9A74D971C62A17E001AE360 /* Distance to Stop.entitlements */,
 				C923C2281B6E4583007C8D3E /* Frameworks */,
 				C923C1EB1B6E4277007C8D3E /* Products */,
+				C9A74D991C63F922001AE360 /* Shared Classes */,
 				C923C1EC1B6E4277007C8D3E /* Stop Catcher */,
 				C95D83C01C1A139A004246EB /* Third Party Libraries */,
 			);
@@ -122,7 +123,6 @@
 			isa = PBXGroup;
 			children = (
 				C9A74D981C62A189001AE360 /* Stop Catcher.entitlements */,
-				C923C2331B6E795F007C8D3E /* User Defaults Manager */,
 				C923C21C1B6E4321007C8D3E /* MainViewController */,
 				C923C20F1B6E4316007C8D3E /* Supporting Files */,
 			);
@@ -162,14 +162,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		C923C2331B6E795F007C8D3E /* User Defaults Manager */ = {
-			isa = PBXGroup;
-			children = (
-				C923C2341B6E797F007C8D3E /* SCUserDefaultsManager.swift */,
-			);
-			name = "User Defaults Manager";
-			sourceTree = "<group>";
-		};
 		C95D83C01C1A139A004246EB /* Third Party Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -197,6 +189,22 @@
 			);
 			name = "Distance to Stop Extenstion";
 			path = "Distance to Stop";
+			sourceTree = "<group>";
+		};
+		C9A74D991C63F922001AE360 /* Shared Classes */ = {
+			isa = PBXGroup;
+			children = (
+				C9A74D9A1C63F922001AE360 /* User Defaults Manager */,
+			);
+			path = "Shared Classes";
+			sourceTree = "<group>";
+		};
+		C9A74D9A1C63F922001AE360 /* User Defaults Manager */ = {
+			isa = PBXGroup;
+			children = (
+				C9A74D9B1C63F922001AE360 /* SCUserDefaultsManager.swift */,
+			);
+			path = "User Defaults Manager";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -335,9 +343,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C923C2171B6E4316007C8D3E /* AppDelegate.swift in Sources */,
+				C9A74D9C1C63F922001AE360 /* SCUserDefaultsManager.swift in Sources */,
 				C95D83C41C1A13D2004246EB /* MBProgressHUD.m in Sources */,
 				C923C21F1B6E433B007C8D3E /* SCMainViewController.swift in Sources */,
-				C923C2351B6E797F007C8D3E /* SCUserDefaultsManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,7 +353,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C9A74D961C629E6D001AE360 /* SCUserDefaultsManager.swift in Sources */,
+				C9A74D9D1C63F933001AE360 /* SCUserDefaultsManager.swift in Sources */,
 				C9A74D8A1C629DE5001AE360 /* TodayViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -573,6 +581,7 @@
 				C9A74D931C629DE6001AE360 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
