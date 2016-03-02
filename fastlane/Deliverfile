@@ -8,3 +8,5 @@
 
 app_identifier "com.stopcatcher.StopCatcher" # The bundle identifier of your app
 username "brianmartinmurphy@gmail.com" # your Apple ID user
+automatic_release true
+submit_for_review true
