@@ -76,4 +76,40 @@ class SCUserDefaultsManager: NSObject
     
     }
     
+    var lastKnownLocation : CLLocationCoordinate2D? {
+        
+        set
+        {
+            if (newValue) != nil
+            {
+                let latitudeNumberValue = NSNumber(double: newValue!.latitude)
+                let longitudeNumberValue = NSNumber(double: newValue!.longitude)
+                let locationDictionary = ["latitudeNumberValue" : latitudeNumberValue, "longitudeNumberValue" : longitudeNumberValue]
+                sharedAppUserDefaults!.setObject(locationDictionary, forKey: "lastKnownlocationDictionary")
+            }
+            else
+            {
+                sharedAppUserDefaults!.removeObjectForKey("lastKnownlocationDictionary")
+            }
+            sharedAppUserDefaults!.synchronize()
+        }
+
+        get {
+            let locationDictionary : AnyObject? = sharedAppUserDefaults!.objectForKey("lastKnownlocationDictionary")
+            
+            if (locationDictionary != nil)
+            {
+                let latitudeNumberValue : NSNumber = locationDictionary!["latitudeNumberValue"] as! NSNumber
+                let longitudeNumberValue : NSNumber = locationDictionary!["longitudeNumberValue"] as! NSNumber
+                return CLLocationCoordinate2D(latitude: latitudeNumberValue.doubleValue, longitude: longitudeNumberValue.doubleValue)
+            }
+            else
+            {
+                return nil
+            }
+        }
+        
+        
+    }
+    
 }

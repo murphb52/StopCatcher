@@ -44,12 +44,20 @@ class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     var statusBarStyle : UIStatusBarStyle = .Default
     
+    var hasZoomedToLocation = false
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
         self.title = "Stop Catcher"
 
         self.mapView.delegate = self
+        
+        if SCUserDefaultsManager().lastKnownLocation != nil
+        {
+            let region = MKCoordinateRegion(center: SCUserDefaultsManager().lastKnownLocation!, span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+            self.mapView.setRegion(region, animated: false)
+        }
         
         locationManager = CLLocationManager()
         locationManager.delegate = self
@@ -107,9 +115,40 @@ class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         self.updateUI()
     }
     
+    //MARK : Location Manager
+    
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus)
     {
         setupViewForAuthStatus(status, animated: true)
+        
+        
+        switch(status)
+        {
+        case .AuthorizedAlways, .AuthorizedWhenInUse:
+            locationManager.startUpdatingLocation()
+            break
+        case .Denied, .Restricted, .NotDetermined:
+            break
+        }
+    }
+    
+    func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
+        
+        if SCUserDefaultsManager().lastKnownLocation!.latitude != newLocation.coordinate.latitude && SCUserDefaultsManager().lastKnownLocation!.longitude != newLocation.coordinate.longitude
+        {
+            SCUserDefaultsManager().lastKnownLocation = newLocation.coordinate
+            
+            if !hasZoomedToLocation
+            {
+                hasZoomedToLocation = true
+                
+                let region = MKCoordinateRegion(center: newLocation.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+                self.mapView.setRegion(region, animated: true)
+                
+            }
+
+        }
+        
     }
     
     //MARK: Refactoring
