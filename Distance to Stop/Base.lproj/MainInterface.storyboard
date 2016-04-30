@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="M4Y-Lb-cyx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="M4Y-Lb-cyx">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <scenes>
         <!--Today View Controller-->
@@ -14,33 +14,24 @@
                         <viewControllerLayoutGuide type="bottom" id="FKl-LY-JtV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" simulatedAppContext="notificationCenter" id="S3S-Oj-5AN">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="217"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="97"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello World" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="GcN-lo-r42">
                                 <rect key="frame" x="20" y="8" width="280" height="81"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="75" id="fi6-7j-a91"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="aMY-T4-vKd">
-                                <rect key="frame" x="142" y="90" width="37" height="37"/>
+                                <rect key="frame" x="142" y="30" width="37" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="37" id="5zu-OP-4Og"/>
                                     <constraint firstAttribute="height" constant="37" id="qGl-QR-9XP"/>
                                 </constraints>
                             </activityIndicatorView>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dBI-oz-3le">
-                                <rect key="frame" x="0.0" y="97" width="320" height="120"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="nWJ-1Q-N5n"/>
-                                </constraints>
-                            </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FSj-54-AAU">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="217"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="97"/>
                                 <connections>
                                     <action selector="didTapWidgetButton:" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="mwu-eW-MXm"/>
                                 </connections>
@@ -48,18 +39,15 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="GcN-lo-r42" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leading" constant="20" id="B8P-sA-jmB"/>
+                            <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="GcN-lo-r42" secondAttribute="bottom" constant="8" id="DC3-Mk-BdV"/>
                             <constraint firstItem="aMY-T4-vKd" firstAttribute="centerY" secondItem="S3S-Oj-5AN" secondAttribute="centerY" id="FXq-YN-tRS"/>
-                            <constraint firstItem="dBI-oz-3le" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leading" id="Oh9-up-yG6"/>
                             <constraint firstItem="GcN-lo-r42" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" constant="8" id="OzQ-OY-1gq"/>
-                            <constraint firstAttribute="trailing" secondItem="dBI-oz-3le" secondAttribute="trailing" id="TYh-cV-gWZ"/>
-                            <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="dBI-oz-3le" secondAttribute="bottom" id="Wpl-lI-vqD"/>
                             <constraint firstAttribute="trailing" secondItem="FSj-54-AAU" secondAttribute="trailing" id="Zva-p5-DYN"/>
                             <constraint firstItem="aMY-T4-vKd" firstAttribute="centerX" secondItem="S3S-Oj-5AN" secondAttribute="centerX" id="eJr-Ka-OyJ"/>
                             <constraint firstItem="FSj-54-AAU" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leading" id="iHS-8G-9ma"/>
                             <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="FSj-54-AAU" secondAttribute="bottom" id="rnO-uM-MJ2"/>
                             <constraint firstItem="FSj-54-AAU" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" id="sEF-1C-CT9"/>
                             <constraint firstAttribute="trailing" secondItem="GcN-lo-r42" secondAttribute="trailing" constant="20" id="vJc-3g-uA0"/>
-                            <constraint firstItem="dBI-oz-3le" firstAttribute="top" secondItem="GcN-lo-r42" secondAttribute="bottom" constant="8" id="xze-Jr-MQd"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
@@ -67,12 +55,10 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="217"/>
+                    <size key="freeformSize" width="320" height="97"/>
                     <connections>
                         <outlet property="loadingActivityIndicator" destination="aMY-T4-vKd" id="Dse-Zj-8vS"/>
                         <outlet property="mainLabel" destination="GcN-lo-r42" id="xd8-0y-P4d"/>
-                        <outlet property="mapView" destination="dBI-oz-3le" id="uHs-0R-cgy"/>
-                        <outlet property="mapViewHeightConstraint" destination="nWJ-1Q-N5n" id="nsm-pi-I6f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>
