@@ -42,6 +42,8 @@ class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     @IBOutlet weak var timePicker: UIDatePicker!
     var hasPickedTime = false
     
+    var statusBarStyle : UIStatusBarStyle = .Default
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -138,7 +140,13 @@ class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             
         })
         
-        UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: animated)
+        self.statusBarStyle = .Default
+        self.setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle
+    {
+        return self.statusBarStyle
     }
     
     func hideBlurredOverlay(animated : Bool)
@@ -152,7 +160,8 @@ class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             
         })
         
-        UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: animated)
+        self.statusBarStyle = .LightContent
+        self.setNeedsStatusBarAppearanceUpdate()
     }
     
     func updateUI()
