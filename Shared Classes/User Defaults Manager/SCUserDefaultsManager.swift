@@ -11,31 +11,31 @@ import MapKit
 
 class SCUserDefaultsManager: NSObject
 {
-    let sharedAppUserDefaults = NSUserDefaults(suiteName: "group.com.stopcatcher.StopCatcher")
+    let sharedAppUserDefaults = UserDefaults(suiteName: "group.com.stopcatcher.StopCatcher")
     
     var isCatchingStop : Bool {
         set
         {
-            sharedAppUserDefaults!.setBool(newValue, forKey: "isCatchingStop")
+            sharedAppUserDefaults!.set(newValue, forKey: "isCatchingStop")
             sharedAppUserDefaults!.synchronize()
         }
         
         get
         {
-            return sharedAppUserDefaults!.boolForKey("isCatchingStop")
+            return sharedAppUserDefaults!.bool(forKey: "isCatchingStop")
         }
     }
     
     var hasAskedForPushNotes : Bool {
         set
         {
-            sharedAppUserDefaults!.setBool(newValue, forKey: "hasAskedForPushNotes")
+            sharedAppUserDefaults!.set(newValue, forKey: "hasAskedForPushNotes")
             sharedAppUserDefaults!.synchronize()
         }
         
         get
         {
-            return sharedAppUserDefaults!.boolForKey("hasAskedForPushNotes")
+            return sharedAppUserDefaults!.bool(forKey: "hasAskedForPushNotes")
         }
     }
     
@@ -45,21 +45,21 @@ class SCUserDefaultsManager: NSObject
         {
             if (newValue) != nil
             {
-                let latitudeNumberValue = NSNumber(double: newValue!.latitude)
-                let longitudeNumberValue = NSNumber(double: newValue!.longitude)
+                let latitudeNumberValue = NSNumber(value: newValue!.latitude as Double)
+                let longitudeNumberValue = NSNumber(value: newValue!.longitude as Double)
                 let locationDictionary = ["latitudeNumberValue" : latitudeNumberValue, "longitudeNumberValue" : longitudeNumberValue]
-                sharedAppUserDefaults!.setObject(locationDictionary, forKey: "locationDictionary")
+                sharedAppUserDefaults!.set(locationDictionary, forKey: "locationDictionary")
             }
             else
             {
-                sharedAppUserDefaults!.removeObjectForKey("locationDictionary")
+                sharedAppUserDefaults!.removeObject(forKey: "locationDictionary")
             }
             sharedAppUserDefaults!.synchronize()
         }
         
         get
         {
-            let locationDictionary : AnyObject? = sharedAppUserDefaults!.objectForKey("locationDictionary")
+            let locationDictionary : AnyObject? = sharedAppUserDefaults!.object(forKey: "locationDictionary") as AnyObject?
             
             if (locationDictionary != nil)
             {

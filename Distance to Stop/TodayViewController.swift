@@ -29,7 +29,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
         self.setupViewForLoading()
     }
     
-    func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void))
+    func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void))
     {
         if SCUserDefaultsManager().isCatchingStop
         {
@@ -53,20 +53,20 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
             setMapViewDisplayed(false)
         }
         
-        completionHandler(NCUpdateResult.NewData)
+        completionHandler(NCUpdateResult.newData)
     }
     
-    func widgetMarginInsetsForProposedMarginInsets(defaultMarginInsets: UIEdgeInsets) -> UIEdgeInsets {
-        return UIEdgeInsetsZero
+    func widgetMarginInsets(forProposedMarginInsets defaultMarginInsets: UIEdgeInsets) -> UIEdgeInsets {
+        return UIEdgeInsets.zero
     }
     
-    func isLocationPermissionGranted(status : CLAuthorizationStatus) -> Bool
+    func isLocationPermissionGranted(_ status : CLAuthorizationStatus) -> Bool
     {
         switch(status)
         {
-        case .AuthorizedAlways, .AuthorizedWhenInUse:
+        case .authorizedAlways, .authorizedWhenInUse:
             return true
-        case .Denied, .Restricted, .NotDetermined:
+        case .denied, .restricted, .notDetermined:
             return false
         }
     }
@@ -74,17 +74,17 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
     func setupViewForLoading()
     {
         loadingActivityIndicator.startAnimating()
-        self.mainLabel.hidden = true
+        self.mainLabel.isHidden = true
     }
     
-    func setupViewForText(text : String)
+    func setupViewForText(_ text : String)
     {
         loadingActivityIndicator.stopAnimating()
         self.mainLabel.text = text
-        self.mainLabel.hidden = false
+        self.mainLabel.isHidden = false
     }
     
-    func setMapViewDisplayed(display : Bool)
+    func setMapViewDisplayed(_ display : Bool)
     {
         if display
         {
@@ -96,7 +96,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
         }
     }
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         if SCUserDefaultsManager().isCatchingStop
         {
@@ -105,12 +105,12 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
             let destinationLocation2D : CLLocationCoordinate2D = SCUserDefaultsManager().trackingLocation!
             let destinationLocation = CLLocation(latitude: destinationLocation2D.latitude, longitude: destinationLocation2D.longitude)
             
-            let distance : CLLocationDistance = destinationLocation.distanceFromLocation(mostRecentLocation)
+            let distance : CLLocationDistance = destinationLocation.distance(from: mostRecentLocation)
             
             let distanceFormatter = MKDistanceFormatter()
-            distanceFormatter.unitStyle = .Full
+            distanceFormatter.unitStyle = .full
             
-            setupViewForText("Distance to stop: \(distanceFormatter.stringFromDistance(distance))\nTap to view in the app")
+            setupViewForText("Distance to stop: \(distanceFormatter.string(fromDistance: distance))\nTap to view in the app")
             setMapViewDisplayed(true)
             
             let pointAnnotation = MKPointAnnotation()
@@ -122,12 +122,12 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
         
     }
 
-    @IBAction func didTapWidgetButton(sender: UIButton)
+    @IBAction func didTapWidgetButton(_ sender: UIButton)
     {
-        extensionContext?.openURL(NSURL(string: "stopcatcher://")!, completionHandler: nil)
+        extensionContext?.open(URL(string: "stopcatcher://")!, completionHandler: nil)
     }
     
-    func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation)
+    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation)
     {
         var mapRegion = MKCoordinateRegion()
         mapRegion.center = mapView.userLocation.coordinate
@@ -137,7 +137,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
         zoomToFitMapAnnotations(self.mapView)
     }
     
-    func zoomToFitMapAnnotations(mapView : MKMapView)
+    func zoomToFitMapAnnotations(_ mapView : MKMapView)
     {
         if mapView.annotations.count == 0
         {
@@ -172,14 +172,14 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
         mapView.setRegion(region, animated: true)
     }
     
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
-        if (annotation.isKindOfClass(MKUserLocation.classForCoder()))
+        if (annotation.isKind(of: MKUserLocation.classForCoder()))
         {
             return nil
         }
         
-        let pinView = mapView .dequeueReusableAnnotationViewWithIdentifier("PinView")
+        let pinView = mapView .dequeueReusableAnnotationView(withIdentifier: "PinView")
         
         if ((pinView == nil))
         {
@@ -188,7 +188,7 @@ class TodayViewController: UIViewController, NCWidgetProviding, CLLocationManage
             let image = UIImage(named: "MapFlag")
             
             annotationView.image = image
-            annotationView.frame = CGRectMake(0, 0, 44, 56)
+            annotationView.frame = CGRect(x: 0, y: 0, width: 44, height: 56)
             
             return annotationView;
         }
