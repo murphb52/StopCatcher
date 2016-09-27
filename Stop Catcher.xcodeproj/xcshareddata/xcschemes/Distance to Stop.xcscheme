@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0710"
+   LastUpgradeVersion = "0800"
    wasCreatedForAppExtension = "YES"
    version = "2.0">
    <BuildAction
@@ -67,16 +67,26 @@
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
       launchAutomaticallySubstyle = "2">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <RemoteRunnable
+         runnableDebuggingMode = "2"
+         BundleIdentifier = "com.apple.springboard">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C923C1E91B6E4277007C8D3E"
-            BuildableName = "Stop Catcher.app"
-            BlueprintName = "Stop Catcher"
+            BlueprintIdentifier = "C9A74D841C629DE5001AE360"
+            BuildableName = "Distance to Stop.appex"
+            BlueprintName = "Distance to Stop"
             ReferencedContainer = "container:Stop Catcher.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </RemoteRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "C9A74D841C629DE5001AE360"
+            BuildableName = "Distance to Stop.appex"
+            BlueprintName = "Distance to Stop"
+            ReferencedContainer = "container:Stop Catcher.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
