@@ -43,18 +43,10 @@ platform :ios do
     # You can also use other beta testing services here (run `fastlane actions`)
   end
 
-  desc "Deploy a new version to the App Store"
-  lane :appstore do
-    cert
-    sigh
-    gym(scheme: "Stop Catcher") # Build your app - more options available
-    deliver
-  end
-
   lane :createBuild do
     cert
-    sigh
-    gym(scheme: "Stop Catcher")
+    sigh(adhoc: true)
+    gym(scheme: "Stop Catcher", export_method: ad-hoc)
   end
 
 
