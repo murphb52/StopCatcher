@@ -42,9 +42,7 @@ class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     @IBOutlet weak var timePicker: UIDatePicker!
     var hasPickedTime = false
     
-    var statusBarStyle : UIStatusBarStyle = .Default
-    
-    var hasZoomedToLocation = false
+    var statusBarStyle : UIStatusBarStyle! = .default
     
     override func viewDidLoad()
     {
@@ -53,27 +51,21 @@ class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
 
         self.mapView.delegate = self
         
-        if SCUserDefaultsManager().lastKnownLocation != nil
-        {
-            let region = MKCoordinateRegion(center: SCUserDefaultsManager().lastKnownLocation!, span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
-            self.mapView.setRegion(region, animated: false)
-        }
-        
         locationManager = CLLocationManager()
         locationManager.delegate = self
         
         
-        self.myLocationButton.layer.borderColor = UIColor(red: 155.0/255.0, green: 89.0/255.0, blue: 182.0/255.0, alpha: 1.0).CGColor
+        self.myLocationButton.layer.borderColor = UIColor(red: 155.0/255.0, green: 89.0/255.0, blue: 182.0/255.0, alpha: 1.0).cgColor
         self.myLocationButton.layer.borderWidth = 1;
         self.myLocationButton.layer.cornerRadius = 10;
         self.myLocationButton.layer.masksToBounds = true
-        self.myLocationButton.addTarget(self, action: Selector("handleMyLocationButtonTapped"), forControlEvents: UIControlEvents.TouchUpInside)
+        self.myLocationButton.addTarget(self, action: #selector(SCMainViewController.handleMyLocationButtonTapped), for: UIControlEvents.touchUpInside)
 
-        self.stopWatchHolderView.layer.borderColor = UIColor(red: 155.0/255.0, green: 89.0/255.0, blue: 182.0/255.0, alpha: 1.0).CGColor
+        self.stopWatchHolderView.layer.borderColor = UIColor(red: 155.0/255.0, green: 89.0/255.0, blue: 182.0/255.0, alpha: 1.0).cgColor
         self.stopWatchHolderView.layer.borderWidth = 1;
         self.stopWatchHolderView.layer.cornerRadius = 10;
         self.stopWatchHolderView.layer.masksToBounds = true
-        self.stopWatchButton.addTarget(self, action: Selector("handleStopwatchButtonTapped"), forControlEvents: UIControlEvents.TouchUpInside)
+        self.stopWatchButton.addTarget(self, action: #selector(SCMainViewController.handleStopwatchButtonTapped), for: UIControlEvents.touchUpInside)
 
         let grayColor = UIColor(red: 246.0/255.0, green: 246.0/255.0, blue: 246.0/255.0, alpha: 1.0)
         let purpleColor = UIColor(red: 155.0/255.0, green: 89.0/255.0, blue: 182.0/255.0, alpha: 1.0)
@@ -83,7 +75,7 @@ class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         self.beginTrackingButton.backgroundColor = purpleColor
         
         //***** Setup locationPermission button
-        self.blurredViewButton.addTarget(self, action: Selector("didTapOverlayButton"), forControlEvents: UIControlEvents.TouchUpInside)
+        self.blurredViewButton.addTarget(self, action: #selector(SCMainViewController.didTapOverlayButton), for: UIControlEvents.touchUpInside)
         self.blurredViewButton.layer.cornerRadius = 5;
         self.blurredViewButton.layer.masksToBounds = true
         self.blurredViewButton.tintColor = grayColor
@@ -92,10 +84,10 @@ class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         self.blurredViewAlertView.layer.cornerRadius = 5
         self.blurredViewAlertView.layer.masksToBounds = true
                 
-        let circleView = MKCircle(centerCoordinate: self.mapView.region.center, radius: maxRadius/2 as CLLocationDistance)
-        self.mapView.addOverlay(circleView)
+        let circleView = MKCircle(center: self.mapView.region.center, radius: maxRadius/2 as CLLocationDistance)
+        self.mapView.add(circleView)
         
-        let pickedTime = NSDate(timeIntervalSince1970: 0)
+        let pickedTime = Date(timeIntervalSince1970: 0)
         self.timePicker.setDate(pickedTime, animated: true)
         
         self.updateUI()
@@ -104,63 +96,32 @@ class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         setupViewForAuthStatus(CLLocationManager.authorizationStatus(), animated: false)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.updateUI()
         setupViewForAuthStatus(CLLocationManager.authorizationStatus(), animated: false)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.updateUI()
     }
     
-    //MARK : Location Manager
-    
-    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus)
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus)
     {
         setupViewForAuthStatus(status, animated: true)
-        
-        
-        switch(status)
-        {
-        case .AuthorizedAlways, .AuthorizedWhenInUse:
-            locationManager.startUpdatingLocation()
-            break
-        case .Denied, .Restricted, .NotDetermined:
-            break
-        }
-    }
-    
-    func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
-        
-        if SCUserDefaultsManager().lastKnownLocation!.latitude != newLocation.coordinate.latitude && SCUserDefaultsManager().lastKnownLocation!.longitude != newLocation.coordinate.longitude
-        {
-            SCUserDefaultsManager().lastKnownLocation = newLocation.coordinate
-            
-            if !hasZoomedToLocation
-            {
-                hasZoomedToLocation = true
-                
-                let region = MKCoordinateRegion(center: newLocation.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
-                self.mapView.setRegion(region, animated: true)
-                
-            }
-
-        }
-        
     }
     
     //MARK: Refactoring
     
-    func setupViewForAuthStatus(authStatus: CLAuthorizationStatus, animated: Bool)
+    func setupViewForAuthStatus(_ authStatus: CLAuthorizationStatus, animated: Bool)
     {
         switch(authStatus)
         {
-        case .AuthorizedAlways, .AuthorizedWhenInUse:
+        case .authorizedAlways, .authorizedWhenInUse:
             self.hideBlurredOverlay(animated)
             break
-        case .Denied, .Restricted, .NotDetermined:
+        case .denied, .restricted, .notDetermined:
             self.showBlurredOverlay(animated)
             break
         }
@@ -168,39 +129,34 @@ class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         self.updateUI()
     }
     
-    func showBlurredOverlay(animated : Bool)
+    func showBlurredOverlay(_ animated : Bool)
     {
         self.mapView.showsUserLocation = true
         
         let duration = animated ? 0.3 : 0.0
-        UIView.animateWithDuration(duration, animations: { () -> Void in
+        UIView.animate(withDuration: duration, animations: { () -> Void in
             
             self.blurView.alpha = 1;
             
         })
         
-        self.statusBarStyle = .Default
-        self.setNeedsStatusBarAppearanceUpdate()
+        self.statusBarStyle = .lightContent
+        setNeedsStatusBarAppearanceUpdate()
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle
-    {
-        return self.statusBarStyle
-    }
-    
-    func hideBlurredOverlay(animated : Bool)
+    func hideBlurredOverlay(_ animated : Bool)
     {
         self.mapView.showsUserLocation = true
         
         let duration = animated ? 0.3 : 0.0
-        UIView.animateWithDuration(duration, animations: { () -> Void in
+        UIView.animate(withDuration: duration, animations: { () -> Void in
             
             self.blurView.alpha = 0;
             
         })
         
-        self.statusBarStyle = .LightContent
-        self.setNeedsStatusBarAppearanceUpdate()
+        self.statusBarStyle = .default
+        setNeedsStatusBarAppearanceUpdate()
     }
     
     func updateUI()
@@ -217,11 +173,11 @@ class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     func updateViewForCatchingStop()
     {
-        self.beginTrackingButton .removeTarget(nil, action: nil, forControlEvents: .AllEvents)
-        self.beginTrackingButton.setTitle("Stop Tracking", forState: UIControlState())
-        self.beginTrackingButton.addTarget(self, action: Selector("didTapConfirmStopCatchingStopButton"), forControlEvents: UIControlEvents.TouchUpInside)
+        self.beginTrackingButton .removeTarget(nil, action: nil, for: .allEvents)
+        self.beginTrackingButton.setTitle("Stop Tracking", for: UIControlState())
+        self.beginTrackingButton.addTarget(self, action: #selector(SCMainViewController.didTapConfirmStopCatchingStopButton), for: UIControlEvents.touchUpInside)
         
-        UIView.animateWithDuration(0.3, animations: {
+        UIView.animate(withDuration: 0.3, animations: {
             self.centeredMapFlag.alpha = 0;
         })
         
@@ -232,14 +188,14 @@ class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         self.updateRadiusCircle()
     }
     
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
-        if (annotation.isKindOfClass(MKUserLocation.classForCoder()))
+        if (annotation.isKind(of: MKUserLocation.classForCoder()))
         {
             return nil
         }
         
-        let pinView = mapView .dequeueReusableAnnotationViewWithIdentifier("PinView")
+        let pinView = mapView .dequeueReusableAnnotationView(withIdentifier: "PinView")
         
         if ((pinView == nil))
         {
@@ -248,7 +204,7 @@ class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             let image = UIImage(named: "MapFlag")
             
             annotationView.image = image
-            annotationView.frame = CGRectMake(0, 0, 44, 56)
+            annotationView.frame = CGRect(x: 0, y: 0, width: 44, height: 56)
             
             return annotationView;
         }
@@ -262,11 +218,11 @@ class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     func updateViewForNotCatchingAStop()
     {
-        self.beginTrackingButton .removeTarget(nil, action: nil, forControlEvents: .AllEvents)
-        self.beginTrackingButton.setTitle("Begin Tracking", forState: UIControlState())
-        self.beginTrackingButton.addTarget(self, action: Selector("didTapConfirmCatchAStopButton"), forControlEvents: UIControlEvents.TouchUpInside)
+        self.beginTrackingButton .removeTarget(nil, action: nil, for: .allEvents)
+        self.beginTrackingButton.setTitle("Begin Tracking", for: UIControlState())
+        self.beginTrackingButton.addTarget(self, action: #selector(SCMainViewController.didTapConfirmCatchAStopButton), for: UIControlEvents.touchUpInside)
         
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
+        UIView.animate(withDuration: 0.3, animations: { () -> Void in
             self.centeredMapFlag.alpha = 1;
         })
         
@@ -282,42 +238,42 @@ class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         if(SCUserDefaultsManager().hasAskedForPushNotes)
         {
             
-            let notificationSettings = UIApplication.sharedApplication().currentUserNotificationSettings()
-            if (notificationSettings!.types == UIUserNotificationType.None)
+            let notificationSettings = UIApplication.shared.currentUserNotificationSettings
+            if (notificationSettings!.types == UIUserNotificationType())
             {
                 if(self.mapView.userLocation.location == nil)
                 {
-                    let alertController = UIAlertController(title: "Uh-oh", message: "Looks like we cannot get your location right now. Please try again later", preferredStyle: .Alert)
-                    alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-                    self.presentViewController(alertController, animated: true, completion: nil)
+                    let alertController = UIAlertController(title: "Uh-oh", message: "Looks like we cannot get your location right now. Please try again later", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alertController, animated: true, completion: nil)
 
                     return;
                 }
                 
-                let hud = MBProgressHUD .showHUDAddedTo(self.view, animated: true)
-                hud.dimBackground = true
+                let hud = MBProgressHUD .showAdded(to: self.view, animated: true)
+                hud?.dimBackground = true
             
                 let request = MKDirectionsRequest()
-                request.transportType = .Transit
+                request.transportType = .transit
                 
                 let startPlacemark = MKPlacemark(coordinate: CLLocationCoordinate2DMake((self.mapView.userLocation.location?.coordinate.latitude)!, (self.mapView.userLocation.location?.coordinate.longitude)!), addressDictionary: nil)
                 request.source = MKMapItem(placemark: startPlacemark)
                 
-                let location = self.mapView.convertPoint(self.mapView.center, toCoordinateFromView: self.view)
+                let location = self.mapView.convert(self.mapView.center, toCoordinateFrom: self.view)
                 let endPlacemark = MKPlacemark(coordinate: location, addressDictionary: nil)
                 request.destination = MKMapItem(placemark: endPlacemark)
                 
                 let directions = MKDirections(request: request)
-                directions.calculateETAWithCompletionHandler { (response, error) -> Void in
+                directions.calculateETA { (response, error) -> Void in
                     
-                    MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
+                    MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
                     if (response != nil)
                     {
                         let totalTravelTimeSeconds : Double = (response?.expectedTravelTime)!
                         let totalTravelTimeMinutes : Double = totalTravelTimeSeconds / 60 as Double;
                         let totalTravelTimeHours : Double = totalTravelTimeMinutes / 60 as Double;
                         
-                        let remainderMinutes = Int(floor(totalTravelTimeMinutes % 60))
+                        let remainderMinutes = Int(floor(totalTravelTimeMinutes.truncatingRemainder(dividingBy: 60)))
                         let remainderHours = Int(floor(totalTravelTimeHours))
                         
                         var travelTime : String?
@@ -334,7 +290,7 @@ class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                         {
                             if(travelTime != nil)
                             {
-                                travelTime?.appendContentsOf("' \(remainderMinutes) Minutes")
+                                travelTime?.append("' \(remainderMinutes) Minutes")
                             }
                             else
                             {
@@ -346,7 +302,7 @@ class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                         {
                             if(travelTime != nil)
                             {
-                                travelTime?.appendContentsOf("' \(remainderMinutes) Minutes")
+                                travelTime?.append("' \(remainderMinutes) Minutes")
                             }
                             else
                             {
@@ -359,16 +315,16 @@ class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                             travelTime = "a few seconds"
                         }
                         
-                        let alertController = UIAlertController(title: "Arrival Time", message: "Looks like you can reach this destination in \(travelTime!)\nDont forget to set your alarm!", preferredStyle: .Alert)
-                        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-                        self.presentViewController(alertController, animated: true, completion: nil)
+                        let alertController = UIAlertController(title: "Arrival Time", message: "Looks like you can reach this destination in \(travelTime!)\nDont forget to set your alarm!", preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                        self.present(alertController, animated: true, completion: nil)
 
                     }
                     else
                     {
-                        let alertController = UIAlertController(title: "Uh-oh", message: "Looks like we cannot get an estimated arrival time right now.\nThere may not be travel information available for this region", preferredStyle: .Alert)
-                        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-                        self.presentViewController(alertController, animated: true, completion: nil)
+                        let alertController = UIAlertController(title: "Uh-oh", message: "Looks like we cannot get an estimated arrival time right now.\nThere may not be travel information available for this region", preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                        self.present(alertController, animated: true, completion: nil)
                     }
                 }
 
@@ -377,7 +333,7 @@ class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             {
                 SCUserDefaultsManager().isCatchingStop = true
                 
-                SCUserDefaultsManager().trackingLocation = self.mapView.convertPoint(self.mapView.center, toCoordinateFromView: self.view)
+                SCUserDefaultsManager().trackingLocation = self.mapView.convert(self.mapView.center, toCoordinateFrom: self.view)
                 
                 self.addLocationNotificationAtCurrentPoint()
                 self.updateUI()
@@ -387,7 +343,7 @@ class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         //***** Ask for push notes
         else
         {
-            UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [.Sound, .Alert, .Badge], categories: nil))
+            UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.sound, .alert, .badge], categories: nil))
             SCUserDefaultsManager().hasAskedForPushNotes = true
         }
     }
@@ -397,22 +353,22 @@ class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         self.removeAllLocalNotifications()
         SCUserDefaultsManager().isCatchingStop = false
         SCUserDefaultsManager().trackingLocation = nil
-        UIApplication.sharedApplication().cancelAllLocalNotifications()
+        UIApplication.shared.cancelAllLocalNotifications()
         self.updateUI()
     }
     
     func didTapOverlayButton()
     {
         //***** If we have not asked for permission we request permission
-        if(CLLocationManager.authorizationStatus() == CLAuthorizationStatus.NotDetermined)
+        if(CLLocationManager.authorizationStatus() == CLAuthorizationStatus.notDetermined)
         {
             locationManager.requestAlwaysAuthorization()
         }
             //***** If we have asked before we simply point the user to the settings
         else
         {
-            let settingsUrl = NSURL(string: UIApplicationOpenSettingsURLString)
-            UIApplication.sharedApplication().openURL(settingsUrl!)
+            let settingsUrl = URL(string: UIApplicationOpenSettingsURLString)
+            UIApplication.shared.openURL(settingsUrl!)
         }
     }
     
@@ -441,19 +397,19 @@ class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         localNotification.alertBody = "Looks like you are near your stop!"
         localNotification.alertTitle = "Get ready!"
         
-        UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+        UIApplication.shared.scheduleLocalNotification(localNotification)
         
         let timedNotification = UILocalNotification()
-        timedNotification.fireDate = NSDate(timeIntervalSinceNow: self.timePicker.countDownDuration)
+        timedNotification.fireDate = Date(timeIntervalSinceNow: self.timePicker.countDownDuration)
         timedNotification.alertBody = "Check you haven't missed your stop!"
         timedNotification.alertTitle = "Time to check!"
         
-        UIApplication.sharedApplication().scheduleLocalNotification(timedNotification)
+        UIApplication.shared.scheduleLocalNotification(timedNotification)
     }
     
     func removeAllLocalNotifications()
     {
-        UIApplication.sharedApplication().cancelAllLocalNotifications()
+        UIApplication.shared.cancelAllLocalNotifications()
     }
 
     //MARK: MapView Methods
@@ -466,7 +422,7 @@ class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         mapView.setRegion(region, animated: true)
     }
     
-    func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool)
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool)
     {
         if(SCUserDefaultsManager().isCatchingStop == false)
         {
@@ -474,11 +430,11 @@ class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         }
     }
     
-    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer
     {
         let circle = MKCircleRenderer(overlay: overlay)
         circle.strokeColor = UIColor(red: 155.0/255.0, green: 89.0/255.0, blue: 182.0/255.0, alpha: 1.0)
-        circle.fillColor = UIColor(red: 155.0/255.0, green: 89.0/255.0, blue: 182.0/255.0, alpha: 1.0).colorWithAlphaComponent(0.3)
+        circle.fillColor = UIColor(red: 155.0/255.0, green: 89.0/255.0, blue: 182.0/255.0, alpha: 1.0).withAlphaComponent(0.3)
         circle.lineWidth = 1
         return circle
     }
@@ -494,14 +450,14 @@ class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         if(SCUserDefaultsManager().isCatchingStop == true)
         {
             self.mapView.removeOverlays(self.mapView.overlays)
-            let circleView = MKCircle(centerCoordinate: SCUserDefaultsManager().trackingLocation!, radius: maxRadius)
-            self.mapView.addOverlay(circleView)
+            let circleView = MKCircle(center: SCUserDefaultsManager().trackingLocation!, radius: maxRadius)
+            self.mapView.add(circleView)
         }
         else
         {
             self.mapView.removeOverlays(self.mapView.overlays)
-            let circleView = MKCircle(centerCoordinate: self.mapView.convertPoint(self.mapView.center, toCoordinateFromView: self.view), radius: maxRadius)
-            self.mapView.addOverlay(circleView)
+            let circleView = MKCircle(center: self.mapView.convert(self.mapView.center, toCoordinateFrom: self.view), radius: maxRadius)
+            self.mapView.add(circleView)
         }
     }
     
@@ -526,35 +482,40 @@ class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             image = UIImage(named: "TickImage")!
         }
         
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
+        UIView.animate(withDuration: 0.3, animations: { () -> Void in
             
             self.stopWatchWidthConstrant.constant = newButtonWidth
             self.stopWatchHeightConstraint.constant = newButtonHeight
             self.view.setNeedsLayout()
             self.view.layoutIfNeeded()
             
-            }) { (finished) -> Void in
+            }, completion: { (finished) -> Void in
                 
                 self.stopWatchButtonIsLarge = !self.stopWatchButtonIsLarge
-        }
+        }) 
         
-        UIView.animateWithDuration(0.15, animations: { () -> Void in
+        UIView.animate(withDuration: 0.15, animations: { () -> Void in
             
             self.stopWatchButton.alpha = 0;
             
-            }) { (finished) -> Void in
+            }, completion: { (finished) -> Void in
                 
-                self.stopWatchButton.setImage(image, forState: UIControlState())
-                UIView.animateWithDuration(0.15, animations: { () -> Void in
+                self.stopWatchButton.setImage(image, for: UIControlState())
+                UIView.animate(withDuration: 0.15, animations: { () -> Void in
                     self.stopWatchButton.alpha = 1
                 })
                 
-        }
+        }) 
     }
     
-    @IBAction func handleTimePickerValueChanged(sender: AnyObject)
+    @IBAction func handleTimePickerValueChanged(_ sender: AnyObject)
     {
         self.hasPickedTime = true
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle
+    {
+        return self.statusBarStyle
     }
     
 }
