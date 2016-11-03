@@ -11,31 +11,31 @@ import MapKit
 
 class SCUserDefaultsManager: NSObject
 {
-    let sharedAppUserDefaults = NSUserDefaults(suiteName: "group.com.stopcatcher.StopCatcher")
+    let sharedAppUserDefaults = UserDefaults(suiteName: "group.com.stopcatcher.StopCatcher")
     
     var isCatchingStop : Bool {
         set
         {
-            sharedAppUserDefaults!.setBool(newValue, forKey: "isCatchingStop")
+            sharedAppUserDefaults!.set(newValue, forKey: "isCatchingStop")
             sharedAppUserDefaults!.synchronize()
         }
         
         get
         {
-            return sharedAppUserDefaults!.boolForKey("isCatchingStop")
+            return sharedAppUserDefaults!.bool(forKey: "isCatchingStop") && trackingLocation != nil
         }
     }
     
     var hasAskedForPushNotes : Bool {
         set
         {
-            sharedAppUserDefaults!.setBool(newValue, forKey: "hasAskedForPushNotes")
+            sharedAppUserDefaults!.set(newValue, forKey: "hasAskedForPushNotes")
             sharedAppUserDefaults!.synchronize()
         }
         
         get
         {
-            return sharedAppUserDefaults!.boolForKey("hasAskedForPushNotes")
+            return sharedAppUserDefaults!.bool(forKey: "hasAskedForPushNotes")
         }
     }
     
@@ -45,21 +45,21 @@ class SCUserDefaultsManager: NSObject
         {
             if (newValue) != nil
             {
-                let latitudeNumberValue = NSNumber(double: newValue!.latitude)
-                let longitudeNumberValue = NSNumber(double: newValue!.longitude)
+                let latitudeNumberValue = NSNumber(value: newValue!.latitude as Double)
+                let longitudeNumberValue = NSNumber(value: newValue!.longitude as Double)
                 let locationDictionary = ["latitudeNumberValue" : latitudeNumberValue, "longitudeNumberValue" : longitudeNumberValue]
-                sharedAppUserDefaults!.setObject(locationDictionary, forKey: "locationDictionary")
+                sharedAppUserDefaults!.set(locationDictionary, forKey: "locationDictionary")
             }
             else
             {
-                sharedAppUserDefaults!.removeObjectForKey("locationDictionary")
+                sharedAppUserDefaults!.removeObject(forKey: "locationDictionary")
             }
             sharedAppUserDefaults!.synchronize()
         }
         
         get
         {
-            let locationDictionary : AnyObject? = sharedAppUserDefaults!.objectForKey("locationDictionary")
+            let locationDictionary : AnyObject? = sharedAppUserDefaults!.object(forKey: "locationDictionary") as AnyObject?
             
             if (locationDictionary != nil)
             {
@@ -74,6 +74,42 @@ class SCUserDefaultsManager: NSObject
             
         }
     
+    }
+    
+    var lastKnownLocation : CLLocationCoordinate2D? {
+        
+        set
+        {
+            if (newValue) != nil
+            {
+                let latitudeNumberValue = NSNumber(value: newValue!.latitude)
+                let longitudeNumberValue = NSNumber(value: newValue!.longitude)
+                let locationDictionary = ["latitudeNumberValue" : latitudeNumberValue, "longitudeNumberValue" : longitudeNumberValue]
+                sharedAppUserDefaults!.set(locationDictionary, forKey: "lastKnownlocationDictionary")
+            }
+            else
+            {
+                sharedAppUserDefaults!.removeObject(forKey: "lastKnownlocationDictionary")
+            }
+            sharedAppUserDefaults!.synchronize()
+        }
+
+        get {
+            let locationDictionary : AnyObject? = sharedAppUserDefaults!.object(forKey: "lastKnownlocationDictionary") as AnyObject?
+            
+            if (locationDictionary != nil)
+            {
+                let latitudeNumberValue : NSNumber = locationDictionary!["latitudeNumberValue"] as! NSNumber
+                let longitudeNumberValue : NSNumber = locationDictionary!["longitudeNumberValue"] as! NSNumber
+                return CLLocationCoordinate2D(latitude: latitudeNumberValue.doubleValue, longitude: longitudeNumberValue.doubleValue)
+            }
+            else
+            {
+                return nil
+            }
+        }
+        
+        
     }
     
 }
