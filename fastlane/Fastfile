@@ -45,7 +45,7 @@ platform :ios do
 
   lane :createBuild do
     cert
-    sigh(adhoc: true)
+    sigh(force: true, adhoc: true)
     gym(scheme: "Stop Catcher", export_method: ad-hoc)
   end
 
