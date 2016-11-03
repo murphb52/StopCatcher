@@ -22,7 +22,7 @@ class SCUserDefaultsManager: NSObject
         
         get
         {
-            return sharedAppUserDefaults!.bool(forKey: "isCatchingStop")
+            return sharedAppUserDefaults!.bool(forKey: "isCatchingStop") && trackingLocation != nil
         }
     }
     
