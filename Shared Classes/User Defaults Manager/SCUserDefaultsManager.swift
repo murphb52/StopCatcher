@@ -82,20 +82,20 @@ class SCUserDefaultsManager: NSObject
         {
             if (newValue) != nil
             {
-                let latitudeNumberValue = NSNumber(double: newValue!.latitude)
-                let longitudeNumberValue = NSNumber(double: newValue!.longitude)
+                let latitudeNumberValue = NSNumber(value: newValue!.latitude)
+                let longitudeNumberValue = NSNumber(value: newValue!.longitude)
                 let locationDictionary = ["latitudeNumberValue" : latitudeNumberValue, "longitudeNumberValue" : longitudeNumberValue]
-                sharedAppUserDefaults!.setObject(locationDictionary, forKey: "lastKnownlocationDictionary")
+                sharedAppUserDefaults!.set(locationDictionary, forKey: "lastKnownlocationDictionary")
             }
             else
             {
-                sharedAppUserDefaults!.removeObjectForKey("lastKnownlocationDictionary")
+                sharedAppUserDefaults!.removeObject(forKey: "lastKnownlocationDictionary")
             }
             sharedAppUserDefaults!.synchronize()
         }
 
         get {
-            let locationDictionary : AnyObject? = sharedAppUserDefaults!.objectForKey("lastKnownlocationDictionary")
+            let locationDictionary : AnyObject? = sharedAppUserDefaults!.object(forKey: "lastKnownlocationDictionary") as AnyObject?
             
             if (locationDictionary != nil)
             {
