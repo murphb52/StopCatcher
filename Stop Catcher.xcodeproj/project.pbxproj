@@ -16,8 +16,6 @@
 		C923C2321B6E6DAA007C8D3E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C923C2311B6E6DAA007C8D3E /* CoreLocation.framework */; };
 		C93E9C2A1C640635007057C6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C923C2151B6E4316007C8D3E /* Images.xcassets */; };
 		C95D83C41C1A13D2004246EB /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = C95D83C31C1A13D2004246EB /* MBProgressHUD.m */; };
-		C97A3E081C1109F700A5F786 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C97A3E061C1109F700A5F786 /* Fabric.framework */; };
-		C97A3E091C1109F700A5F786 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C97A3E071C1109F700A5F786 /* Crashlytics.framework */; };
 		C9A74D871C629DE5001AE360 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9A74D861C629DE5001AE360 /* NotificationCenter.framework */; };
 		C9A74D8A1C629DE5001AE360 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A74D891C629DE5001AE360 /* TodayViewController.swift */; };
 		C9A74D8D1C629DE6001AE360 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9A74D8B1C629DE6001AE360 /* MainInterface.storyboard */; };
@@ -63,8 +61,6 @@
 		C95D83C21C1A13D2004246EB /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		C95D83C31C1A13D2004246EB /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		C95D83C81C1A1465004246EB /* StopCatcherBridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopCatcherBridgingHeader.h; sourceTree = "<group>"; };
-		C97A3E061C1109F700A5F786 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
-		C97A3E071C1109F700A5F786 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		C9A74D851C629DE5001AE360 /* Distance to Stop.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Distance to Stop.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9A74D861C629DE5001AE360 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		C9A74D891C629DE5001AE360 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
@@ -82,8 +78,6 @@
 			files = (
 				C923C2321B6E6DAA007C8D3E /* CoreLocation.framework in Frameworks */,
 				C923C2271B6E4571007C8D3E /* MapKit.framework in Frameworks */,
-				C97A3E091C1109F700A5F786 /* Crashlytics.framework in Frameworks */,
-				C97A3E081C1109F700A5F786 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,8 +147,6 @@
 		C923C2281B6E4583007C8D3E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C97A3E061C1109F700A5F786 /* Fabric.framework */,
-				C97A3E071C1109F700A5F786 /* Crashlytics.framework */,
 				C923C2311B6E6DAA007C8D3E /* CoreLocation.framework */,
 				C923C2261B6E4571007C8D3E /* MapKit.framework */,
 				C9A74D861C629DE5001AE360 /* NotificationCenter.framework */,
@@ -218,7 +210,6 @@
 				C923C1E61B6E4277007C8D3E /* Sources */,
 				C923C1E71B6E4277007C8D3E /* Frameworks */,
 				C923C1E81B6E4277007C8D3E /* Resources */,
-				C97A3E051C1109D700A5F786 /* ShellScript */,
 				C9A74D951C629DE6001AE360 /* Embed App Extensions */,
 			);
 			buildRules = (
@@ -261,7 +252,7 @@
 				TargetAttributes = {
 					C923C1E91B6E4277007C8D3E = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = LQGZ3XPU6E;
+						DevelopmentTeam = C77ZC8954S;
 						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -274,7 +265,7 @@
 					};
 					C9A74D841C629DE5001AE360 = {
 						CreatedOnToolsVersion = 7.1.1;
-						DevelopmentTeam = LQGZ3XPU6E;
+						DevelopmentTeam = C77ZC8954S;
 						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -324,22 +315,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		C97A3E051C1109D700A5F786 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 87a2767b62ac32110fb0a408e070ec21d1533a04 65d375f878de0b8d110372ac03a1bd53b3fb3d6753b953bb7eac1abf1e42ec25";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C923C1E61B6E4277007C8D3E /* Sources */ = {
@@ -432,7 +407,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -473,7 +448,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -489,13 +464,14 @@
 				CODE_SIGN_ENTITLEMENTS = "Stop Catcher/Stop Catcher.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = C77ZC8954S;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = "Stop Catcher/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.stopcatcher.StopCatcher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -514,13 +490,14 @@
 				CODE_SIGN_ENTITLEMENTS = "Stop Catcher/Stop Catcher.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = C77ZC8954S;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = "Stop Catcher/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.stopcatcher.StopCatcher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -538,6 +515,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = C77ZC8954S;
 				INFOPLIST_FILE = "Distance to Stop/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -555,6 +533,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Distance to Stop/Distance to Stop.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = C77ZC8954S;
 				INFOPLIST_FILE = "Distance to Stop/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
