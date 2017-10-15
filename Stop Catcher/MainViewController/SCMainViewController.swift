@@ -232,7 +232,7 @@ class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     //MARK: Selectors for confirm button
     
-    func didTapConfirmCatchAStopButton()
+    @objc func didTapConfirmCatchAStopButton()
     {
         //***** Check if we have asked for push notications
         if(SCUserDefaultsManager().hasAskedForPushNotes)
@@ -348,7 +348,7 @@ class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         }
     }
     
-    func didTapConfirmStopCatchingStopButton()
+    @objc func didTapConfirmStopCatchingStopButton()
     {
         self.removeAllLocalNotifications()
         SCUserDefaultsManager().isCatchingStop = false
@@ -357,7 +357,7 @@ class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         self.updateUI()
     }
     
-    func didTapOverlayButton()
+    @objc func didTapOverlayButton()
     {
         //***** If we have not asked for permission we request permission
         if(CLLocationManager.authorizationStatus() == CLAuthorizationStatus.notDetermined)
@@ -414,7 +414,7 @@ class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
 
     //MARK: MapView Methods
     
-    func handleMyLocationButtonTapped()
+    @objc func handleMyLocationButtonTapped()
     {
         let userLocation = self.mapView.userLocation
         let coords = userLocation.coordinate
@@ -463,7 +463,7 @@ class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     //MARK: Selecting Countdown Time
     
-    func handleStopwatchButtonTapped()
+    @objc func handleStopwatchButtonTapped()
     {
         var newButtonWidth : CGFloat
         var newButtonHeight : CGFloat

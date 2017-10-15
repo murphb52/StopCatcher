@@ -31,23 +31,13 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-	<key>Fabric</key>
-	<dict>
-		<key>APIKey</key>
-		<string>87a2767b62ac32110fb0a408e070ec21d1533a04</string>
-		<key>Kits</key>
-		<array>
-			<dict>
-				<key>KitInfo</key>
-				<dict/>
-				<key>KitName</key>
-				<string>Crashlytics</string>
-			</dict>
-		</array>
-	</dict>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>We only ever will track your location when you tell us to. The information is all kept on the handset and we will never store this information</string>
 	<key>NSLocationAlwaysUsageDescription</key>
+	<string>We only ever will track your location when you tell us to. The information is all kept on the handset and we will never store this information</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We only ever will track your location when you tell us to. The information is all kept on the handset and we will never store this information</string>
 	<key>UIBackgroundModes</key>
 	<array>
