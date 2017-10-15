@@ -22,7 +22,7 @@ class SCUserDefaultsManager: NSObject
         
         get
         {
-            return sharedAppUserDefaults!.bool(forKey: "isCatchingStop")
+            return sharedAppUserDefaults!.bool(forKey: "isCatchingStop") && trackingLocation != nil
         }
     }
     
@@ -74,6 +74,42 @@ class SCUserDefaultsManager: NSObject
             
         }
     
+    }
+    
+    var lastKnownLocation : CLLocationCoordinate2D? {
+        
+        set
+        {
+            if (newValue) != nil
+            {
+                let latitudeNumberValue = NSNumber(value: newValue!.latitude)
+                let longitudeNumberValue = NSNumber(value: newValue!.longitude)
+                let locationDictionary = ["latitudeNumberValue" : latitudeNumberValue, "longitudeNumberValue" : longitudeNumberValue]
+                sharedAppUserDefaults!.set(locationDictionary, forKey: "lastKnownlocationDictionary")
+            }
+            else
+            {
+                sharedAppUserDefaults!.removeObject(forKey: "lastKnownlocationDictionary")
+            }
+            sharedAppUserDefaults!.synchronize()
+        }
+
+        get {
+            let locationDictionary : AnyObject? = sharedAppUserDefaults!.object(forKey: "lastKnownlocationDictionary") as AnyObject?
+            
+            if (locationDictionary != nil)
+            {
+                let latitudeNumberValue : NSNumber = locationDictionary!["latitudeNumberValue"] as! NSNumber
+                let longitudeNumberValue : NSNumber = locationDictionary!["longitudeNumberValue"] as! NSNumber
+                return CLLocationCoordinate2D(latitude: latitudeNumberValue.doubleValue, longitude: longitudeNumberValue.doubleValue)
+            }
+            else
+            {
+                return nil
+            }
+        }
+        
+        
     }
     
 }

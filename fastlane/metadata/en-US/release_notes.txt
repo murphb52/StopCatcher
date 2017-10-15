@@ -1,1 +1,3 @@
-Check out the new map in the Distance to Stop Today Extension!
+Now updated for iOS 10!
+
+Also the Distance to Stop Today Extension widget is now working again! You can track your stop right from your lock screen!
