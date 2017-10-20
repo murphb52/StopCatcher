@@ -240,7 +240,7 @@ class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         {
             UNUserNotificationCenter.current().getNotificationSettings(completionHandler: { (notificationSettings) in
                 
-                if (notificationSettings.authorizationStatus == .authorized)
+                if (notificationSettings.authorizationStatus != .authorized)
                 {
                     if(self.mapView.userLocation.location == nil)
                     {
