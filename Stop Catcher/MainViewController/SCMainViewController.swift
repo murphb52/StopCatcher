@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import UserNotifications
 
 class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UIAlertViewDelegate
 {
@@ -237,114 +238,124 @@ class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         //***** Check if we have asked for push notications
         if(SCUserDefaultsManager().hasAskedForPushNotes)
         {
-            
-            let notificationSettings = UIApplication.shared.currentUserNotificationSettings
-            if (notificationSettings!.types == UIUserNotificationType())
-            {
-                if(self.mapView.userLocation.location == nil)
+            UNUserNotificationCenter.current().getNotificationSettings(completionHandler: { (notificationSettings) in
+                
+                if (notificationSettings.authorizationStatus == .authorized)
                 {
-                    let alertController = UIAlertController(title: "Uh-oh", message: "Looks like we cannot get your location right now. Please try again later", preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                    self.present(alertController, animated: true, completion: nil)
-
-                    return;
-                }
-                
-                let hud = MBProgressHUD .showAdded(to: self.view, animated: true)
-                hud?.dimBackground = true
-            
-                let request = MKDirectionsRequest()
-                request.transportType = .transit
-                
-                let startPlacemark = MKPlacemark(coordinate: CLLocationCoordinate2DMake((self.mapView.userLocation.location?.coordinate.latitude)!, (self.mapView.userLocation.location?.coordinate.longitude)!), addressDictionary: nil)
-                request.source = MKMapItem(placemark: startPlacemark)
-                
-                let location = self.mapView.convert(self.mapView.center, toCoordinateFrom: self.view)
-                let endPlacemark = MKPlacemark(coordinate: location, addressDictionary: nil)
-                request.destination = MKMapItem(placemark: endPlacemark)
-                
-                let directions = MKDirections(request: request)
-                directions.calculateETA { (response, error) -> Void in
-                    
-                    MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
-                    if (response != nil)
+                    if(self.mapView.userLocation.location == nil)
                     {
-                        let totalTravelTimeSeconds : Double = (response?.expectedTravelTime)!
-                        let totalTravelTimeMinutes : Double = totalTravelTimeSeconds / 60 as Double;
-                        let totalTravelTimeHours : Double = totalTravelTimeMinutes / 60 as Double;
+                        let alertController = UIAlertController(title: "Uh-oh", message: "Looks like we cannot get your location right now. Please try again later", preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                        self.present(alertController, animated: true, completion: nil)
                         
-                        let remainderMinutes = Int(floor(totalTravelTimeMinutes.truncatingRemainder(dividingBy: 60)))
-                        let remainderHours = Int(floor(totalTravelTimeHours))
+                        return;
+                    }
+                    
+                    let hud = MBProgressHUD .showAdded(to: self.view, animated: true)
+                    hud?.dimBackground = true
+                    
+                    let request = MKDirectionsRequest()
+                    request.transportType = .transit
+                    
+                    let startPlacemark = MKPlacemark(coordinate: CLLocationCoordinate2DMake((self.mapView.userLocation.location?.coordinate.latitude)!, (self.mapView.userLocation.location?.coordinate.longitude)!), addressDictionary: nil)
+                    request.source = MKMapItem(placemark: startPlacemark)
+                    
+                    let location = self.mapView.convert(self.mapView.center, toCoordinateFrom: self.view)
+                    let endPlacemark = MKPlacemark(coordinate: location, addressDictionary: nil)
+                    request.destination = MKMapItem(placemark: endPlacemark)
+                    
+                    let directions = MKDirections(request: request)
+                    directions.calculateETA { (response, error) -> Void in
                         
-                        var travelTime : String?
-                        if(remainderHours == 1)
+                        MBProgressHUD.hideAllHUDs(for: self.view, animated: true)
+                        if (response != nil)
                         {
-                            travelTime = "\(remainderHours) Hour"
-                        }
-                        else if (remainderHours > 1)
-                        {
-                            travelTime = "\(remainderHours) Hours"
-                        }
-                        
-                        if(remainderMinutes == 1)
-                        {
-                            if(travelTime != nil)
+                            let totalTravelTimeSeconds : Double = (response?.expectedTravelTime)!
+                            let totalTravelTimeMinutes : Double = totalTravelTimeSeconds / 60 as Double;
+                            let totalTravelTimeHours : Double = totalTravelTimeMinutes / 60 as Double;
+                            
+                            let remainderMinutes = Int(floor(totalTravelTimeMinutes.truncatingRemainder(dividingBy: 60)))
+                            let remainderHours = Int(floor(totalTravelTimeHours))
+                            
+                            var travelTime : String?
+                            if(remainderHours == 1)
                             {
-                                travelTime?.append("' \(remainderMinutes) Minutes")
+                                travelTime = "\(remainderHours) Hour"
                             }
-                            else
+                            else if (remainderHours > 1)
                             {
-                                travelTime = ("\(remainderMinutes) Minute")
+                                travelTime = "\(remainderHours) Hours"
                             }
                             
-                        }
-                        else if (remainderMinutes > 1)
-                        {
-                            if(travelTime != nil)
+                            if(remainderMinutes == 1)
                             {
-                                travelTime?.append("' \(remainderMinutes) Minutes")
+                                if(travelTime != nil)
+                                {
+                                    travelTime?.append("' \(remainderMinutes) Minutes")
+                                }
+                                else
+                                {
+                                    travelTime = ("\(remainderMinutes) Minute")
+                                }
+                                
                             }
-                            else
+                            else if (remainderMinutes > 1)
                             {
-                                travelTime = ("\(remainderMinutes) Minutes")
+                                if(travelTime != nil)
+                                {
+                                    travelTime?.append("' \(remainderMinutes) Minutes")
+                                }
+                                else
+                                {
+                                    travelTime = ("\(remainderMinutes) Minutes")
+                                }
                             }
+                            
+                            if (travelTime == nil)
+                            {
+                                travelTime = "a few seconds"
+                            }
+                            
+                            let alertController = UIAlertController(title: "Arrival Time", message: "Looks like you can reach this destination in \(travelTime!)\nDont forget to set your alarm!", preferredStyle: .alert)
+                            alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                            self.present(alertController, animated: true, completion: nil)
+                            
                         }
-                        
-                        if (travelTime == nil)
+                        else
                         {
-                            travelTime = "a few seconds"
+                            let alertController = UIAlertController(title: "Uh-oh", message: "Looks like we cannot get an estimated arrival time right now.\nThere may not be travel information available for this region", preferredStyle: .alert)
+                            alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                            self.present(alertController, animated: true, completion: nil)
                         }
-                        
-                        let alertController = UIAlertController(title: "Arrival Time", message: "Looks like you can reach this destination in \(travelTime!)\nDont forget to set your alarm!", preferredStyle: .alert)
-                        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                        self.present(alertController, animated: true, completion: nil)
-
                     }
-                    else
-                    {
-                        let alertController = UIAlertController(title: "Uh-oh", message: "Looks like we cannot get an estimated arrival time right now.\nThere may not be travel information available for this region", preferredStyle: .alert)
-                        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                        self.present(alertController, animated: true, completion: nil)
-                    }
+                    
                 }
-
-            }
-            else
-            {
-                SCUserDefaultsManager().isCatchingStop = true
+                else
+                {
+                    SCUserDefaultsManager().isCatchingStop = true
+                    
+                    SCUserDefaultsManager().trackingLocation = self.mapView.convert(self.mapView.center, toCoordinateFrom: self.view)
+                    
+                    self.addLocationNotificationAtCurrentPoint()
+                    self.updateUI()
+                }
                 
-                SCUserDefaultsManager().trackingLocation = self.mapView.convert(self.mapView.center, toCoordinateFrom: self.view)
-                
-                self.addLocationNotificationAtCurrentPoint()
-                self.updateUI()
-            }
+            })
             
         }
         //***** Ask for push notes
         else
         {
-            UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.sound, .alert, .badge], categories: nil))
             SCUserDefaultsManager().hasAskedForPushNotes = true
+            
+            UNUserNotificationCenter.current().requestAuthorization(options: [.badge, .sound, .alert], completionHandler: { (success, error) in
+                
+                if (success)
+                {
+                    self.didTapConfirmCatchAStopButton()
+                }
+                
+            })
         }
     }
     
@@ -353,7 +364,7 @@ class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         self.removeAllLocalNotifications()
         SCUserDefaultsManager().isCatchingStop = false
         SCUserDefaultsManager().trackingLocation = nil
-        UIApplication.shared.cancelAllLocalNotifications()
+        removeAllLocalNotifications()
         self.updateUI()
     }
     
@@ -368,7 +379,7 @@ class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         else
         {
             let settingsUrl = URL(string: UIApplicationOpenSettingsURLString)
-            UIApplication.shared.openURL(settingsUrl!)
+            UIApplication.shared.open(settingsUrl!, options: [:], completionHandler: nil)
         }
     }
     
@@ -388,28 +399,49 @@ class SCMainViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     func addLocationNotificationAtCurrentPoint()
     {
-        let localNotification = UILocalNotification()
+        scheduleLocationNotification()
         
+        scheduleTimedNotification()
+    }
+    
+    func scheduleLocationNotification()
+    {
+        // Create content
+        let localNotificationContent = UNMutableNotificationContent()
+        localNotificationContent.body = "Looks like you are near your stop!"
+        localNotificationContent.title = "Get ready!"
+        
+        // Create Trigger
         let regionToDetect = CLCircularRegion(center: self.mapView.centerCoordinate, radius: maxRadius, identifier: "Location Tracking")
+        let locationTrigger = UNLocationNotificationTrigger(region: regionToDetect, repeats: false)
         
-        localNotification.regionTriggersOnce = true
-        localNotification.region = regionToDetect
-        localNotification.alertBody = "Looks like you are near your stop!"
-        localNotification.alertTitle = "Get ready!"
+        // Create Request
+        let locationRequest = UNNotificationRequest(identifier: UUID().uuidString, content: localNotificationContent, trigger: locationTrigger)
         
-        UIApplication.shared.scheduleLocalNotification(localNotification)
+        // Schedule
+        UNUserNotificationCenter.current().add(locationRequest, withCompletionHandler: nil)
+    }
+    
+    func scheduleTimedNotification()
+    {
+        // Create Content
+        let timedNotificationContent = UNMutableNotificationContent()
+        timedNotificationContent.title = "Time to check!"
+        timedNotificationContent.body = "Check you haven't missed your stop!"
         
-        let timedNotification = UILocalNotification()
-        timedNotification.fireDate = Date(timeIntervalSinceNow: self.timePicker.countDownDuration)
-        timedNotification.alertBody = "Check you haven't missed your stop!"
-        timedNotification.alertTitle = "Time to check!"
+        // Create Trigger
+        let timedTrigger = UNTimeIntervalNotificationTrigger(timeInterval: self.timePicker.countDownDuration, repeats: false)
         
-        UIApplication.shared.scheduleLocalNotification(timedNotification)
+        // Create Request
+        let timedRequest = UNNotificationRequest(identifier: UUID().uuidString, content: timedNotificationContent, trigger: timedTrigger)
+        
+        // Schedule
+        UNUserNotificationCenter.current().add(timedRequest, withCompletionHandler: nil)
     }
     
     func removeAllLocalNotifications()
     {
-        UIApplication.shared.cancelAllLocalNotifications()
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
     }
 
     //MARK: MapView Methods

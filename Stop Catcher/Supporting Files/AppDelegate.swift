@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
     var rootViewController : SCMainViewController?
@@ -25,6 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window?.rootViewController = rootViewController
         self.window?.makeKeyAndVisible()
+        
+        UNUserNotificationCenter.current().delegate = self
         
         return true
     }
@@ -46,35 +49,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         
-        let arrayOfNotifications = UIApplication.shared.scheduledLocalNotifications
-        
-        if (arrayOfNotifications!.count == 0 || arrayOfNotifications!.count % 2 != 0)
-        {
-            SCUserDefaultsManager().isCatchingStop = false
-            SCUserDefaultsManager().trackingLocation = nil
-            UIApplication.shared.cancelAllLocalNotifications()
-            rootViewController?.updateUI()
-        }
-        else
-        {
-            SCUserDefaultsManager().isCatchingStop = true
+        UNUserNotificationCenter.current().getPendingNotificationRequests { (notifications) in
+            
+            if (notifications.count == 0 || notifications.count % 2 != 0)
+            {
+                SCUserDefaultsManager().isCatchingStop = false
+                SCUserDefaultsManager().trackingLocation = nil
+                UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+                self.rootViewController?.updateUI()
+            }
+            else
+            {
+                SCUserDefaultsManager().isCatchingStop = true
+            }
+            
         }
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-    func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
-        
+    
+    public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Swift.Void)
+    {
         SCUserDefaultsManager().isCatchingStop = false
         SCUserDefaultsManager().trackingLocation = nil
-        UIApplication.shared.cancelAllLocalNotifications()
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         rootViewController?.updateUI()
+        
+        completionHandler(.alert)
     }
     
-    func application(_ application: UIApplication, didRegister notificationSettings: UIUserNotificationSettings) {
-        rootViewController?.didTapConfirmCatchAStopButton()
+    public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Swift.Void)
+    {
+        SCUserDefaultsManager().isCatchingStop = false
+        SCUserDefaultsManager().trackingLocation = nil
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        rootViewController?.updateUI()
+        
+        completionHandler()
     }
 
 }

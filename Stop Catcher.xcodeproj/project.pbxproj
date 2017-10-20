@@ -22,6 +22,7 @@
 		C9A74D911C629DE6001AE360 /* Distance to Stop.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C9A74D851C629DE5001AE360 /* Distance to Stop.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		C9A74D9C1C63F922001AE360 /* SCUserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A74D9B1C63F922001AE360 /* SCUserDefaultsManager.swift */; };
 		C9A74D9D1C63F933001AE360 /* SCUserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A74D9B1C63F922001AE360 /* SCUserDefaultsManager.swift */; };
+		C9BB944E1F995E36004FE094 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9BB944D1F995E36004FE094 /* UserNotifications.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		C9A74D971C62A17E001AE360 /* Distance to Stop.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Distance to Stop.entitlements"; sourceTree = "<group>"; };
 		C9A74D981C62A189001AE360 /* Stop Catcher.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Stop Catcher.entitlements"; sourceTree = "<group>"; };
 		C9A74D9B1C63F922001AE360 /* SCUserDefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCUserDefaultsManager.swift; sourceTree = "<group>"; };
+		C9BB944D1F995E36004FE094 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9BB944E1F995E36004FE094 /* UserNotifications.framework in Frameworks */,
 				C923C2321B6E6DAA007C8D3E /* CoreLocation.framework in Frameworks */,
 				C923C2271B6E4571007C8D3E /* MapKit.framework in Frameworks */,
 			);
@@ -147,6 +150,7 @@
 		C923C2281B6E4583007C8D3E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C9BB944D1F995E36004FE094 /* UserNotifications.framework */,
 				C923C2311B6E6DAA007C8D3E /* CoreLocation.framework */,
 				C923C2261B6E4571007C8D3E /* MapKit.framework */,
 				C9A74D861C629DE5001AE360 /* NotificationCenter.framework */,
